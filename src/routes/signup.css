@@ -44,7 +44,7 @@
 }
 .signupBtn:hover {
   color: white;
-  width: ;
+  /* width: ; */
   box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
   background-color: #f67280;
 }
@@ -72,7 +72,7 @@ input:focus {
 }
 .githubIcn:hover {
   color: white;
-  width: ;
+  /* width: ; */
   box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
   background-color: #dc3545;
 }
@@ -90,15 +90,15 @@ input:focus {
 }
 .googleIcn:hover {
   color: white;
-  width: ;
+  /* width: ; */
   box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
   background-color: #0d6efd;
 }
 .App {
   background-image: url(https://img.freepik.com/free-vector/network-mesh-wire-digital-technology-background_1017-27428.jpg?w=1380&t=st=1688982327~exp=1688982927~hmac=368ac4943f1a92bc3a3c54f5dd521691fe8eaf9d70b144bd149220d9aa46b5de);
 }
-.cover {
-}
+/* .cover {
+} */
 .logo {
   width: 220px;
   padding-top: 20px;
