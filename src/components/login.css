@@ -1,0 +1,106 @@
+.page {
+  display: flex;
+  height: 50em;
+  justify-content: center;
+  align-items: center;
+}
+@font-face {
+  font-family: "customFont";
+  src: url();
+}
+.login-cover {
+  background-color: white;
+  width: 20em;
+  height: 35em;
+  position: relative;
+  border-radius: 1em;
+  box-shadow: 0 1em 1em gray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.userInput {
+  width: 16em;
+  height: 3em;
+}
+.passInput {
+  width: 16em;
+  height: 3em;
+}
+.loginBtn {
+  cursor: pointer;
+  border: 0;
+  border-radius: 4px;
+  font-weight: 600;
+  margin: 0 10px;
+  width: 200px;
+  padding: 10px 0;
+  box-shadow: 0 0 20px rgba(104, 85, 224, 0.2);
+  transition: 0.4s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loginBtn:hover {
+  color: white;
+  /* width: ; */
+  box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
+  background-color: #f67280;
+}
+input {
+  border: none;
+  background-color: aliceblue;
+  height: 4em;
+  border-radius: 0.25em;
+  width: 80%;
+  text-align: center;
+}
+input:focus {
+  outline-color: #f67280;
+}
+.githubIcn {
+  cursor: pointer;
+  border: 0;
+  border-radius: 4px;
+  font-weight: 600;
+  margin: 0 10px;
+  width: 100px;
+  padding: 20px 0;
+  box-shadow: 0 0 20px rgba(104, 85, 224, 0.2);
+
+  transition: 0.4s;
+}
+.githubIcn:hover {
+  color: white;
+  /* width: ; */
+  box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
+  background-color: #dc3545;
+}
+
+.googleIcn {
+  cursor: pointer;
+  border: 0;
+  border-radius: 4px;
+  font-weight: 600;
+  margin: 0 10px;
+  width: 100px;
+  padding: 10px 0;
+  /* box-shadow: 0 0 20px rgba(104, 85, 224, 0.2); */
+  transition: 0.4s;
+}
+.googleIcn:hover {
+  color: white;
+  /* width: ; */
+  /* box-shadow: 0 0 20px rgba(104, 85, 224, 0.6); */
+  background-color: #0d6efd;
+}
+.App {
+  background-image: url(https://img.freepik.com/free-vector/network-mesh-wire-digital-technology-background_1017-27428.jpg?w=1380&t=st=1688982327~exp=1688982927~hmac=368ac4943f1a92bc3a3c54f5dd521691fe8eaf9d70b144bd149220d9aa46b5de);
+}
+/* .cover {
+} */
+.logo {
+  width: 220px;
+  padding-top: 20px;
+}
