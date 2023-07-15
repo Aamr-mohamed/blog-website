@@ -4,41 +4,27 @@ import logo from "../images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function SignupForm() {
-  const usernameRef = useRef(null);
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
+  const usernameRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
   const navigate = useNavigate();
-  const storedEmails = JSON.parse(localStorage.getItem("email"));
-  const storedPasswords = JSON.parse(localStorage.getItem("password"));
-  const storedUsernames = JSON.parse(localStorage.getItem("username"));
-  const [email, setEmail] = useState([storedEmails]);
-  const [password, setPassword] = useState([storedPasswords]);
-  const [username, setUsername] = useState([storedUsernames]);
-  useEffect(() => {
-    localStorage.setItem("email", JSON.stringify(email));
-  }, [email]);
-  useEffect(() => {
-    localStorage.setItem("password", JSON.stringify(password));
-  }, [password]);
-  useEffect(() => {
-    localStorage.setItem("username", JSON.stringify(username));
-  }, [username]);
-  console.log(storedEmails);
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [username, setUsername] = useState();
+
   // localStorage.clear();
 
   // console.log(email.current.value);
   const handlesubmit = (event) => {
-    // if (passInput1 == passInput2) {
-
-    setEmail([email, emailRef.current.value]);
-    emailRef.current.value = "";
     event.preventDefault();
     // saved signup data
-    // localStorage.setItem("usernameData", username.current.value);
-    // localStorage.setItem("emailData", email.current.value);
-    // localStorage.setItem("passwordData", password.current.value);
-    // navigation to homepage
-    // navigate("/login");
+    localStorage.setItem("usernameData", usernameRef.current.value);
+    localStorage.setItem("emailData", emailRef.current.value);
+    localStorage.setItem("passwordData", passwordRef.current.value);
+    setEmail(email, emailRef.current.value);
+    setPassword(password, passwordRef.current.value);
+    setUsername(username, usernameRef.current.value);
+    navigate("/login");
     // }
   };
   return (

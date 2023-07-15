@@ -2,27 +2,25 @@ import React, { useRef, useState } from "react";
 import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
-import SignupForm from "../Signup/signup";
-
-// function localDb() {}
 
 export default function LoginForm() {
-  // const navigate = useNavigate();
-  // const svdEmail = useRef();
-  // const svdPassword = useRef();
-  // const email = localStorage.getItem("emailData");
-  // const password = localStorage.getItem("passwordData");
-  // const verification = (event) => {
-  //   event.preventDefault();
-  //   console.log(svdEmail);
-
-  //   if (svdEmail == email && svdPassword == password) {
-  //     navigate("/root");
-  //     console.log("a7a1");
-  //   } else {
-  //     console.log("a7a2");
-  //   }
-  // };
+  const navigate = useNavigate();
+  const svdEmail = useRef();
+  const svdPassword = useRef();
+  const email = localStorage.getItem("emailData");
+  const password = localStorage.getItem("passwordData");
+  const verification = (event) => {
+    localStorage.setItem("emailCheck", svdEmail.current.value);
+    localStorage.setItem("passwordCheck", svdPassword.current.value);
+    const emailTemp = localStorage.getItem("emailCheck");
+    const passwordTemp = localStorage.getItem("passwordCheck");
+    if (emailTemp == email && passwordTemp == password) {
+      navigate("/");
+    } else {
+      console.log("m4 4a8al");
+    }
+    event.preventDefault();
+  };
   return (
     <div
       className="page"
@@ -37,18 +35,18 @@ export default function LoginForm() {
       <div className="login-cover">
         <img src={logo} alt="Bloggingway Image" className="logo" />
         <h1>Login</h1>
-        <form className="form">
+        <form className="form" onSubmit={verification}>
           <input
             type="text"
             placeholder="Email"
             className="userInput"
-            // ref={svdEmail}
+            ref={svdEmail}
           ></input>
           <input
             type="password"
             placeholder="Password"
             className="passInput"
-            // ref={svdPassword}
+            ref={svdPassword}
           ></input>
           <button className="loginBtn">Sign in</button>
         </form>
