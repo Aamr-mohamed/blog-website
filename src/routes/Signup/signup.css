@@ -23,9 +23,11 @@
 .userInput {
   width: 16em;
   height: 3em;
+  margin-top: 5px;
 }
 .passInput {
   width: 16em;
+  margin-top: 5px;
   height: 3em;
 }
 .signupBtn {
@@ -41,6 +43,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 8px;
 }
 .signupBtn:hover {
   color: white;
@@ -102,4 +105,10 @@ input:focus {
 .logo {
   width: 220px;
   padding-top: 20px;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }

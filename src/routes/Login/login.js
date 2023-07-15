@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import "./login.css";
-import { Link } from "react-router-dom";
-import logo from "./logo.png";
+import { Link, useNavigate } from "react-router-dom";
+import logo from "../images/logo.png";
+import SignupForm from "../Signup/signup";
+
+// function localDb() {}
 
 export default function LoginForm() {
+  // const navigate = useNavigate();
+  // const svdEmail = useRef();
+  // const svdPassword = useRef();
+  // const email = localStorage.getItem("emailData");
+  // const password = localStorage.getItem("passwordData");
+  // const verification = (event) => {
+  //   event.preventDefault();
+  //   console.log(svdEmail);
+
+  //   if (svdEmail == email && svdPassword == password) {
+  //     navigate("/root");
+  //     console.log("a7a1");
+  //   } else {
+  //     console.log("a7a2");
+  //   }
+  // };
   return (
     <div
       className="page"
@@ -18,13 +37,19 @@ export default function LoginForm() {
       <div className="login-cover">
         <img src={logo} alt="Bloggingway Image" className="logo" />
         <h1>Login</h1>
-        <input type="text" placeholder="Username" className="userInput"></input>
-        <input
-          type="password"
-          placeholder="Password"
-          className="passInput"
-        ></input>
-        <form method="post">
+        <form className="form">
+          <input
+            type="text"
+            placeholder="Email"
+            className="userInput"
+            // ref={svdEmail}
+          ></input>
+          <input
+            type="password"
+            placeholder="Password"
+            className="passInput"
+            // ref={svdPassword}
+          ></input>
           <button className="loginBtn">Sign in</button>
         </form>
         <div>
@@ -69,6 +94,8 @@ export default function LoginForm() {
           <br />
           <h5>Dont have an account</h5>
           <Link to="/signup">signup</Link>
+          <br />
+          <Link to="/">homepage</Link>
         </div>
       </div>
     </div>

@@ -3,10 +3,10 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Root from "./routes/root";
+import Root from "./routes/Home/root";
 import ErrorPage from "./error-page";
-import LoginForm from "./routes/login";
-import SignupForm from "./routes/signup";
+import LoginForm from "./routes/Login/login";
+import SignupForm from "./routes/Signup/signup";
 
 const router = createBrowserRouter([
   {
