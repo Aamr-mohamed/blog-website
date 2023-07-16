@@ -10,11 +10,10 @@ export default function LoginForm() {
   const email = localStorage.getItem("emailData");
   const password = localStorage.getItem("passwordData");
   const verification = (event) => {
-    localStorage.setItem("emailCheck", svdEmail.current.value);
-    localStorage.setItem("passwordCheck", svdPassword.current.value);
-    const emailTemp = localStorage.getItem("emailCheck");
-    const passwordTemp = localStorage.getItem("passwordCheck");
-    if (emailTemp == email && passwordTemp == password) {
+    if (
+      svdEmail.current.value == email &&
+      svdPassword.current.value == password
+    ) {
       navigate("/");
     } else {
       console.log("m4 4a8al");

@@ -14,10 +14,8 @@ export default function SignupForm() {
 
   // localStorage.clear();
 
-  // console.log(email.current.value);
   const handlesubmit = (event) => {
     event.preventDefault();
-    // saved signup data
     localStorage.setItem("usernameData", usernameRef.current.value);
     localStorage.setItem("emailData", emailRef.current.value);
     localStorage.setItem("passwordData", passwordRef.current.value);
@@ -25,7 +23,6 @@ export default function SignupForm() {
     setPassword(password, passwordRef.current.value);
     setUsername(username, usernameRef.current.value);
     navigate("/login");
-    // }
   };
   return (
     <div
@@ -40,32 +37,58 @@ export default function SignupForm() {
     >
       <div className="signup-cover">
         <img src={logo} alt="Bloggingway Image" className="logo" />
-        <h1>Signup</h1>
+        <h1 className="title">Signup</h1>
         <form onSubmit={handlesubmit} className="form">
           <input
             type="text"
             placeholder="Please enter ur fullname"
             className="userInput"
             ref={usernameRef}
+            required
+            autoComplete="off"
           ></input>
+          <label for="userInput">
+            <b>Username</b>
+          </label>
           <input
             type="text"
             placeholder="Email"
-            className="userInput"
+            className="email"
             ref={emailRef}
+            required
+            autoComplete="off"
           ></input>
+          <label for="email">
+            <b>Email</b>
+          </label>
           <input
             type="password"
-            placeholder="New Password"
+            placeholder="Enter Password"
             className="passInput"
+            required
           ></input>
-          <input
-            type="password"
-            placeholder="re-enter ur new password"
-            className="passInput"
-            ref={passwordRef}
-          ></input>
+          <label for="passInput">
+            <b>Password</b>
+          </label>
 
+          <input
+            type="password"
+            placeholder="Re-enter ur password"
+            className="passInput2"
+            ref={passwordRef}
+            required
+          ></input>
+          <label for="passInput2">
+            <b>Repeat password</b>
+          </label>
+          <div>
+            <input type="checkbox" className="chkbox" />
+            Remember me
+          </div>
+          <p>
+            By creating an account <br /> you agree to our
+            <a href="#">Terms & Privacy</a>.
+          </p>
           <button className="signupBtn">Sign up</button>
         </form>
         <div>
@@ -103,6 +126,8 @@ export default function SignupForm() {
             </svg>
             Github
           </button>
+        </div>
+        <div>
           <h5>Already have an account</h5>
           <Link to="/login">Login</Link>
           <br />
