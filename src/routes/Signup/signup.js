@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import "./signup.css";
 import logo from "../images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
-
+import "../formInput/FormInput";
 export default function SignupForm() {
   const usernameRef = useRef();
   const emailRef = useRef();
@@ -11,11 +11,40 @@ export default function SignupForm() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [username, setUsername] = useState();
+  const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  // const [values, setValues] = useState({
+  //   username: "",
+  //   email: "",
+  //   password: "",
+  //   confirmPassword: "",
+  // });
+  // const inputs = [
+  //   {
+  //     id: 1,
+  //     name: "username",
+  //     type: "text",
+  //     placeholder: "",
+  //     label: "Username",
+  //   },
+  //   { id: 2, name: "email", type: "email", placeholder: "", label: "email" },
+  //   {
+  //     id: 3,
+  //     name: "password",
+  //     type: "password",
+  //     placeholder: "",
+  //     label: "Password",
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "repeatPassword",
+  //     type: "password",
+  //     placeholder: "",
+  //     label: "Repeat password",
+  //   },
+  // ];
 
-  // localStorage.clear();
-
-  const handlesubmit = (event) => {
-    event.preventDefault();
+  const handlesubmit = (e) => {
+    e.preventDefault();
     localStorage.setItem("usernameData", usernameRef.current.value);
     localStorage.setItem("emailData", emailRef.current.value);
     localStorage.setItem("passwordData", passwordRef.current.value);
@@ -39,46 +68,40 @@ export default function SignupForm() {
         <img src={logo} alt="Bloggingway Image" className="logo" />
         <h1 className="title">Signup</h1>
         <form onSubmit={handlesubmit} className="form">
+          {/* {inputs.map((input) => (
+            <FormInput key={input.id} />
+          ))} */}
           <input
             type="text"
-            placeholder="Please enter ur fullname"
+            placeholder=""
             className="userInput"
             ref={usernameRef}
-            required
-            autoComplete="off"
           ></input>
-          <label for="userInput">
+          <label for="userInput" className="userLabel">
             <b>Username</b>
           </label>
           <input
             type="text"
-            placeholder="Email"
-            className="email"
+            placeholder=""
+            className="emailInput"
             ref={emailRef}
-            required
-            autoComplete="off"
           ></input>
-          <label for="email">
+          <label for="email" className="emailLabel">
             <b>Email</b>
           </label>
-          <input
-            type="password"
-            placeholder="Enter Password"
-            className="passInput"
-            required
-          ></input>
-          <label for="passInput">
+
+          <input type="password" placeholder="" className="passInput"></input>
+          <label for="passInput" className="pass1Label">
             <b>Password</b>
           </label>
 
           <input
             type="password"
-            placeholder="Re-enter ur password"
+            placeholder=""
             className="passInput2"
             ref={passwordRef}
-            required
           ></input>
-          <label for="passInput2">
+          <label for="passInput2" className="pass2Label">
             <b>Repeat password</b>
           </label>
           <div>
@@ -92,17 +115,32 @@ export default function SignupForm() {
           <button className="signupBtn">Sign up</button>
         </form>
         <div>
-          <p>Or Signup using</p>
+          <p style={{ textAlign: "center" }}>Or Signup using</p>
         </div>
         <div>
           <button
             href="https://accounts.google.com/signin"
-            className="googleIcn"
-            style={{ alignContent: "center" }}
+            className="facebookIcn"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="25"
+              width="35"
+              height="25"
+              fill="currentColor"
+              class="bi bi-facebook"
+              viewBox="0 0 16 16"
+            >
+              <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
+            </svg>
+            facebook
+          </button>
+          <button
+            href="https://accounts.google.com/signin"
+            className="googleIcn"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="35"
               height="25"
               fill="currentColor"
               className="bi bi-google"
@@ -116,7 +154,7 @@ export default function SignupForm() {
           <button className="githubIcn" href="https://github.com/login">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="25"
+              width="35"
               height="25"
               fill="currentColor"
               className="bi bi-github"
@@ -126,8 +164,6 @@ export default function SignupForm() {
             </svg>
             Github
           </button>
-        </div>
-        <div>
           <h5>Already have an account</h5>
           <Link to="/login">Login</Link>
           <br />

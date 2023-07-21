@@ -7,11 +7,12 @@
 .page {
   display: grid;
   height: 100vh;
-  font-family: Montserrat, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-weight: 500;
 }
 .title {
   margin-bottom: 0.5rem;
+  padding-left: 55px;
 }
 .signup-cover {
   background-color: white;
@@ -28,28 +29,21 @@
   height: 25rem;
   margin-bottom: 0.5rem;
 }
-.userInput {
-  width: 16em;
-  height: 3em;
-  margin-top: 5px;
-}
-.email {
-  width: 16em;
-  height: 3em;
-  margin-top: 5px;
-}
-.passInput {
-  width: 16em;
-  margin-top: 5px;
-  height: 3em;
-}
 
+.userInput,
+.emailInput,
+.email,
+.passInput,
 .passInput2 {
   width: 16em;
-  margin-top: 5px;
   height: 3em;
+  margin-top: 5px;
 }
-.signupBtn {
+
+.signupBtn,
+.githubIcn,
+.googleIcn,
+.facebookIcn {
   cursor: pointer;
   border: 0;
   border-radius: 4px;
@@ -59,15 +53,29 @@
   padding: 10px 0;
   box-shadow: 0 0 20px rgba(104, 85, 224, 0.2);
   transition: 0.4s;
-  justify-content: center;
-  align-items: center;
-  margin-top: 8px;
+  margin-top: 5px;
 }
-.signupBtn:hover {
+.signupBtn:hover,
+.githubIcn:hover,
+.googleIcn:hover,
+.facebookIcn:hover {
   color: white;
-  /* width: ; */
   box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
   background-color: #f67280;
+}
+.githubIcn,
+.googleIcn,
+.facebookIcn {
+  width: 100px;
+}
+.facebookIcn:hover {
+  background-color: #3b5998;
+}
+.githubIcn:hover {
+  background-color: #1d1a1a;
+}
+.googleIcn:hover {
+  background-color: #bb2c3b;
 }
 input {
   border: 2px solid #c0c0c0;
@@ -88,46 +96,62 @@ input:hover {
 input:focus {
   border-color: #f45a6a;
 }
-label {
-  /* position: absolute; */
-  /* left: 4px; */
-  /* top: 5px; */
+.userLabel,
+.emailLabel,
+.pass1Label,
+.pass2Label {
+  transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
+  pointer-events: none;
+  color: #4d4d4d;
+  position: absolute;
+  left: 75px;
 }
-.githubIcn {
-  cursor: pointer;
-  border: 0;
-  border-radius: 4px;
-  font-weight: 600;
-  margin: 0 10px;
-  width: 100px;
-  padding: 10px 0;
-  box-shadow: 0 0 20px rgba(104, 85, 224, 0.2);
-  transition: 0.4s;
-}
-.githubIcn:hover {
-  color: white;
-  /* width: ; */
-  box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
-  background-color: #dc3545;
+.userLabel {
+  top: 26px;
 }
 
-.googleIcn {
-  cursor: pointer;
-  border: 0;
-  border-radius: 4px;
-  font-weight: 600;
-  margin: 0 10px;
-  width: 100px;
-  padding: 10px 0;
-  box-shadow: 0 0 20px rgba(104, 85, 224, 0.2);
-  transition: 0.4s;
+.userInput:focus ~ .userLabel,
+.userInput:not(:placeholder-shown).userInput:not(:focus) ~ .userLabel {
+  top: 3px;
+  left: 70px;
+  font-size: 0.9rem;
+  background-color: white;
+  color: #1d1a1a;
 }
-.googleIcn:hover {
-  color: white;
-  /* width: ; */
-  box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
-  background-color: #0d6efd;
+.emailLabel {
+  top: 85px;
 }
+.emailInput:focus ~ .emailLabel,
+.emailInput:not(:placeholder-shown).emailInput:not(:focus) ~ .emailLabel {
+  top: 63px;
+  left: 70px;
+  font-size: 0.9rem;
+  background-color: white;
+  color: #1d1a1a;
+}
+.pass1Label {
+  top: 145px;
+}
+.passInput:focus ~ .pass1Label,
+.passInput:not(:placeholder-shown).passInput:not(:focus) ~ .pass1Label {
+  top: 123px;
+  left: 70px;
+  font-size: 0.9rem;
+  background-color: white;
+  color: #1d1a1a;
+}
+.pass2Label {
+  top: 205px;
+}
+.passInput2:focus ~ .pass2Label,
+.passInput2:not(:placeholder-shown).passInput2:not(:focus) ~ .pass2Label {
+  top: 184px;
+  left: 70px;
+  font-size: 0.9rem;
+  background-color: white;
+  color: #1d1a1a;
+}
+
 .App {
   background-image: url(https://img.freepik.com/free-vector/network-mesh-wire-digital-technology-background_1017-27428.jpg?w=1380&t=st=1688982327~exp=1688982927~hmac=368ac4943f1a92bc3a3c54f5dd521691fe8eaf9d70b144bd149220d9aa46b5de);
 }
@@ -136,15 +160,19 @@ label {
 .logo {
   width: 220px;
   padding-top: 20px;
+  padding-left: 55px;
 }
-.form {
+/* .form {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-}
+} */
 .chkbox {
   width: 15px;
   height: 15px;
-  align-items: flex-start;
+  /* justify-content: end; */
+}
+.using {
+  text-align: center;
 }

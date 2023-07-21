@@ -32,21 +32,27 @@ export default function LoginForm() {
       }}
     >
       <div className="login-cover">
-        <img src={logo} alt="Bloggingway Image" className="logo" />
+        <img src={logo} alt="Bloggingway Image" className="logo1" />
         <h1>Login</h1>
         <form className="form" onSubmit={verification}>
           <input
             type="text"
-            placeholder="Email"
-            className="userInput"
+            placeholder=""
+            className="email1Input"
             ref={svdEmail}
           ></input>
+          <label for="email" className="email1Label">
+            <b>Email</b>
+          </label>
           <input
             type="password"
-            placeholder="Password"
-            className="passInput"
+            placeholder=""
+            className="pass3Input"
             ref={svdPassword}
           ></input>
+          <label for="passInput" className="pass3Label">
+            <b>Password</b>
+          </label>
           <button className="loginBtn">Sign in</button>
         </form>
         <div>
