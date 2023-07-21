@@ -1,8 +1,9 @@
 import React, { useRef, useEffect, useState } from "react";
-import "./signup.css";
+import "./signup.module.css";
 import logo from "../images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import "../formInput/FormInput";
+
 export default function SignupForm() {
   const usernameRef = useRef();
   const emailRef = useRef();
@@ -55,7 +56,7 @@ export default function SignupForm() {
   };
   return (
     <div
-      className="page"
+      className="sign_page"
       style={{
         backgroundImage: `url("https://img.freepik.com/free-vector/technology-background_23-2148119855.jpg?w=1380&t=st=1688998470~exp=1688999070~hmac=957eb0c4621e85c9ae1f4b85781a4407d450d2f59eb8badfdce7338ac38423ae")`,
         backgroundRepeat: "no-repeat",
