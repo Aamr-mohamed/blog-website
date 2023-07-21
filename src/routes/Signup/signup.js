@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import "./signup.module.css";
+import styles from "./signup.module.css";
 import logo from "../images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import "../formInput/FormInput";
@@ -56,7 +57,7 @@ export default function SignupForm() {
   };
   return (
     <div
-      className="sign_page"
+      className={styles.signup_page}
       style={{
         backgroundImage: `url("https://img.freepik.com/free-vector/technology-background_23-2148119855.jpg?w=1380&t=st=1688998470~exp=1688999070~hmac=957eb0c4621e85c9ae1f4b85781a4407d450d2f59eb8badfdce7338ac38423ae")`,
         backgroundRepeat: "no-repeat",
@@ -65,55 +66,59 @@ export default function SignupForm() {
         height: "100vh",
       }}
     >
-      <div className="signup-cover">
-        <img src={logo} alt="Bloggingway Image" className="logo" />
-        <h1 className="title">Signup</h1>
-        <form onSubmit={handlesubmit} className="form">
+      <div className={styles.signup_cover}>
+        <img src={logo} alt="Bloggingway Image" className={styles.logo} />
+        <h1 className={styles.title}>Signup</h1>
+        <form onSubmit={handlesubmit} className={styles.form}>
           {/* {inputs.map((input) => (
             <FormInput key={input.id} />
           ))} */}
           <input
             type="text"
             placeholder=""
-            className="userInput"
+            className={styles.userInput}
             ref={usernameRef}
           ></input>
-          <label for="userInput" className="userLabel">
+          <label for="userInput" className={styles.userLabel}>
             <b>Username</b>
           </label>
           <input
             type="text"
             placeholder=""
-            className="emailInput"
+            className={styles.emailInput}
             ref={emailRef}
           ></input>
-          <label for="email" className="emailLabel">
+          <label for="email" className={styles.emailLabel}>
             <b>Email</b>
           </label>
 
-          <input type="password" placeholder="" className="passInput"></input>
-          <label for="passInput" className="pass1Label">
+          <input
+            type="password"
+            placeholder=""
+            className={styles.passInput}
+          ></input>
+          <label for="passInput" className={styles.pass1Label}>
             <b>Password</b>
           </label>
 
           <input
             type="password"
             placeholder=""
-            className="passInput2"
+            className={styles.passInput2}
             ref={passwordRef}
           ></input>
-          <label for="passInput2" className="pass2Label">
+          <label for="passInput2" className={styles.pass2Label}>
             <b>Repeat password</b>
           </label>
           <div>
-            <input type="checkbox" className="chkbox" />
+            <input type="checkbox" className={styles.chkbox} />
             Remember me
           </div>
           <p>
             By creating an account <br /> you agree to our
             <a href="#">Terms & Privacy</a>.
           </p>
-          <button className="signupBtn">Sign up</button>
+          <button className={styles.signupBtn}>Sign up</button>
         </form>
         <div>
           <p style={{ textAlign: "center" }}>Or Signup using</p>
@@ -121,7 +126,7 @@ export default function SignupForm() {
         <div>
           <button
             href="https://accounts.google.com/signin"
-            className="facebookIcn"
+            className={styles.facebookIcn}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -137,7 +142,7 @@ export default function SignupForm() {
           </button>
           <button
             href="https://accounts.google.com/signin"
-            className="googleIcn"
+            className={styles.googleIcn}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -152,7 +157,7 @@ export default function SignupForm() {
             Google
           </button>
 
-          <button className="githubIcn" href="https://github.com/login">
+          <button className={styles.githubIcn} href="https://github.com/login">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="35"

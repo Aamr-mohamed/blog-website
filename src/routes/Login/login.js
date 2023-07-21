@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import "./login.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
+import styles from "./login.module.css";
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function LoginForm() {
   };
   return (
     <div
-      className="login_page"
+      className={styles.login_page}
       style={{
         backgroundImage: `url("https://img.freepik.com/free-vector/technology-background_23-2148119855.jpg?w=1380&t=st=1688998470~exp=1688999070~hmac=957eb0c4621e85c9ae1f4b85781a4407d450d2f59eb8badfdce7338ac38423ae")`,
         backgroundRepeat: "no-repeat",
@@ -31,29 +32,29 @@ export default function LoginForm() {
         height: "100vh",
       }}
     >
-      <div className="login-cover">
-        <img src={logo} alt="Bloggingway Image" className="logo1" />
+      <div className={styles.login_cover}>
+        <img src={logo} alt="Bloggingway Image" className={styles.logo1} />
         <h1>Login</h1>
-        <form className="form" onSubmit={verification}>
+        <form className={styles.form} onSubmit={verification}>
           <input
             type="text"
             placeholder=""
-            className="email1Input"
+            className={styles.email1Input}
             ref={svdEmail}
           ></input>
-          <label for="email" className="email1Label">
+          <label for="email" className={styles.email1Label}>
             <b>Email</b>
           </label>
           <input
             type="password"
             placeholder=""
-            className="pass3Input"
+            className={styles.pass3Input}
             ref={svdPassword}
           ></input>
-          <label for="passInput" className="pass3Label">
+          <label for="passInput" className={styles.pass3Label}>
             <b>Password</b>
           </label>
-          <button className="loginBtn">Sign in</button>
+          <button className={styles.loginBtn}>Sign in</button>
         </form>
         <div>
           <p>Or login using</p>
@@ -61,7 +62,23 @@ export default function LoginForm() {
         <div>
           <button
             href="https://accounts.google.com/signin"
-            className="googleIcn"
+            className={styles.facebookIcn}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="35"
+              height="25"
+              fill="currentColor"
+              class="bi bi-facebook"
+              viewBox="0 0 16 16"
+            >
+              <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
+            </svg>
+            facebook
+          </button>
+          <button
+            href="https://accounts.google.com/signin"
+            className={styles.googleIcn}
             style={{
               alignContent: "center",
               textDecoration: "none",
@@ -70,7 +87,7 @@ export default function LoginForm() {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="25"
+              width="35"
               height="25"
               fill="currentColor"
               className="bi bi-google"
@@ -81,10 +98,10 @@ export default function LoginForm() {
             Google
           </button>
 
-          <button className="githubIcn" href="https://github.com/login">
+          <button className={styles.githubIcn} href="https://github.com/login">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="25"
+              width="35"
               height="25"
               fill="currentColor"
               className="bi bi-github"

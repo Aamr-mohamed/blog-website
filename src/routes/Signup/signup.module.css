@@ -4,30 +4,35 @@
   margin: 0;
   padding: 0;
 }
-.page_page {
-  display: grid;
+.signup_page {
+  display: flex;
   height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 500;
+  justify-content: center;
+  align-items: center;
 }
 .title {
   margin-bottom: 0.5rem;
-  padding-left: 55px;
+  padding-left: 20px;
 }
-.signup-cover {
+.signup_cover {
   background-color: white;
   width: 25em;
   height: 50em;
   border-radius: 1em;
   box-shadow: 0 1em 1em gray;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 }
 .form {
   position: relative;
   height: 25rem;
   margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .userInput,
@@ -37,9 +42,11 @@
 .passInput2 {
   width: 16em;
   height: 3em;
-  margin-top: 5px;
+  margin-bottom: 20px;
 }
-
+.signupBtn:hover {
+  background-color: #f67280;
+}
 .signupBtn,
 .githubIcn,
 .googleIcn,
@@ -61,7 +68,6 @@
 .facebookIcn:hover {
   color: white;
   box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
-  background-color: #f67280;
 }
 .githubIcn,
 .googleIcn,
@@ -89,6 +95,7 @@ input {
   outline: none;
   padding-left: 1.5rem;
   background: none;
+  justify-content: center;
 }
 input:hover {
   border-color: #f9a2ab;
@@ -104,49 +111,49 @@ input:focus {
   pointer-events: none;
   color: #4d4d4d;
   position: absolute;
-  left: 75px;
+  left: 20px;
 }
 .userLabel {
-  top: 26px;
+  top: 15px;
 }
 
 .userInput:focus ~ .userLabel,
 .userInput:not(:placeholder-shown).userInput:not(:focus) ~ .userLabel {
-  top: 3px;
-  left: 70px;
+  top: -8px;
+  left: 10px;
   font-size: 0.9rem;
   background-color: white;
   color: #1d1a1a;
 }
 .emailLabel {
-  top: 85px;
+  top: 80px;
 }
 .emailInput:focus ~ .emailLabel,
 .emailInput:not(:placeholder-shown).emailInput:not(:focus) ~ .emailLabel {
-  top: 63px;
-  left: 70px;
+  top: 59px;
+  left: 10px;
   font-size: 0.9rem;
   background-color: white;
   color: #1d1a1a;
 }
 .pass1Label {
-  top: 145px;
+  top: 148px;
 }
 .passInput:focus ~ .pass1Label,
 .passInput:not(:placeholder-shown).passInput:not(:focus) ~ .pass1Label {
-  top: 123px;
-  left: 70px;
+  top: 125px;
+  left: 10px;
   font-size: 0.9rem;
   background-color: white;
   color: #1d1a1a;
 }
 .pass2Label {
-  top: 205px;
+  top: 213px;
 }
 .passInput2:focus ~ .pass2Label,
 .passInput2:not(:placeholder-shown).passInput2:not(:focus) ~ .pass2Label {
-  top: 184px;
-  left: 70px;
+  top: 191px;
+  left: 10px;
   font-size: 0.9rem;
   background-color: white;
   color: #1d1a1a;
@@ -158,9 +165,9 @@ input:focus {
 /* .cover {
 } */
 .logo {
-  width: 220px;
-  padding-top: 20px;
-  padding-left: 55px;
+  width: 240px;
+  padding-top: 30px;
+  padding-left: 20px;
 }
 /* .form {
   display: flex;
