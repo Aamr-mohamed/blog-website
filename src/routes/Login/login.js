@@ -8,18 +8,20 @@ export default function LoginForm() {
   const navigate = useNavigate();
   const svdEmail = useRef();
   const svdPassword = useRef();
-  const email = localStorage.getItem("emailData");
-  const password = localStorage.getItem("passwordData");
-  const verification = (event) => {
-    if (
-      svdEmail.current.value == email &&
-      svdPassword.current.value == password
-    ) {
-      navigate("/");
-    } else {
-      console.log("m4 4a8al");
-    }
-    event.preventDefault();
+  const users = JSON.parse(localStorage.getItem("users"));
+  const verification = (e) => {
+    // console.log(users);
+    users.forEach((user) => {
+      if (
+        user.email === svdEmail.current.value &&
+        user.password === svdPassword.current.value
+      ) {
+        navigate("/");
+      } else {
+        console.log("m4 4a8al");
+      }
+    });
+    e.preventDefault();
   };
   return (
     <div

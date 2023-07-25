@@ -6,14 +6,19 @@ import { Link, useNavigate } from "react-router-dom";
 import "../formInput/FormInput";
 
 export default function SignupForm() {
+  const firstnameRef = useRef();
+  const lastnameRef = useRef();
+  const dateRef = useRef();
+  const genderRef = useRef();
   const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [username, setUsername] = useState();
+  // const [email, setEmail] = useState();
+  // const [password, setPassword] = useState();
+  // const [username, setUsername] = useState();
   const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  // const errormassege  =
   // const [values, setValues] = useState({
   //   username: "",
   //   email: "",
@@ -44,15 +49,24 @@ export default function SignupForm() {
   //     label: "Repeat password",
   //   },
   // ];
-
+  var users = [];
   const handlesubmit = (e) => {
+    var data = {};
+    data["username"] = usernameRef.current.value;
+    data["firstname"] = firstnameRef.current.value;
+    data["lastname"] = lastnameRef.current.value;
+    data["date"] = dateRef.current.value;
+    data["gender"] = genderRef.current.value;
+    data["email"] = emailRef.current.value;
+    data["password"] = passwordRef.current.value;
+
+    users.push(data);
+    console.log(users);
     e.preventDefault();
-    localStorage.setItem("usernameData", usernameRef.current.value);
-    localStorage.setItem("emailData", emailRef.current.value);
-    localStorage.setItem("passwordData", passwordRef.current.value);
-    setEmail(email, emailRef.current.value);
-    setPassword(password, passwordRef.current.value);
-    setUsername(username, usernameRef.current.value);
+    localStorage.setItem("users", JSON.stringify(users));
+    // setEmail(email, emailRef.current.value);
+    // setPassword(password, passwordRef.current.value);
+    // setUsername(username, usernameRef.current.value);
     navigate("/login");
   };
   return (
@@ -70,46 +84,104 @@ export default function SignupForm() {
         <img src={logo} alt="Bloggingway Image" className={styles.logo} />
         <h1 className={styles.title}>Signup</h1>
         <form onSubmit={handlesubmit} className={styles.form}>
-          {/* {inputs.map((input) => (
-            <FormInput key={input.id} />
-          ))} */}
+          <label for="userInput" className={styles.userLabel}>
+            <b>First Name</b>
+          </label>
           <input
             type="text"
             placeholder=""
             className={styles.userInput}
-            ref={usernameRef}
+            ref={firstnameRef}
+            required
           ></input>
+          <span>Username should be 3-16 characters</span>
+          <label for="userInput" className={styles.userLabel}>
+            <b>Last Name</b>
+          </label>
+          <input
+            type="text"
+            placeholder=""
+            className={styles.userInput}
+            ref={lastnameRef}
+            required
+          ></input>
+          <span>Username should be 3-16 characters</span>
+          <label for="userInput" className={styles.userLabel}>
+            <b>Birth date</b>
+          </label>
+          <input
+            type="date"
+            placeholder=""
+            className={styles.userInput}
+            ref={dateRef}
+            required
+          ></input>
+          <label for="userInput" className={styles.userLabel}>
+            <b>Gender</b>
+          </label>
+          <select className="gender" ref={genderRef}>
+            <option value="">Please select one…</option>
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+            <option value="non-binary">Non-Binary</option>
+            <option value="non-binary">Neutral gender</option>
+            <option value="non-binary">Genderfluid</option>
+            <option value="non-binary">Gender expansive</option>
+            <option value="non-binary">Cisgender</option>
+            <option value="non-binary">Genderfluid</option>
+            <option value="non-binary">Transgender</option>
+            <option value="non-binary">Two Spirit</option>
+            <option value="non-binary">Cat/Dog/Animals</option>
+            <option value="other">Other</option>
+            <option value="Prefer not to answer">Prefer not to Answer</option>
+          </select>
           <label for="userInput" className={styles.userLabel}>
             <b>Username</b>
           </label>
           <input
             type="text"
             placeholder=""
-            className={styles.emailInput}
-            ref={emailRef}
+            className={styles.userInput}
+            ref={usernameRef}
+            required
           ></input>
+          <span>Username should be 3-16 characters</span>
           <label for="email" className={styles.emailLabel}>
             <b>Email</b>
           </label>
+          <input
+            type="email"
+            placeholder=""
+            className={styles.emailInput}
+            ref={emailRef}
+            errormassage=""
+            required
+          ></input>
 
+          <span>Thats not a valid email</span>
+          <label for="passInput" className={styles.pass1Label}>
+            <b>Password</b>
+          </label>
           <input
             type="password"
             placeholder=""
             className={styles.passInput}
+            required
           ></input>
-          <label for="passInput" className={styles.pass1Label}>
-            <b>Password</b>
-          </label>
 
+          <span>Password shoud be 8-20 characters</span>
+          <label for="passInput2" className={styles.pass2Label}>
+            <b>Repeat password</b>
+          </label>
           <input
             type="password"
             placeholder=""
             className={styles.passInput2}
             ref={passwordRef}
+            required
           ></input>
-          <label for="passInput2" className={styles.pass2Label}>
-            <b>Repeat password</b>
-          </label>
+
+          <span>Passwords doesnt match</span>
           <div>
             <input type="checkbox" className={styles.chkbox} />
             Remember me

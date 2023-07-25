@@ -19,7 +19,7 @@
 .signup_cover {
   background-color: white;
   width: 25em;
-  height: 50em;
+  height: 60em;
   border-radius: 1em;
   box-shadow: 0 1em 1em gray;
   display: flex;
@@ -29,21 +29,22 @@
 }
 .form {
   position: relative;
-  height: 25rem;
+  height: 60rem;
   margin-bottom: 0.5rem;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
 }
 
-.userInput,
+/* .userInput,
 .emailInput,
 .email,
 .passInput,
 .passInput2 {
   width: 16em;
   height: 3em;
-  margin-bottom: 20px;
-}
+  margin-bottom: 10px;
+} */
 .signupBtn:hover {
   background-color: #f67280;
 }
@@ -87,8 +88,8 @@ input {
   border: 2px solid #c0c0c0;
   border-radius: 0.5em;
   background-color: aliceblue;
-  height: 100%;
-  width: 100%;
+  height: 28px;
+  /* width: 100%; */
   text-align: left;
   font-family: inherit;
   font-weight: inherit;
@@ -96,6 +97,7 @@ input {
   padding-left: 1.5rem;
   background: none;
   justify-content: center;
+  /* margin: 10px; */
 }
 input:hover {
   border-color: #f9a2ab;
@@ -103,7 +105,8 @@ input:hover {
 input:focus {
   border-color: #f45a6a;
 }
-.userLabel,
+
+/* .userLabel,
 .emailLabel,
 .pass1Label,
 .pass2Label {
@@ -157,7 +160,7 @@ input:focus {
   font-size: 0.9rem;
   background-color: white;
   color: #1d1a1a;
-}
+} */
 
 .App {
   background-image: url(https://img.freepik.com/free-vector/network-mesh-wire-digital-technology-background_1017-27428.jpg?w=1380&t=st=1688982327~exp=1688982927~hmac=368ac4943f1a92bc3a3c54f5dd521691fe8eaf9d70b144bd149220d9aa46b5de);
@@ -182,4 +185,17 @@ input:focus {
 }
 .using {
   text-align: center;
+}
+span {
+  font-size: 12px;
+  /* margin: 15px; */
+
+  color: red;
+  display: none;
+}
+input:invalid ~ span {
+  display: block;
+}
+select {
+  height: 30px;
 }
