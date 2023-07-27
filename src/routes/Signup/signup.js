@@ -49,24 +49,24 @@ export default function SignupForm() {
   //     label: "Repeat password",
   //   },
   // ];
-  var users = [];
-  const handlesubmit = (e) => {
-    var data = {};
-    data["username"] = usernameRef.current.value;
-    data["firstname"] = firstnameRef.current.value;
-    data["lastname"] = lastnameRef.current.value;
-    data["date"] = dateRef.current.value;
-    data["gender"] = genderRef.current.value;
-    data["email"] = emailRef.current.value;
-    data["password"] = passwordRef.current.value;
 
-    users.push(data);
-    console.log(users);
+  const handlesubmit = (e) => {
+    var existingUsers = JSON.parse(localStorage.getItem("users"));
+    if (existingUsers == null) existingUsers = [];
+    var data = {
+      username: usernameRef.current.value,
+      firstname: firstnameRef.current.value,
+      lastname: lastnameRef.current.value,
+      date: dateRef.current.value,
+      gender: genderRef.current.value,
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+    };
+    // console.log(users);
+    // localStorage.clear();
     e.preventDefault();
-    localStorage.setItem("users", JSON.stringify(users));
-    // setEmail(email, emailRef.current.value);
-    // setPassword(password, passwordRef.current.value);
-    // setUsername(username, usernameRef.current.value);
+    existingUsers.push(data);
+    localStorage.setItem("users", JSON.stringify(existingUsers));
     navigate("/login");
   };
   return (
