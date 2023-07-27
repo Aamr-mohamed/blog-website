@@ -1,4 +1,4 @@
-.page {
+.login_page {
   display: flex;
   height: 50em;
   justify-content: center;
@@ -8,9 +8,9 @@
   font-family: "customFont";
   src: url();
 }
-.signup-cover {
+.login_cover {
   background-color: white;
-  width: 20em;
+  width: 25em;
   height: 35em;
   position: relative;
   border-radius: 1em;
@@ -20,15 +20,41 @@
   align-items: center;
   justify-content: space-around;
 }
-.userInput {
+.email1Input,
+.pass3Input {
   width: 16em;
   height: 3em;
+  margin-bottom: 24px;
 }
-.passInput {
-  width: 16em;
-  height: 3em;
+.email1Label,
+.pass3Label {
+  transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
+  pointer-events: none;
+  color: #4d4d4d;
+  position: absolute;
+  left: 98px;
 }
-.signupBtn {
+.email1Label {
+  top: 167px;
+}
+.pass3Label {
+  top: 236px;
+}
+.email1Input:focus ~ .email1Label,
+.email1Input:not(:placeholder-shown).email1Input:not(:focus) ~ .email1Label {
+  top: 145px;
+  font-size: 0.9rem;
+  background-color: white;
+  color: #1d1a1a;
+}
+.pass3Input:focus ~ .pass3Label,
+.pass3Input:not(:placeholder-shown).pass3Input:not(:focus) ~ .pass3Label {
+  top: 216px;
+  font-size: 0.9rem;
+  background-color: white;
+  color: #1d1a1a;
+}
+.loginBtn {
   cursor: pointer;
   border: 0;
   border-radius: 4px;
@@ -41,8 +67,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 8px;
 }
-.signupBtn:hover {
+.loginBtn:hover {
   color: white;
   /* width: ; */
   box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
@@ -54,12 +81,15 @@ input {
   height: 4em;
   border-radius: 0.25em;
   width: 80%;
-  text-align: center;
+  text-align: left;
 }
 input:focus {
   outline-color: #f67280;
 }
-.githubIcn {
+.signupBtn,
+.githubIcn,
+.googleIcn,
+.facebookIcn {
   cursor: pointer;
   border: 0;
   border-radius: 4px;
@@ -69,37 +99,41 @@ input:focus {
   padding: 10px 0;
   box-shadow: 0 0 20px rgba(104, 85, 224, 0.2);
   transition: 0.4s;
+  margin-top: 5px;
+}
+.githubIcn,
+.googleIcn,
+.facebookIcn {
+  width: 100px;
+}
+.facebookIcn:hover {
+  background-color: #3b5998;
 }
 .githubIcn:hover {
-  color: white;
-  /* width: ; */
-  box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
-  background-color: #dc3545;
-}
-
-.googleIcn {
-  cursor: pointer;
-  border: 0;
-  border-radius: 4px;
-  font-weight: 600;
-  margin: 0 10px;
-  width: 100px;
-  padding: 10px 0;
-  box-shadow: 0 0 20px rgba(104, 85, 224, 0.2);
-  transition: 0.4s;
+  background-color: #1d1a1a;
 }
 .googleIcn:hover {
+  background-color: #bb2c3b;
+}
+.signupBtn:hover,
+.githubIcn:hover,
+.googleIcn:hover,
+.facebookIcn:hover {
   color: white;
-  /* width: ; */
   box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
-  background-color: #0d6efd;
 }
 .App {
   background-image: url(https://img.freepik.com/free-vector/network-mesh-wire-digital-technology-background_1017-27428.jpg?w=1380&t=st=1688982327~exp=1688982927~hmac=368ac4943f1a92bc3a3c54f5dd521691fe8eaf9d70b144bd149220d9aa46b5de);
 }
 /* .cover {
 } */
-.logo {
+.logo1 {
   width: 220px;
   padding-top: 20px;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }
