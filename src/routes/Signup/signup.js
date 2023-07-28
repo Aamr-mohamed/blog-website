@@ -18,57 +18,35 @@ export default function SignupForm() {
   // const [password, setPassword] = useState();
   // const [username, setUsername] = useState();
   const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  // const errormassege  =
-  // const [values, setValues] = useState({
-  //   username: "",
-  //   email: "",
-  //   password: "",
-  //   confirmPassword: "",
-  // });
-  // const inputs = [
-  //   {
-  //     id: 1,
-  //     name: "username",
-  //     type: "text",
-  //     placeholder: "",
-  //     label: "Username",
-  //   },
-  //   { id: 2, name: "email", type: "email", placeholder: "", label: "email" },
-  //   {
-  //     id: 3,
-  //     name: "password",
-  //     type: "password",
-  //     placeholder: "",
-  //     label: "Password",
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "repeatPassword",
-  //     type: "password",
-  //     placeholder: "",
-  //     label: "Repeat password",
-  //   },
-  // ];
-
   const handlesubmit = (e) => {
+    e.preventDefault();
     var existingUsers = JSON.parse(localStorage.getItem("users"));
     if (existingUsers == null) existingUsers = [];
-    var data = {
-      username: usernameRef.current.value,
-      firstname: firstnameRef.current.value,
-      lastname: lastnameRef.current.value,
-      date: dateRef.current.value,
-      gender: genderRef.current.value,
-      email: emailRef.current.value,
-      password: passwordRef.current.value,
-    };
-    // console.log(users);
-    // localStorage.clear();
-    e.preventDefault();
-    existingUsers.push(data);
-    localStorage.setItem("users", JSON.stringify(existingUsers));
-    navigate("/login");
+    if (existingUsers.find((user) => user.email === emailRef.current.value)) {
+      alert("This email is already exists");
+    } else if (
+      existingUsers.find((user) => user.username === usernameRef.current.value)
+    ) {
+      alert("This Username is already exists");
+    } else {
+      var data = {
+        username: usernameRef.current.value,
+        firstname: firstnameRef.current.value,
+        lastname: lastnameRef.current.value,
+        date: dateRef.current.value,
+        gender: genderRef.current.value,
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+      };
+
+      existingUsers.push(data);
+      localStorage.setItem("users", JSON.stringify(existingUsers));
+      navigate("/login");
+    }
   };
+
+  // console.log(users);
+  // localStorage.clear();
   return (
     <div
       className={styles.signup_page}
