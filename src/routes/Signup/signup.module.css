@@ -35,16 +35,6 @@
   flex-direction: column;
   justify-content: space-around;
 }
-
-/* .userInput,
-.emailInput,
-.email,
-.passInput,
-.passInput2 {
-  width: 16em;
-  height: 3em;
-  margin-bottom: 10px;
-} */
 .signupBtn:hover {
   background-color: #f67280;
 }
@@ -98,70 +88,14 @@ input {
   background: none;
   justify-content: center;
   /* margin: 10px; */
+  margin: 6px;
 }
 input:hover {
   border-color: #f9a2ab;
 }
 input:focus {
-  border-color: #f45a6a;
+  border-color: #f9a2ab;
 }
-
-/* .userLabel,
-.emailLabel,
-.pass1Label,
-.pass2Label {
-  transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
-  pointer-events: none;
-  color: #4d4d4d;
-  position: absolute;
-  left: 20px;
-}
-.userLabel {
-  top: 15px;
-}
-
-.userInput:focus ~ .userLabel,
-.userInput:not(:placeholder-shown).userInput:not(:focus) ~ .userLabel {
-  top: -8px;
-  left: 10px;
-  font-size: 0.9rem;
-  background-color: white;
-  color: #1d1a1a;
-}
-.emailLabel {
-  top: 80px;
-}
-.emailInput:focus ~ .emailLabel,
-.emailInput:not(:placeholder-shown).emailInput:not(:focus) ~ .emailLabel {
-  top: 59px;
-  left: 10px;
-  font-size: 0.9rem;
-  background-color: white;
-  color: #1d1a1a;
-}
-.pass1Label {
-  top: 148px;
-}
-.passInput:focus ~ .pass1Label,
-.passInput:not(:placeholder-shown).passInput:not(:focus) ~ .pass1Label {
-  top: 125px;
-  left: 10px;
-  font-size: 0.9rem;
-  background-color: white;
-  color: #1d1a1a;
-}
-.pass2Label {
-  top: 213px;
-}
-.passInput2:focus ~ .pass2Label,
-.passInput2:not(:placeholder-shown).passInput2:not(:focus) ~ .pass2Label {
-  top: 191px;
-  left: 10px;
-  font-size: 0.9rem;
-  background-color: white;
-  color: #1d1a1a;
-} */
-
 .App {
   background-image: url(https://img.freepik.com/free-vector/network-mesh-wire-digital-technology-background_1017-27428.jpg?w=1380&t=st=1688982327~exp=1688982927~hmac=368ac4943f1a92bc3a3c54f5dd521691fe8eaf9d70b144bd149220d9aa46b5de);
 }
@@ -186,14 +120,7 @@ input:focus {
 .using {
   text-align: center;
 }
-span {
-  font-size: 12px;
-  /* margin: 15px; */
-
-  color: red;
-  display: none;
-}
-input:invalid ~ span {
+/* input:invalid ~ span {
   display: block;
 }
 select {

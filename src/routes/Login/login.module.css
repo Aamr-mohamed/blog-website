@@ -20,40 +20,7 @@
   align-items: center;
   justify-content: space-around;
 }
-.email1Input,
-.pass3Input {
-  width: 16em;
-  height: 3em;
-  margin-bottom: 24px;
-}
-.email1Label,
-.pass3Label {
-  transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
-  pointer-events: none;
-  color: #4d4d4d;
-  position: absolute;
-  left: 98px;
-}
-.email1Label {
-  top: 167px;
-}
-.pass3Label {
-  top: 236px;
-}
-.email1Input:focus ~ .email1Label,
-.email1Input:not(:placeholder-shown).email1Input:not(:focus) ~ .email1Label {
-  top: 145px;
-  font-size: 0.9rem;
-  background-color: white;
-  color: #1d1a1a;
-}
-.pass3Input:focus ~ .pass3Label,
-.pass3Input:not(:placeholder-shown).pass3Input:not(:focus) ~ .pass3Label {
-  top: 216px;
-  font-size: 0.9rem;
-  background-color: white;
-  color: #1d1a1a;
-}
+
 .loginBtn {
   cursor: pointer;
   border: 0;
@@ -67,7 +34,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 8px;
+  margin-top: 20px;
 }
 .loginBtn:hover {
   color: white;

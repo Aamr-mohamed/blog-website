@@ -14,60 +14,34 @@ export default function SignupForm() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
-  // const [email, setEmail] = useState();
-  // const [password, setPassword] = useState();
-  // const [username, setUsername] = useState();
   const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  // const errormassege  =
-  // const [values, setValues] = useState({
-  //   username: "",
-  //   email: "",
-  //   password: "",
-  //   confirmPassword: "",
-  // });
-  // const inputs = [
-  //   {
-  //     id: 1,
-  //     name: "username",
-  //     type: "text",
-  //     placeholder: "",
-  //     label: "Username",
-  //   },
-  //   { id: 2, name: "email", type: "email", placeholder: "", label: "email" },
-  //   {
-  //     id: 3,
-  //     name: "password",
-  //     type: "password",
-  //     placeholder: "",
-  //     label: "Password",
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "repeatPassword",
-  //     type: "password",
-  //     placeholder: "",
-  //     label: "Repeat password",
-  //   },
-  // ];
-
   const handlesubmit = (e) => {
     var existingUsers = JSON.parse(localStorage.getItem("users"));
     if (existingUsers == null) existingUsers = [];
-    var data = {
-      username: usernameRef.current.value,
-      firstname: firstnameRef.current.value,
-      lastname: lastnameRef.current.value,
-      date: dateRef.current.value,
-      gender: genderRef.current.value,
-      email: emailRef.current.value,
-      password: passwordRef.current.value,
-    };
     // console.log(users);
     // localStorage.clear();
     e.preventDefault();
-    existingUsers.push(data);
-    localStorage.setItem("users", JSON.stringify(existingUsers));
-    navigate("/login");
+    if (existingUsers.find((user) => user.email === emailRef.current.value)) {
+      alert("This Email is already exists");
+    } else if (
+      existingUsers.find((user) => user.username === usernameRef.current.value)
+    ) {
+      alert("This Username is already exists");
+    } else {
+      var data = {
+        username: usernameRef.current.value,
+        firstname: firstnameRef.current.value,
+        lastname: lastnameRef.current.value,
+        date: dateRef.current.value,
+        gender: genderRef.current.value,
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+      };
+
+      existingUsers.push(data);
+      localStorage.setItem("users", JSON.stringify(existingUsers));
+      navigate("/login");
+    }
   };
   return (
     <div
@@ -83,105 +57,108 @@ export default function SignupForm() {
       <div className={styles.signup_cover}>
         <img src={logo} alt="Bloggingway Image" className={styles.logo} />
         <h1 className={styles.title}>Signup</h1>
-        <form onSubmit={handlesubmit} className={styles.form}>
-          <label for="userInput" className={styles.userLabel}>
-            <b>First Name</b>
-          </label>
-          <input
-            type="text"
-            placeholder=""
-            className={styles.userInput}
-            ref={firstnameRef}
-            required
-          ></input>
-          <span>Username should be 3-16 characters</span>
-          <label for="userInput" className={styles.userLabel}>
-            <b>Last Name</b>
-          </label>
-          <input
-            type="text"
-            placeholder=""
-            className={styles.userInput}
-            ref={lastnameRef}
-            required
-          ></input>
-          <span>Username should be 3-16 characters</span>
-          <label for="userInput" className={styles.userLabel}>
-            <b>Birth date</b>
-          </label>
-          <input
-            type="date"
-            placeholder=""
-            className={styles.userInput}
-            ref={dateRef}
-            required
-          ></input>
-          <label for="userInput" className={styles.userLabel}>
-            <b>Gender</b>
-          </label>
-          <select className="gender" ref={genderRef}>
-            <option value="">Please select one…</option>
-            <option value="female">Female</option>
-            <option value="male">Male</option>
-            <option value="non-binary">Non-Binary</option>
-            <option value="non-binary">Neutral gender</option>
-            <option value="non-binary">Genderfluid</option>
-            <option value="non-binary">Gender expansive</option>
-            <option value="non-binary">Cisgender</option>
-            <option value="non-binary">Genderfluid</option>
-            <option value="non-binary">Transgender</option>
-            <option value="non-binary">Two Spirit</option>
-            <option value="non-binary">Cat/Dog/Animals</option>
-            <option value="other">Other</option>
-            <option value="Prefer not to answer">Prefer not to Answer</option>
-          </select>
-          <label for="userInput" className={styles.userLabel}>
-            <b>Username</b>
-          </label>
-          <input
-            type="text"
-            placeholder=""
-            className={styles.userInput}
-            ref={usernameRef}
-            required
-          ></input>
-          <span>Username should be 3-16 characters</span>
-          <label for="email" className={styles.emailLabel}>
-            <b>Email</b>
-          </label>
-          <input
-            type="email"
-            placeholder=""
-            className={styles.emailInput}
-            ref={emailRef}
-            errormassage=""
-            required
-          ></input>
-
-          <span>Thats not a valid email</span>
-          <label for="passInput" className={styles.pass1Label}>
-            <b>Password</b>
-          </label>
-          <input
-            type="password"
-            placeholder=""
-            className={styles.passInput}
-            required
-          ></input>
-
-          <span>Password shoud be 8-20 characters</span>
-          <label for="passInput2" className={styles.pass2Label}>
-            <b>Repeat password</b>
-          </label>
-          <input
-            type="password"
-            placeholder=""
-            className={styles.passInput2}
-            ref={passwordRef}
-            required
-          ></input>
-
-          <span>Passwords doesnt match</span>
+        <form onSubmit={handlesubmit} class="form-floating">
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder=""
+              required
+              ref={firstnameRef}
+            ></input>
+            <label for="floatingInput">Firstname</label>
+          </div>
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder=""
+              required
+              ref={lastnameRef}
+            ></input>
+            <label for="floatingInput">Lastname</label>
+          </div>
+          <div class="form-floating">
+            <input
+              type="date"
+              class="form-control"
+              id="floatingInput"
+              placeholder=""
+              required
+              style={{ alignItems: "center", height: "20px" }}
+              ref={dateRef}
+            ></input>
+            <label for="floatingInput">Date</label>
+          </div>
+          <div class="d-flex justify-content-center">
+            <select
+              class="form-select"
+              id="floatingSelect"
+              aria-label="Floating label select example"
+              ref={genderRef}
+              required
+            >
+              <option selected>Please select one…</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="non-binary">Non-Binary</option>
+              <option value="non-binary">Neutral gender</option>
+              <option value="non-binary">Genderfluid</option>
+              <option value="non-binary">Gender expansive</option>
+              <option value="non-binary">Cisgender</option>
+              <option value="non-binary">Genderfluid</option>
+              <option value="non-binary">Transgender</option>
+              <option value="non-binary">Two Spirit</option>
+              <option value="non-binary">Cat/Dog/Animals</option>
+              <option value="other">Other</option>
+              <option value="Prefer not to answer">Prefer not to Answer</option>
+            </select>
+          </div>
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder=""
+              required
+              ref={usernameRef}
+            ></input>
+            <label for="floatingInput">Username</label>
+          </div>
+          <div class="form-floating">
+            <input
+              type="email"
+              class="form-control"
+              id="floatingInput"
+              placeholder=""
+              required
+              ref={emailRef}
+            ></input>
+            <label for="floatingInput">Email address</label>
+          </div>
+          <div class="form-floating">
+            <input
+              type="password"
+              class="form-control"
+              id="floatingPassword"
+              placeholder=""
+              required
+            ></input>
+            <label for="floatingPassword">Password</label>
+          </div>
+          <div class="form-floating">
+            <input
+              type="password"
+              class="form-control"
+              id="floatingPassword"
+              placeholder=""
+              required
+              ref={passwordRef}
+            ></input>
+            <label for="floatingPassword">Repeat Password</label>
+          </div>
           <div>
             <input type="checkbox" className={styles.chkbox} />
             Remember me

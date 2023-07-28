@@ -37,25 +37,27 @@ export default function LoginForm() {
       <div className={styles.login_cover}>
         <img src={logo} alt="Bloggingway Image" className={styles.logo1} />
         <h1>Login</h1>
-        <form className={styles.form} onSubmit={verification}>
-          <input
-            type="text"
-            placeholder=""
-            className={styles.email1Input}
-            ref={svdEmail}
-          ></input>
-          <label for="email" className={styles.email1Label}>
-            <b>Email</b>
-          </label>
-          <input
-            type="password"
-            placeholder=""
-            className={styles.pass3Input}
-            ref={svdPassword}
-          ></input>
-          <label for="passInput" className={styles.pass3Label}>
-            <b>Password</b>
-          </label>
+        <form className="form-floating" onSubmit={verification}>
+          <div class="form-floating mb-3">
+            <input
+              type="email"
+              class="form-control"
+              id="floatingInput"
+              placeholder=""
+              ref={svdEmail}
+            ></input>
+            <label for="floatingInput">Email address</label>
+          </div>
+          <div class="form-floating">
+            <input
+              type="password"
+              class="form-control"
+              id="floatingPassword"
+              placeholder="Password"
+              ref={svdPassword}
+            ></input>
+            <label for="floatingPassword">Password</label>
+          </div>
           <button className={styles.loginBtn}>Sign in</button>
         </form>
         <div>
