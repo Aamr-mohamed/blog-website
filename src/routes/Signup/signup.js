@@ -16,55 +16,9 @@ export default function SignupForm() {
   const passwordRef = useRef();
   const navigate = useNavigate();
   const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-<<<<<<< Updated upstream
-  // const errormassege  =
-  // const [values, setValues] = useState({
-  //   username: "",
-  //   email: "",
-  //   password: "",
-  //   confirmPassword: "",
-  // });
-  // const inputs = [
-  //   {
-  //     id: 1,
-  //     name: "username",
-  //     type: "text",
-  //     placeholder: "",
-  //     label: "Username",
-  //   },
-  //   { id: 2, name: "email", type: "email", placeholder: "", label: "email" },
-  //   {
-  //     id: 3,
-  //     name: "password",
-  //     type: "password",
-  //     placeholder: "",
-  //     label: "Password",
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "repeatPassword",
-  //     type: "password",
-  //     placeholder: "",
-  //     label: "Repeat password",
-  //   },
-  // ];
-
-=======
-
-  const emailError = () => {
-    console.log("na tez");
-    return (
-      <div>
-        <label className="na_tez">tezk</label>
-        <Alert>This email is already exists</Alert>;
-      </div>
-    );
-  };
->>>>>>> Stashed changes
   const handlesubmit = (e) => {
     var existingUsers = JSON.parse(localStorage.getItem("users"));
     if (existingUsers == null) existingUsers = [];
-<<<<<<< Updated upstream
     var data = {
       username: usernameRef.current.value,
       firstname: firstnameRef.current.value,
@@ -79,10 +33,8 @@ export default function SignupForm() {
     e.preventDefault();
     existingUsers.push(data);
     localStorage.setItem("users", JSON.stringify(existingUsers));
-    navigate("/login");
-=======
     if (existingUsers.find((user) => user.email === emailRef.current.value)) {
-      emailError();
+      alert("This Email is already exists");
     } else if (
       existingUsers.find((user) => user.username === usernameRef.current.value)
     ) {
@@ -102,7 +54,6 @@ export default function SignupForm() {
       localStorage.setItem("users", JSON.stringify(existingUsers));
       navigate("/login");
     }
->>>>>>> Stashed changes
   };
   return (
     <div
