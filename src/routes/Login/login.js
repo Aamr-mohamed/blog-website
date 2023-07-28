@@ -16,6 +16,10 @@ export default function LoginForm() {
         user.email === svdEmail.current.value &&
         user.password === svdPassword.current.value
       ) {
+        var currentEmail = svdEmail.current.value;
+        var currentUser = user.username;
+        localStorage.setItem("currentEmail", currentEmail);
+        localStorage.setItem("currentUser", currentUser);
         navigate("/");
       } else {
         console.log("m4 4a8al");
