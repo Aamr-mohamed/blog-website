@@ -1,9 +1,10 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, Select } from "react";
 import "./signup.module.css";
 import styles from "./signup.module.css";
 import logo from "../images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
-import "../formInput/FormInput";
+import { Button, Alert } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function SignupForm() {
   const firstnameRef = useRef();
@@ -14,10 +15,8 @@ export default function SignupForm() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
-  // const [email, setEmail] = useState();
-  // const [password, setPassword] = useState();
-  // const [username, setUsername] = useState();
   const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+<<<<<<< Updated upstream
   // const errormassege  =
   // const [values, setValues] = useState({
   //   username: "",
@@ -50,9 +49,22 @@ export default function SignupForm() {
   //   },
   // ];
 
+=======
+
+  const emailError = () => {
+    console.log("na tez");
+    return (
+      <div>
+        <label className="na_tez">tezk</label>
+        <Alert>This email is already exists</Alert>;
+      </div>
+    );
+  };
+>>>>>>> Stashed changes
   const handlesubmit = (e) => {
     var existingUsers = JSON.parse(localStorage.getItem("users"));
     if (existingUsers == null) existingUsers = [];
+<<<<<<< Updated upstream
     var data = {
       username: usernameRef.current.value,
       firstname: firstnameRef.current.value,
@@ -68,6 +80,29 @@ export default function SignupForm() {
     existingUsers.push(data);
     localStorage.setItem("users", JSON.stringify(existingUsers));
     navigate("/login");
+=======
+    if (existingUsers.find((user) => user.email === emailRef.current.value)) {
+      emailError();
+    } else if (
+      existingUsers.find((user) => user.username === usernameRef.current.value)
+    ) {
+      alert("This Username is already exists");
+    } else {
+      var data = {
+        username: usernameRef.current.value,
+        firstname: firstnameRef.current.value,
+        lastname: lastnameRef.current.value,
+        date: dateRef.current.value,
+        gender: genderRef.current.value,
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+      };
+
+      existingUsers.push(data);
+      localStorage.setItem("users", JSON.stringify(existingUsers));
+      navigate("/login");
+    }
+>>>>>>> Stashed changes
   };
   return (
     <div
@@ -119,8 +154,15 @@ export default function SignupForm() {
           <label for="userInput" className={styles.userLabel}>
             <b>Gender</b>
           </label>
-          <select className="gender" ref={genderRef}>
-            <option value="">Please select one…</option>
+          <select
+            className="selectpicker"
+            ref={genderRef}
+            data-style="btn-info"
+            required
+          >
+            <option value="" hidden>
+              Please select one…
+            </option>
             <option value="female">Female</option>
             <option value="male">Male</option>
             <option value="non-binary">Non-Binary</option>
@@ -157,7 +199,6 @@ export default function SignupForm() {
             errormassage=""
             required
           ></input>
-
           <span>Thats not a valid email</span>
           <label for="passInput" className={styles.pass1Label}>
             <b>Password</b>
@@ -168,7 +209,6 @@ export default function SignupForm() {
             className={styles.passInput}
             required
           ></input>
-
           <span>Password shoud be 8-20 characters</span>
           <label for="passInput2" className={styles.pass2Label}>
             <b>Repeat password</b>
@@ -180,7 +220,6 @@ export default function SignupForm() {
             ref={passwordRef}
             required
           ></input>
-
           <span>Passwords doesnt match</span>
           <div>
             <input type="checkbox" className={styles.chkbox} />
