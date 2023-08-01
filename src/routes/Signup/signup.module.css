@@ -38,10 +38,7 @@
 .signupBtn:hover {
   background-color: #f67280;
 }
-.signupBtn,
-.githubIcn,
-.googleIcn,
-.facebookIcn {
+.signupBtn {
   cursor: pointer;
   border: 0;
   border-radius: 4px;
@@ -53,27 +50,11 @@
   transition: 0.4s;
   margin-top: 5px;
 }
-.signupBtn:hover,
-.githubIcn:hover,
-.googleIcn:hover,
-.facebookIcn:hover {
+.signupBtn:hover {
   color: white;
   box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
 }
-.githubIcn,
-.googleIcn,
-.facebookIcn {
-  width: 100px;
-}
-.facebookIcn:hover {
-  background-color: #3b5998;
-}
-.githubIcn:hover {
-  background-color: #1d1a1a;
-}
-.googleIcn:hover {
-  background-color: #bb2c3b;
-}
+
 input {
   border: 2px solid #c0c0c0;
   border-radius: 0.5em;
