@@ -18,7 +18,7 @@ const Header = ()=>{
         <a class="nav-link" href="signup/">Signup</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled">Disabled</a>
+        <a class="nav-link disabled">Admin (coming soon)</a>
       </li>
     </ul>
   </div>

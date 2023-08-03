@@ -43,7 +43,7 @@
   border: 0;
   border-radius: 4px;
   font-weight: 600;
-  margin: 0 5px;
+  margin: 0 20px;
   width: 200px;
   padding: 10px 0;
   box-shadow: 0 0 20px rgba(104, 85, 224, 0.2);
@@ -68,9 +68,11 @@ input {
   padding-left: 1.5rem;
   background: none;
   justify-content: center;
-  /* margin: 10px; */
-  margin: 6px;
 }
+.form-control {
+  /* margin: 6px !important; */
+}
+
 input:hover {
   border-color: #f9a2ab;
 }

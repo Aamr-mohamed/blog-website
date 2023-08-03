@@ -7,13 +7,9 @@ import Root from "./routes/Home/root";
 import ErrorPage from "./error-page";
 import LoginForm from "./routes/Login/login";
 import SignupForm from "./routes/Signup/signup";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Root />,
-    errorElement: <ErrorPage />,
-  },
   {
     path: "login/",
     element: <LoginForm />,
@@ -22,7 +18,19 @@ const router = createBrowserRouter([
     path: "signup/",
     element: <SignupForm />,
   },
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <ErrorPage />,
+  },
 ]);
+export default function App() {
+  return (
+    <div>
+      <Root />
+    </div>
+  );
+}
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
