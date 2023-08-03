@@ -3,7 +3,7 @@ import "./login.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
 import styles from "./login.module.css";
-import { Button } from "reactstrap";
+import Button from "react-bootstrap/Button";
 import bcrypt from "bcryptjs-react";
 
 export default function LoginForm() {
@@ -87,7 +87,7 @@ export default function LoginForm() {
           <Button
             href="https://www.facebook.com/login/"
             // className={styles.facebookIcn}
-            class="btn btn-primary"
+            variant="primary"
             style={{ margin: "6px" }}
           >
             <svg
@@ -105,7 +105,7 @@ export default function LoginForm() {
           <Button
             href="https://accounts.google.com/signin"
             // className={styles.googleIcn}
-            class="btn btn-danger"
+            variant="danger"
             style={{ margin: "6px" }}
 
             // style={{
@@ -130,7 +130,7 @@ export default function LoginForm() {
           <Button
             // className={styles.githubIcn}
             href="https://github.com/login"
-            class="btn btn-dark"
+            variant="dark"
             style={{ margin: "6px" }}
           >
             <svg

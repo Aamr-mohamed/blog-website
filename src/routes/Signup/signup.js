@@ -3,8 +3,9 @@ import "./signup.module.css";
 import styles from "./signup.module.css";
 import logo from "../images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "reactstrap";
+import Button from "react-bootstrap/Button";
 import bcrypt from "bcryptjs-react";
+import Form from "react-bootstrap/Form";
 
 export default function SignupForm() {
   localStorage.setItem("currentEmail", []);
@@ -165,9 +166,16 @@ export default function SignupForm() {
             <option value="Prefer not to answer">Prefer not to Answer</option>
           </select>
         </div>
+
         <div>
-          <input type="checkbox" className={styles.chkbox} />
-          Remember me
+          <Form>
+            <Form.Check
+              type="switch"
+              inline
+              id="custom-switch"
+              label="Remember me"
+            />
+          </Form>
         </div>
         <div>
           <p>
@@ -176,9 +184,9 @@ export default function SignupForm() {
           </p>
         </div>
         <div>
-          <Button className={styles.signupBtn} onSubmit={handlesubmit}>
+          <button className={styles.signupBtn} onSubmit={handlesubmit}>
             Sign up
-          </Button>
+          </button>
         </div>
 
         <div>
@@ -186,8 +194,9 @@ export default function SignupForm() {
         </div>
         <div>
           <Button
-            href="https://accounts.google.com/signin"
-            class="btn btn-primary"
+            as="button"
+            href="https://www.facebook.com/login/"
+            variant="primary"
             style={{ margin: "6px" }}
           >
             <svg
@@ -204,7 +213,7 @@ export default function SignupForm() {
           </Button>
           <Button
             href="https://accounts.google.com/signin"
-            class="btn btn-danger"
+            variant="danger"
             style={{ margin: "6px" }}
           >
             <svg
@@ -222,7 +231,7 @@ export default function SignupForm() {
 
           <Button
             href="https://github.com/login"
-            class="btn btn-dark"
+            variant="dark"
             style={{ margin: "6px" }}
           >
             <svg
