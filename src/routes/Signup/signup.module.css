@@ -43,7 +43,7 @@
   border: 0;
   border-radius: 4px;
   font-weight: 600;
-  margin: 0 10px;
+  margin: 0 5px;
   width: 200px;
   padding: 10px 0;
   box-shadow: 0 0 20px rgba(104, 85, 224, 0.2);
@@ -60,7 +60,7 @@ input {
   border-radius: 0.5em;
   background-color: aliceblue;
   height: 28px;
-  /* width: 100%; */
+  width: 100%;
   text-align: left;
   font-family: inherit;
   font-weight: inherit;

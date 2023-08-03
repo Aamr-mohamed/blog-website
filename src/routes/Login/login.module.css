@@ -38,7 +38,6 @@
 }
 .loginBtn:hover {
   color: white;
-  /* width: ; */
   box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
   background-color: #f67280;
 }
