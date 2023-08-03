@@ -40,8 +40,6 @@ export default function LoginForm() {
             }
           }
         );
-      } else {
-        console.log("m4 4a8al");
       }
     });
   };

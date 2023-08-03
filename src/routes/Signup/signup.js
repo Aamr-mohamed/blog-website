@@ -46,7 +46,7 @@ export default function SignupForm() {
       existingUsers.push(data);
       localStorage.setItem("users", JSON.stringify(existingUsers));
       localStorage.setItem("hashedPassword", JSON.stringify(hashedPassword));
-      // navigate("/login");
+      navigate("/login");
     }
   };
   return (
