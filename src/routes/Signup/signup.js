@@ -134,7 +134,7 @@ export default function SignupForm() {
           <div>
             <FloatingLabel
               controlId="floatingInput"
-              label="Password"
+              label="Repeat Password"
               className="mb-2"
             >
               <Form.Control

@@ -42,6 +42,8 @@ export default function LoginForm() {
               }
             }
           );
+        } else {
+          alert("Email doesnt exist please type a right email or go to signup");
         }
       });
     }
@@ -60,7 +62,7 @@ export default function LoginForm() {
       <div className={styles.login_cover}>
         <img src={logo} alt="Bloggingway Image" className={styles.logo1} />
         <h1>Login</h1>
-        <form className="form-floating" onSubmit={verification}>
+        <form onSubmit={verification}>
           <div>
             <FloatingLabel
               controlId="floatingInput"
@@ -97,7 +99,6 @@ export default function LoginForm() {
         <div>
           <Button
             href="https://www.facebook.com/login/"
-            // className={styles.facebookIcn}
             variant="primary"
             style={{ margin: "6px" }}
           >
