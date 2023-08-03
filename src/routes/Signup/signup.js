@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import bcrypt from "bcryptjs-react";
 import Form from "react-bootstrap/Form";
+import { FloatingLabel } from "react-bootstrap";
 
 export default function SignupForm() {
   localStorage.setItem("currentEmail", []);
@@ -63,131 +64,143 @@ export default function SignupForm() {
       <div className={styles.signup_cover}>
         <img src={logo} alt="Bloggingway Image" className={styles.logo} />
         <h1 className={styles.title}>Signup</h1>
+        <form className="mb-3" onSubmit={handlesubmit}>
+          <div>
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Firstname"
+              className="mb-2"
+            >
+              <Form.Control
+                type="text"
+                placeholder=""
+                ref={firstnameRef}
+                required
+              />
+            </FloatingLabel>
+          </div>
+          <div>
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Lastname"
+              className="mb-2"
+            >
+              <Form.Control
+                type="text"
+                placeholder=""
+                ref={lastnameRef}
+                required
+              />
+            </FloatingLabel>
+          </div>
 
-        <div class="form-floating">
-          <input
-            type="text"
-            class="form-control"
-            id="floatingInput"
-            placeholder=""
-            required
-            ref={firstnameRef}
-          ></input>
-          <label for="floatingInput">Firstname</label>
-        </div>
-        <div class="form-floating">
-          <input
-            type="text"
-            class="form-control"
-            id="floatingInput"
-            placeholder=""
-            required
-            ref={lastnameRef}
-          ></input>
-          <label for="floatingInput">Lastname</label>
-        </div>
+          <div>
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Username"
+              className="mb-2"
+            >
+              <Form.Control
+                type="text"
+                placeholder=""
+                ref={usernameRef}
+                required
+              />
+            </FloatingLabel>
+          </div>
+          <div>
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Email address"
+              className="mb-2"
+            >
+              <Form.Control
+                type="email"
+                placeholder=""
+                ref={emailRef}
+                required
+              />
+            </FloatingLabel>
+          </div>
+          <div>
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Password"
+              className="mb-2"
+            >
+              <Form.Control type="password" placeholder="" required />
+            </FloatingLabel>
+          </div>
+          <div>
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Password"
+              className="mb-2"
+            >
+              <Form.Control
+                type="password"
+                placeholder=""
+                required
+                ref={passwordRef}
+              />
+            </FloatingLabel>
+          </div>
+          <div>
+            <Form.Control
+              type="date"
+              ref={dateRef}
+              required
+              className="mb-2"
+            ></Form.Control>
+          </div>
 
-        <div class="form-floating">
-          <input
-            type="text"
-            class="form-control"
-            id="floatingInput"
-            placeholder=""
-            required
-            ref={usernameRef}
-          ></input>
-          <label for="floatingInput">Username</label>
-        </div>
-        <div class="form-floating">
-          <input
-            type="email"
-            class="form-control"
-            id="floatingInput"
-            placeholder=""
-            required
-            ref={emailRef}
-          ></input>
-          <label for="floatingInput">Email address</label>
-        </div>
-        <div class="form-floating">
-          <input
-            type="password"
-            class="form-control"
-            id="floatingPassword"
-            placeholder=""
-            required
-          ></input>
-          <label for="floatingPassword">Password</label>
-        </div>
-        <div class="form-floating">
-          <input
-            type="password"
-            class="form-control"
-            id="floatingPassword"
-            placeholder=""
-            required
-            ref={passwordRef}
-          ></input>
-          <label for="floatingPassword">Repeat Password</label>
-        </div>
-        <div class="form-floating">
-          <input
-            type="date"
-            class="form-control"
-            id="floatingInput"
-            placeholder=""
-            required
-            style={{ alignItems: "center", height: "20px" }}
-            ref={dateRef}
-          ></input>
-          <label for="floatingInput">Date</label>
-        </div>
-        <div class="d-flex justify-content-center">
-          <select
-            class="form-select"
-            id="floatingSelect"
-            aria-label="Floating label select example"
-            ref={genderRef}
-            required
-          >
-            <option selected>Please select one…</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="non-binary">Non-Binary</option>
-            <option value="non-binary">Neutral gender</option>
-            <option value="non-binary">Genderfluid</option>
-            <option value="non-binary">Gender expansive</option>
-            <option value="non-binary">Cisgender</option>
-            <option value="non-binary">Genderfluid</option>
-            <option value="non-binary">Transgender</option>
-            <option value="non-binary">Two Spirit</option>
-            <option value="non-binary">Cat/Dog/Animals</option>
-            <option value="other">Other</option>
-            <option value="Prefer not to answer">Prefer not to Answer</option>
-          </select>
-        </div>
+          <div>
+            <Form.Select
+              className="mb-2"
+              aria-label="Floating label select example"
+              ref={genderRef}
+              required
+            >
+              <option selected>Please select one…</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="non-binary">Non-Binary</option>
+              <option value="non-binary">Neutral gender</option>
+              <option value="non-binary">Genderfluid</option>
+              <option value="non-binary">Gender expansive</option>
+              <option value="non-binary">Cisgender</option>
+              <option value="non-binary">Genderfluid</option>
+              <option value="non-binary">Transgender</option>
+              <option value="non-binary">Two Spirit</option>
+              <option value="non-binary">Cat/Dog/Animals</option>
+              <option value="other">Other</option>
+              <option value="Prefer not to answer">Prefer not to Answer</option>
+            </Form.Select>
+          </div>
 
-        <div>
-          <Form>
-            <Form.Check
-              type="switch"
-              inline
-              id="custom-switch"
-              label="Remember me"
-            />
-          </Form>
-        </div>
-        <div>
-          <p>
-            By creating an account <br /> you agree to our
-            <a href="#">Terms & Privacy</a>.
-          </p>
-        </div>
-        <div>
-          <button className={styles.signupBtn} onSubmit={handlesubmit}>
-            Sign up
-          </button>
-        </div>
+          <div>
+            <Form>
+              <Form.Check
+                type="switch"
+                inline
+                id="custom-switch"
+                label="Remember me"
+              />
+            </Form>
+          </div>
+          <div>
+            <p>
+              By creating an account <br /> you agree to our
+              <a href="https://safety.google/intl/en/principles/">
+                Terms & Privacy
+              </a>
+              .
+            </p>
+          </div>
+          <div>
+            <button className={styles.signupBtn}>Sign up</button>
+          </div>
+        </form>
 
         <div>
           <p style={{ textAlign: "center" }}>Or Signup using</p>

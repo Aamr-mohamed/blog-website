@@ -5,6 +5,8 @@ import logo from "../images/logo.png";
 import styles from "./login.module.css";
 import Button from "react-bootstrap/Button";
 import bcrypt from "bcryptjs-react";
+import Form from "react-bootstrap/Form";
+import { FloatingLabel } from "react-bootstrap";
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -16,32 +18,33 @@ export default function LoginForm() {
   const verification = (e) => {
     e.preventDefault();
     // console.log(users);
-    users.forEach((user) => {
-      if (
-        user.email === svdEmail.current.value
-        // user.password === svdPassword.current.value
-      ) {
-        console.log(user.password);
-        bcrypt.compare(
-          svdPassword.current.value,
-          user.password,
-          function (err, isMatch) {
-            if (err) {
-              throw err;
-            } else if (!isMatch) {
-              alert("password doesnt match");
-            } else {
-              var currentEmail = svdEmail.current.value;
-              var currentUser = user.username;
-              localStorage.setItem("currentEmail", currentEmail);
-              localStorage.setItem("currentUser", currentUser);
-              navigate("/");
-              alert("password matches");
+    if (users == null) {
+      alert("You are our first user please Signup first :D");
+    } else {
+      users.forEach((user) => {
+        if (user.email === svdEmail.current.value) {
+          // console.log(user.password);
+          bcrypt.compare(
+            svdPassword.current.value,
+            user.password,
+            function (err, isMatch) {
+              if (err) {
+                throw err;
+              } else if (!isMatch) {
+                alert("password doesnt match");
+              } else {
+                var currentEmail = svdEmail.current.value;
+                var currentUser = user.username;
+                localStorage.setItem("currentEmail", currentEmail);
+                localStorage.setItem("currentUser", currentUser);
+                navigate("/");
+                alert("password matches");
+              }
             }
-          }
-        );
-      }
-    });
+          );
+        }
+      });
+    }
   };
   return (
     <div
@@ -58,25 +61,33 @@ export default function LoginForm() {
         <img src={logo} alt="Bloggingway Image" className={styles.logo1} />
         <h1>Login</h1>
         <form className="form-floating" onSubmit={verification}>
-          <div class="form-floating mb-3">
-            <input
-              type="email"
-              class="form-control"
-              id="floatingInput"
-              placeholder=""
-              ref={svdEmail}
-            ></input>
-            <label for="floatingInput">Email address</label>
+          <div>
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Email address"
+              className="mb-2"
+            >
+              <Form.Control
+                type="email"
+                placeholder=""
+                ref={svdEmail}
+                required
+              />
+            </FloatingLabel>
           </div>
-          <div class="form-floating">
-            <input
-              type="password"
-              class="form-control"
-              id="floatingPassword"
-              placeholder="Password"
-              ref={svdPassword}
-            ></input>
-            <label for="floatingPassword">Password</label>
+          <div>
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Password"
+              className="mb-2"
+            >
+              <Form.Control
+                type="password"
+                placeholder=""
+                required
+                ref={svdPassword}
+              />
+            </FloatingLabel>
           </div>
           <button className={styles.loginBtn}>Sign in</button>
         </form>
@@ -104,15 +115,8 @@ export default function LoginForm() {
           </Button>
           <Button
             href="https://accounts.google.com/signin"
-            // className={styles.googleIcn}
             variant="danger"
             style={{ margin: "6px" }}
-
-            // style={{
-            //   alignContent: "center",
-            //   textDecoration: "none",
-            //   textColor: "black",
-            // }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -128,7 +132,6 @@ export default function LoginForm() {
           </Button>
 
           <Button
-            // className={styles.githubIcn}
             href="https://github.com/login"
             variant="dark"
             style={{ margin: "6px" }}

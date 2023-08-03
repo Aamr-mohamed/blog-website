@@ -5,6 +5,8 @@ import { Alert } from 'reactstrap';
 
 export default function Root() {
   const userName=localStorage.getItem("currentUser")
+  // localStorage.clear();
+
   return (
     <div>
         <Header/>
