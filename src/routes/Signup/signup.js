@@ -3,7 +3,7 @@ import "./signup.module.css";
 import styles from "./signup.module.css";
 import logo from "../images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
-import "../formInput/FormInput";
+
 import { Button } from "reactstrap";
 import bcrypt from "bcryptjs-react";
 
