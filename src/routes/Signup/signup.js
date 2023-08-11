@@ -26,7 +26,6 @@ export default function SignupForm() {
     var existingUsers = JSON.parse(localStorage.getItem("users"));
     if (existingUsers == null) existingUsers = [];
     // console.log(users);
-    // localStorage.clear();
     e.preventDefault();
     if (existingUsers.find((user) => user.email === emailRef.current.value)) {
       alert("This Email is already exists");
@@ -46,7 +45,6 @@ export default function SignupForm() {
       };
       existingUsers.push(data);
       localStorage.setItem("users", JSON.stringify(existingUsers));
-      localStorage.setItem("hashedPassword", JSON.stringify(hashedPassword));
       navigate("/login");
     }
   };

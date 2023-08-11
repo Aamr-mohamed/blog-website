@@ -17,11 +17,13 @@ export default function LoginForm() {
   // bcrypt.hashSync(password,10);
   const verification = (e) => {
     e.preventDefault();
+    // localStorage.clear();
     // console.log(users);
     if (users == null) {
       alert("You are our first user please Signup first :D");
+      navigate("/signup/");
     } else {
-      users.forEach((user) => {
+      users.every((user) => {
         if (user.email === svdEmail.current.value) {
           // console.log(user.password);
           bcrypt.compare(
@@ -32,13 +34,14 @@ export default function LoginForm() {
                 throw err;
               } else if (!isMatch) {
                 alert("password doesnt match");
+                return false;
               } else {
                 var currentEmail = svdEmail.current.value;
                 var currentUser = user.username;
                 localStorage.setItem("currentEmail", currentEmail);
                 localStorage.setItem("currentUser", currentUser);
-                navigate("/");
                 alert("password matches");
+                navigate("/");
               }
             }
           );

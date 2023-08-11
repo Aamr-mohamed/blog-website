@@ -3,6 +3,7 @@ import React from "react";
 import { Alert } from 'reactstrap';
 // import "bootstrap/dist/css/bootstrap.min.css";
 
+
 export default function Root() {
   const userName=localStorage.getItem("currentUser")
   // localStorage.clear();
@@ -10,7 +11,8 @@ export default function Root() {
   return (
     <div>
         <Header/>
-        <Alert>Welcome {userName}</Alert>;
+        
+        
         {/* <Button color="danger">Danger!</Button> */}
     </div>
 );}
