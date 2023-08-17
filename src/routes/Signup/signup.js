@@ -7,6 +7,9 @@ import { Button, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function SignupForm() {
+  // localStorage.clear();
+  localStorage.setItem("currentEmail", []);
+  localStorage.setItem("currentUser", []);
   const firstnameRef = useRef();
   const lastnameRef = useRef();
   const dateRef = useRef();
