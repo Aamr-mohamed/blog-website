@@ -1,4 +1,4 @@
-export default function Buttonn({text}){
+export default function CoolButton({text}){
     
 return(
     <div>

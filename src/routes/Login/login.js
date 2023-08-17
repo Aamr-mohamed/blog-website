@@ -7,8 +7,11 @@ import Button from "react-bootstrap/Button";
 import bcrypt from "bcryptjs-react";
 import Form from "react-bootstrap/Form";
 import { FloatingLabel } from "react-bootstrap";
+import CoolButton from "../components/button";
 
 export default function LoginForm() {
+  localStorage.setItem("currentEmail", []);
+  localStorage.setItem("currentUser", []);
   const navigate = useNavigate();
   const svdEmail = useRef();
   const svdPassword = useRef();
@@ -94,7 +97,8 @@ export default function LoginForm() {
               />
             </FloatingLabel>
           </div>
-          <button className={styles.loginBtn}>Sign in</button>
+          {/* <button className={styles.loginBtn}>Sign in</button> */}
+          <CoolButton text="Sign In" />
         </form>
         <div>
           <p>Or login using</p>
