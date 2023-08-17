@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import bcrypt from "bcryptjs-react";
 import Form from "react-bootstrap/Form";
 import { FloatingLabel } from "react-bootstrap";
+import Buttonn from "../components/button";
 
 export default function SignupForm() {
   localStorage.setItem("currentEmail", []);
@@ -196,7 +197,7 @@ export default function SignupForm() {
             </p>
           </div>
           <div>
-            <button className={styles.signupBtn}>Sign up</button>
+            <Buttonn text="SignUp" />
           </div>
         </form>
 
