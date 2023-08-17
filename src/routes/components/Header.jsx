@@ -8,6 +8,9 @@ import male from "../../assets/profilePics/male.jpg";
 import female from "../../assets/profilePics/woman.jpg"
 import nonBinary from "../../assets/profilePics/non-binary.jpg" 
 import dog from "../../assets/profilePics/dog.jpg"
+import trans from "../../assets/profilePics/trans.jpg"
+import genderfluid from "../../assets/profilePics/gender fluid.jpg"
+import weird from "../../assets/profilePics/weirdGender.jpg"
 
 const Header = ()=>{
   const userName=localStorage.getItem("currentUser")
@@ -20,9 +23,14 @@ const Header = ()=>{
     var profilePic=nonBinary
   }else if(userGender==="dog"){
     var profilePic=dog
+  }else if(userGender==="Transgender"){
+    var profilePic=trans
+  }else if(userGender==="Genderfluid"){
+    var profilePic=genderfluid
+  }else{
+    var profilePic=weird
   }
-  return(
-    
+    return(
     <Navbar collapseOnSelect expand="lg" className="bg-body" style={{backgroundColor:"#f67280"}} >
       <NavBar/>
   <Container>
@@ -39,7 +47,7 @@ const Header = ()=>{
       <span className="logged-prsn" style={{marginTop:"7px"}}>{userName}</span>
       <Nav.Link href="">coming soon</Nav.Link>
       <NavDropdown title="Account" id="collasible-nav-dropdown">
-        <NavDropdown.Item href="#action/3.1">profile</NavDropdown.Item>
+        <NavDropdown.Item href="/profile/">profile</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.2">
           coming soon
         </NavDropdown.Item>

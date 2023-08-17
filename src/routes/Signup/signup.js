@@ -45,12 +45,9 @@ export default function SignupForm() {
         email: emailRef.current.value,
         password: hashedPassword,
       };
-      var currentEmail = data.email;
-      var currentUser = data.username;
-      var usergender = data.gender;
-      localStorage.setItem("currentEmail", currentEmail);
-      localStorage.setItem("currentUser", currentUser);
-      localStorage.setItem("usergender", usergender);
+      localStorage.setItem("currentEmail", data.email);
+      localStorage.setItem("currentUser", data.username);
+      localStorage.setItem("usergender", data.gender);
       existingUsers.push(data);
       localStorage.setItem("users", JSON.stringify(existingUsers));
       navigate("/");
@@ -171,13 +168,12 @@ export default function SignupForm() {
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="non-binary">Non-Binary</option>
-              <option value="non-binary">Neutral gender</option>
-              <option value="non-binary">Genderfluid</option>
-              <option value="non-binary">Gender expansive</option>
-              <option value="non-binary">Cisgender</option>
-              <option value="non-binary">Genderfluid</option>
-              <option value="non-binary">Transgender</option>
-              <option value="non-binary">Two Spirit</option>
+              <option value="Neutral gender">Neutral gender</option>
+              <option value="Genderfluid">Genderfluid</option>
+              <option value="Gender expansive">Gender expansive</option>
+              <option value="Cisgender">Cisgender</option>
+              <option value="Transgender">Transgender</option>
+              <option value="Two Spirit">Two Spirit</option>
               <option value="dog">Cat/Dog/Animals</option>
               <option value="other">Other</option>
               <option value="Prefer not to answer">Prefer not to Answer</option>

@@ -35,7 +35,7 @@ export default function LoginForm() {
     } else {
       bcrypt.compare(
         svdPassword.current.value,
-        user.password,
+        user[0].password,
         function (err, isMatch) {
           if (err) {
             throw err;
@@ -44,8 +44,8 @@ export default function LoginForm() {
             return false;
           } else {
             var currentEmail = svdEmail.current.value;
-            var currentUser = user.username;
-            var usergender = user.gender;
+            var currentUser = user[0].username;
+            var usergender = user[0].gender;
             localStorage.setItem("currentEmail", currentEmail);
             localStorage.setItem("currentUser", currentUser);
             localStorage.setItem("usergender", usergender);
@@ -55,35 +55,6 @@ export default function LoginForm() {
         }
       );
     }
-    // else {
-    //   users.filter(function (user) {
-    //     if (user.email === svdEmail.current.value) {
-    //       bcrypt.compare(
-    //         svdPassword.current.value,
-    //         user.password,
-    //         function (err, isMatch) {
-    //           if (err) {
-    //             throw err;
-    //           } else if (!isMatch) {
-    //             alert("password doesnt match");
-    //             return false;
-    //           } else {
-    //             var currentEmail = svdEmail.current.value;
-    //             var currentUser = user.username;
-    //             var usergender = user.gender;
-    //             localStorage.setItem("currentEmail", currentEmail);
-    //             localStorage.setItem("currentUser", currentUser);
-    //             localStorage.setItem("usergender", usergender);
-    //             alert("password matches");
-    //             navigate("/");
-    //           }
-    //         }
-    //       );
-    //     } else {
-    //       alert("Email doesnt exist please type a right email or go to signup");
-    //     }
-    //   });
-    // }
   };
   return (
     <div
