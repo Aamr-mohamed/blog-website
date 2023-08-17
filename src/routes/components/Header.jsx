@@ -4,12 +4,23 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import  Navbar  from "react-bootstrap/Navbar";
 import NavBar from "./SideBar";
-import profile from "../images/profile-pic.jpg";
-
+import male from "../../assets/profilePics/male.jpg";
+import female from "../../assets/profilePics/woman.jpg"
+import nonBinary from "../../assets/profilePics/non-binary.jpg" 
+import dog from "../../assets/profilePics/dog.jpg"
 
 const Header = ()=>{
   const userName=localStorage.getItem("currentUser")
-
+  const userGender=localStorage.getItem("usergender")
+  if (userGender==="male"){
+    var profilePic=male
+  }else if(userGender==="female"){
+    var profilePic=female
+  }else if(userGender==="non-binary"){
+    var profilePic=nonBinary
+  }else if(userGender==="dog"){
+    var profilePic=dog
+  }
   return(
     
     <Navbar collapseOnSelect expand="lg" className="bg-body" style={{backgroundColor:"#f67280"}} >
@@ -24,7 +35,7 @@ const Header = ()=>{
       <Nav.Link href="">soon</Nav.Link>
     </Nav>
     <Nav className="ms-auto">
-      <img src={profile} alt="Profile" class="rounded-circle" style={{width:"35px",height:"35px",marginTop:"3px",marginRight:"3px"}}/>
+      <img src={profilePic} alt="Profile" class="rounded-circle" style={{width:"35px",height:"35px",marginTop:"3px",marginRight:"3px"}}/>
       <span className="logged-prsn" style={{marginTop:"7px"}}>{userName}</span>
       <Nav.Link href="">coming soon</Nav.Link>
       <NavDropdown title="Account" id="collasible-nav-dropdown">

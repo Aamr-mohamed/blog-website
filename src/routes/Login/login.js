@@ -12,6 +12,7 @@ import CoolButton from "../components/button";
 export default function LoginForm() {
   localStorage.setItem("currentEmail", []);
   localStorage.setItem("currentUser", []);
+  localStorage.setItem("usergender", []);
   const navigate = useNavigate();
   const svdEmail = useRef();
   const svdPassword = useRef();
@@ -20,39 +21,69 @@ export default function LoginForm() {
   // bcrypt.hashSync(password,10);
   const verification = (e) => {
     e.preventDefault();
+    // console.log(svdEmail.current.value);
     // localStorage.clear();
     // console.log(users);
-    if (users == null) {
+    if (!users) {
       alert("You are our first user please Signup first :D");
       navigate("/signup/");
-    } else {
-      users.every((user) => {
-        if (user.email === svdEmail.current.value) {
-          // console.log(user.password);
-          bcrypt.compare(
-            svdPassword.current.value,
-            user.password,
-            function (err, isMatch) {
-              if (err) {
-                throw err;
-              } else if (!isMatch) {
-                alert("password doesnt match");
-                return false;
-              } else {
-                var currentEmail = svdEmail.current.value;
-                var currentUser = user.username;
-                localStorage.setItem("currentEmail", currentEmail);
-                localStorage.setItem("currentUser", currentUser);
-                alert("password matches");
-                navigate("/");
-              }
-            }
-          );
-        } else {
-          alert("Email doesnt exist please type a right email or go to signup");
-        }
-      });
     }
+    const user = users.filter((u) => u.email === svdEmail.current.value);
+    console.log(user);
+    if (user == []) {
+      alert("Email doesnt exist please type a right email or go to signup");
+    } else {
+      bcrypt.compare(
+        svdPassword.current.value,
+        user.password,
+        function (err, isMatch) {
+          if (err) {
+            throw err;
+          } else if (!isMatch) {
+            alert("password doesnt match");
+            return false;
+          } else {
+            var currentEmail = svdEmail.current.value;
+            var currentUser = user.username;
+            var usergender = user.gender;
+            localStorage.setItem("currentEmail", currentEmail);
+            localStorage.setItem("currentUser", currentUser);
+            localStorage.setItem("usergender", usergender);
+            alert("password matches");
+            navigate("/");
+          }
+        }
+      );
+    }
+    // else {
+    //   users.filter(function (user) {
+    //     if (user.email === svdEmail.current.value) {
+    //       bcrypt.compare(
+    //         svdPassword.current.value,
+    //         user.password,
+    //         function (err, isMatch) {
+    //           if (err) {
+    //             throw err;
+    //           } else if (!isMatch) {
+    //             alert("password doesnt match");
+    //             return false;
+    //           } else {
+    //             var currentEmail = svdEmail.current.value;
+    //             var currentUser = user.username;
+    //             var usergender = user.gender;
+    //             localStorage.setItem("currentEmail", currentEmail);
+    //             localStorage.setItem("currentUser", currentUser);
+    //             localStorage.setItem("usergender", usergender);
+    //             alert("password matches");
+    //             navigate("/");
+    //           }
+    //         }
+    //       );
+    //     } else {
+    //       alert("Email doesnt exist please type a right email or go to signup");
+    //     }
+    //   });
+    // }
   };
   return (
     <div

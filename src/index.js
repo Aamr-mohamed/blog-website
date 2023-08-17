@@ -8,6 +8,7 @@ import LoginForm from "./routes/Login/login";
 import SignupForm from "./routes/Signup/signup";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import NewPost from "./routes/new-post/new-post";
+import Profile from "./routes/profile/profile";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: "new-post/",
     element: <NewPost />,
+  },
+  {
+    path: "profile/",
+    element: <Profile />,
   },
 ]);
 export default function App() {

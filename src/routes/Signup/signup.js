@@ -12,6 +12,7 @@ import CoolButton from "../components/button";
 export default function SignupForm() {
   localStorage.setItem("currentEmail", []);
   localStorage.setItem("currentUser", []);
+  localStorage.setItem("usergender", []);
   const firstnameRef = useRef();
   const lastnameRef = useRef();
   const dateRef = useRef();
@@ -44,9 +45,15 @@ export default function SignupForm() {
         email: emailRef.current.value,
         password: hashedPassword,
       };
+      var currentEmail = data.email;
+      var currentUser = data.username;
+      var usergender = data.gender;
+      localStorage.setItem("currentEmail", currentEmail);
+      localStorage.setItem("currentUser", currentUser);
+      localStorage.setItem("usergender", usergender);
       existingUsers.push(data);
       localStorage.setItem("users", JSON.stringify(existingUsers));
-      navigate("/login");
+      navigate("/");
     }
   };
   return (
@@ -171,7 +178,7 @@ export default function SignupForm() {
               <option value="non-binary">Genderfluid</option>
               <option value="non-binary">Transgender</option>
               <option value="non-binary">Two Spirit</option>
-              <option value="non-binary">Cat/Dog/Animals</option>
+              <option value="dog">Cat/Dog/Animals</option>
               <option value="other">Other</option>
               <option value="Prefer not to answer">Prefer not to Answer</option>
             </Form.Select>
