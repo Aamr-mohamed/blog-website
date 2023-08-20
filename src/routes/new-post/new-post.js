@@ -8,21 +8,24 @@ import CoolButton from "../components/button";
 import "./newPost.module.css";
 
 export default function NewPost() {
+  var date = new Date().toJSON();
+  // console.log(date);
+  const email = localStorage.getItem("currentEmail");
   const userName = localStorage.getItem("currentUser");
   const NewPost = useRef();
-
   const navigate = useNavigate();
   const NewTitle = useRef();
   const handlesubmit = (e) => {
-    var existingPosts = JSON.parse(localStorage.getItem("addPost"));
+    var existingPosts = JSON.parse(localStorage.getItem("Post"));
     if (existingPosts == null) existingPosts = [];
     e.preventDefault();
     var postData = {
-      post: NewPost.current.value,
       Title: NewTitle.current.value,
-      user: userName,
+      post: NewPost.current.value,
+      userEmail: email,
+      createdAt: date,
     };
-    if (postData.user == []) {
+    if (postData.email == []) {
       alert("please login first");
       navigate("/login/");
     } else if (
@@ -31,7 +34,7 @@ export default function NewPost() {
       alert("This post already created before");
     } else {
       existingPosts.push(postData);
-      localStorage.setItem("addPost", JSON.stringify(existingPosts));
+      localStorage.setItem("Post", JSON.stringify(existingPosts));
       alert("Post was created sucessfully");
     }
   };
@@ -93,10 +96,7 @@ export default function NewPost() {
               required
             />
           </Form.Group>
-          <Form.Group controlId="formFile" className="mb-3">
-            <Form.Label>Add a file to the post</Form.Label>
-            <Form.Control type="file" size="lg" />
-          </Form.Group>
+
           <div
             style={{
               alignSelf: "right",
