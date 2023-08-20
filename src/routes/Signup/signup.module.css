@@ -3,43 +3,72 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: "poppins", sans-serif;
 }
-.signup_page {
-  display: flex;
+.signupBackground {
+  width: 100%;
   height: 100vh;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 500;
-  justify-content: center;
-  align-items: center;
+  position: absolute;
+}
+.logo {
+  position: relative;
 }
 .title {
-  margin-bottom: 0.5rem;
-  padding-left: 20px;
+  /* margin-bottom: 0.5rem;
+  padding-left: 20px; */
+  color: #fff;
 }
-.signup_cover {
-  background-color: white;
-  width: 25em;
-  height: 60em;
-  border-radius: 1em;
-  box-shadow: 0 1em 1em gray;
+
+.signupCard {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  /* justify-items: center; */
+  /* flex-direction: column; */
+  margin-top: 120px;
+  margin-left: 350px;
+  width: 65%;
+  height: 75%;
+  background-image: url("../images/background.jpg");
+  background-position: center;
+  background-size: cover;
+  border: 1px solid black;
+  border-radius: 10px;
+  border: none;
 }
-.form {
+.leftSideCard {
+  /* display: flex; */
+  width: 50%;
+  height: 100%;
+  text-align: center;
+  padding: 0 100px;
+  backdrop-filter: blur(10px);
+  /* flex-direction: column; */
+  /* backdrop-filter: blur(20px); */
+}
+.rightSideCard {
+  display: inline-flexbox;
+  width: 50%;
+  height: 100%;
+  /* margin: auto; */
+  /* margin-left: 300px; */
+  /* position: relative; */
+  padding: 100px;
+  padding-top: 235px;
+  backdrop-filter: blur(10px);
+}
+/* .form {
   position: relative;
   height: 60rem;
   margin-bottom: 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-}
+} */
 
 Button:hover {
   color: white;
   box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
-  background-color: #f67280;
+  background-color: crimson;
 }
 
 input {
@@ -61,13 +90,10 @@ input {
 }
 
 input:hover {
-  border-color: #f9a2ab;
+  border-color: crimson;
 }
 input:focus {
-  border-color: #f9a2ab;
-}
-.App {
-  background-image: url(https://img.freepik.com/free-vector/network-mesh-wire-digital-technology-background_1017-27428.jpg?w=1380&t=st=1688982327~exp=1688982927~hmac=368ac4943f1a92bc3a3c54f5dd521691fe8eaf9d70b144bd149220d9aa46b5de);
+  border-color: crimson;
 }
 /* .cover {
 } */
@@ -85,7 +111,6 @@ input:focus {
 .chkbox {
   width: 15px;
   height: 15px;
-  /* justify-content: end; */
 }
 .using {
   text-align: center;

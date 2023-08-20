@@ -5,7 +5,7 @@ import profile from "../images/profile-pic.jpg";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import CoolButton from "../components/button";
-import "./button.module.css";
+import "./newPost.module.css";
 
 export default function NewPost() {
   const userName = localStorage.getItem("currentUser");
