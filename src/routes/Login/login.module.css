@@ -8,40 +8,33 @@
   font-family: "customFont";
   src: url();
 }
+
 .login_cover {
-  background-color: white;
   width: 25em;
-  height: 35em;
+  height: 45em;
   position: relative;
-  border-radius: 1em;
-  box-shadow: 0 1em 1em gray;
+  border-radius: 10px;
+  /* box-shadow: 0 1em 1em gray; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  backdrop-filter: blur(20px);
 }
-
-.loginBtn {
-  cursor: pointer;
-  border: 0;
-  border-radius: 4px;
-  font-weight: 600;
-  margin: 0 10px;
-  width: 200px;
-  padding: 10px 0;
-  box-shadow: 0 0 20px rgba(104, 85, 224, 0.2);
-  transition: 0.4s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
+::placeholder {
+  color: #fff;
 }
-.loginBtn:hover {
+Button:hover {
   color: white;
   box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
-  background-color: #f67280;
+  background-color: crimson;
+}
+FloatingLabel:focus {
+  background-color: transparent;
 }
 input {
+  color: #fff;
+  font-size: 16px;
   border: none;
   background-color: aliceblue;
   height: 4em;

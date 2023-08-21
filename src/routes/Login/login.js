@@ -7,55 +7,61 @@ import Button from "react-bootstrap/Button";
 import bcrypt from "bcryptjs-react";
 import Form from "react-bootstrap/Form";
 import { FloatingLabel } from "react-bootstrap";
+import CoolButton from "../components/button";
+import background from "../images/background.jpg";
+import logoNew from "../../assets/logo/logo-no-background.png";
 
 export default function LoginForm() {
+  localStorage.setItem("currentEmail", []);
+  localStorage.setItem("currentUser", []);
+  localStorage.setItem("usergender", []);
   const navigate = useNavigate();
   const svdEmail = useRef();
   const svdPassword = useRef();
   const users = JSON.parse(localStorage.getItem("users"));
-
   // bcrypt.hashSync(password,10);
   const verification = (e) => {
     e.preventDefault();
+    // console.log(svdEmail.current.value);
     // localStorage.clear();
     // console.log(users);
-    if (users == null) {
+    if (!users) {
       alert("You are our first user please Signup first :D");
       navigate("/signup/");
+    }
+    const user = users.filter((u) => u.email === svdEmail.current.value);
+    // console.log(user);
+    if (user == 0) {
+      alert("Email doesnt exist please type a right email or go to signup");
     } else {
-      users.every((user) => {
-        if (user.email === svdEmail.current.value) {
-          // console.log(user.password);
-          bcrypt.compare(
-            svdPassword.current.value,
-            user.password,
-            function (err, isMatch) {
-              if (err) {
-                throw err;
-              } else if (!isMatch) {
-                alert("password doesnt match");
-                return false;
-              } else {
-                var currentEmail = svdEmail.current.value;
-                var currentUser = user.username;
-                localStorage.setItem("currentEmail", currentEmail);
-                localStorage.setItem("currentUser", currentUser);
-                alert("password matches");
-                navigate("/");
-              }
-            }
-          );
-        } else {
-          alert("Email doesnt exist please type a right email or go to signup");
+      bcrypt.compare(
+        svdPassword.current.value,
+        user[0].password,
+        function (err, isMatch) {
+          if (err) {
+            throw err;
+          } else if (!isMatch) {
+            alert("password doesnt match");
+            return false;
+          } else {
+            var currentEmail = svdEmail.current.value;
+            var currentUser = user[0].username;
+            var usergender = user[0].gender;
+            localStorage.setItem("currentEmail", currentEmail);
+            localStorage.setItem("currentUser", currentUser);
+            localStorage.setItem("usergender", usergender);
+            alert("password matches");
+            navigate("/");
+          }
         }
-      });
+      );
     }
   };
   return (
     <div
       className={styles.login_page}
       style={{
-        backgroundImage: `url("https://img.freepik.com/free-vector/technology-background_23-2148119855.jpg?w=1380&t=st=1688998470~exp=1688999070~hmac=957eb0c4621e85c9ae1f4b85781a4407d450d2f59eb8badfdce7338ac38423ae")`,
+        backgroundImage: `url(${background})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         width: "100vw",
@@ -63,20 +69,23 @@ export default function LoginForm() {
       }}
     >
       <div className={styles.login_cover}>
-        <img src={logo} alt="Bloggingway Image" className={styles.logo1} />
-        <h1>Login</h1>
+        <img src={logoNew} alt="Bloggingway Image" className={styles.logo1} />
+
+        <h1 style={{ color: "#fff" }}>Login</h1>
         <form onSubmit={verification}>
           <div>
             <FloatingLabel
               controlId="floatingInput"
               label="Email address"
               className="mb-2"
+              style={{ color: "#fff" }}
             >
               <Form.Control
                 type="email"
                 placeholder=""
                 ref={svdEmail}
                 required
+                style={{ background: "transparent", color: "#fff" }}
               />
             </FloatingLabel>
           </div>
@@ -85,19 +94,22 @@ export default function LoginForm() {
               controlId="floatingInput"
               label="Password"
               className="mb-2"
+              style={{ color: "#fff" }}
             >
               <Form.Control
                 type="password"
                 placeholder=""
                 required
                 ref={svdPassword}
+                style={{ background: "transparent", color: "#fff" }}
               />
             </FloatingLabel>
           </div>
-          <button className={styles.loginBtn}>Sign in</button>
+          {/* <button className={styles.loginBtn}>Sign in</button> */}
+          <CoolButton text="Sign In" />
         </form>
         <div>
-          <p>Or login using</p>
+          <p style={{ color: "#fff" }}>Or login using</p>
         </div>
         <div>
           <Button
@@ -153,7 +165,7 @@ export default function LoginForm() {
             Github
           </Button>
           <br />
-          <h5>Dont have an account</h5>
+          <h5 style={{ color: "#fff" }}>Dont have an account</h5>
           <Link to="/signup">signup</Link>
           <br />
           <Link to="/">homepage</Link>
