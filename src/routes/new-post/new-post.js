@@ -20,9 +20,9 @@ export default function NewPost() {
     if (existingPosts == null) existingPosts = [];
     e.preventDefault();
     var postData = {
+      userEmail: email,
       Title: NewTitle.current.value,
       post: NewPost.current.value,
-      userEmail: email,
       createdAt: date,
     };
     if (postData.email == []) {

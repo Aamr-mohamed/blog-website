@@ -260,12 +260,19 @@ export default function SignupForm() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                marginTop: "10px",
               }}
             >
               <CoolButton text="SignUp" />
             </div>
             <div>
-              <p style={{ textAlign: "center", color: "#fff" }}>
+              <p
+                style={{
+                  textAlign: "center",
+                  color: "#fff",
+                  marginTop: "10px",
+                }}
+              >
                 Or Signup using
               </p>
             </div>

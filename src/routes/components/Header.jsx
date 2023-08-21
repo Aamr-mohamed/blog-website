@@ -3,7 +3,8 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import  Navbar  from "react-bootstrap/Navbar";
-import NavBar from "./SideBar";
+import SideBar from "./SideBar";
+import SideBarNot from "./SideBarNot";
 import male from "../../assets/profilePics/male.jpg";
 import female from "../../assets/profilePics/woman.jpg"
 import nonBinary from "../../assets/profilePics/non-binary.jpg" 
@@ -15,6 +16,8 @@ import weird from "../../assets/profilePics/weirdGender.jpg"
 const Header = ()=>{
   const userName=localStorage.getItem("currentUser")
   const userGender=localStorage.getItem("usergender")
+  const currentemail=localStorage.getItem("currentEmail");
+  console.log(currentemail);
   if (userGender==="male"){
     var profilePic=male
   }else if(userGender==="female"){
@@ -32,7 +35,12 @@ const Header = ()=>{
   }
     return(
     <Navbar collapseOnSelect expand="lg" className="bg-body" style={{backgroundColor:"#f67280"}} >
-      <NavBar/>
+      {
+        currentemail ?
+          <SideBar/>
+          :
+          <SideBarNot/>
+      }
   <Container>
   <img src={logo} alt="Bloggingway Image" style={{width: "120px",
   paddingTop: "13px",height:"100px",marginRight:"20px"}} />
@@ -43,19 +51,34 @@ const Header = ()=>{
       <Nav.Link href="">soon</Nav.Link>
     </Nav>
     <Nav className="ms-auto">
-      <img src={profilePic} alt="Profile" class="rounded-circle" style={{width:"35px",height:"35px",marginTop:"3px",marginRight:"3px"}}/>
-      <span className="logged-prsn" style={{marginTop:"7px"}}>{userName}</span>
+      {
+        currentemail ?
+          <div>
+            <img src={profilePic} alt="Profile" class="rounded-circle" style={{width:"35px",height:"35px",marginTop:"3px",marginRight:"3px"}}/>
+            <span className="logged-prsn" style={{marginTop:"7px"}}>{userName}</span>
+          </div>
+          :
+          <span className="welcome" style={{marginTop:"7px"}}>Welcome</span>
+          
+      }
       <Nav.Link href="">coming soon</Nav.Link>
       <NavDropdown title="Account" id="collasible-nav-dropdown">
-        <NavDropdown.Item href="/profile/">profile</NavDropdown.Item>
+        <NavDropdown.Item href="">ComingSoon</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.2">
           coming soon
         </NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">Settings</NavDropdown.Item>
         <NavDropdown.Divider />
+        {
+          currentemail ?
         <NavDropdown.Item href="login/">
           Logout
         </NavDropdown.Item>
+        :
+        <NavDropdown.Item href="login/">
+          Login
+        </NavDropdown.Item>
+        }
       </NavDropdown>
     </Nav>
   </Navbar.Collapse>

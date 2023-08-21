@@ -21,43 +21,24 @@
   justify-content: space-around;
   backdrop-filter: blur(20px);
 }
-::placeholder {
-  color: #fff;
-}
+
 Button:hover {
   color: white;
-  box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
+  /* box-shadow: 0 0 20px rgba(104, 85, 224, 0.6); */
   background-color: crimson;
-}
-FloatingLabel:focus {
-  background-color: transparent;
-}
-input {
-  color: #fff;
-  font-size: 16px;
-  border: none;
-  background-color: aliceblue;
-  height: 4em;
-  border-radius: 0.25em;
-  width: 80%;
-  text-align: left;
-}
-input:focus {
-  outline-color: #f67280;
+  filter: blur(0.03em);
+  transition: background-color 100ms linear;
 }
 
-.App {
-  background-image: url(https://img.freepik.com/free-vector/network-mesh-wire-digital-technology-background_1017-27428.jpg?w=1380&t=st=1688982327~exp=1688982927~hmac=368ac4943f1a92bc3a3c54f5dd521691fe8eaf9d70b144bd149220d9aa46b5de);
+input:focus {
+  outline-color: crimson;
+  background-color: transparent;
 }
-/* .cover {
-} */
+Form.Control:focus {
+  border-color: #a3c4bc !important;
+  box-shadow: 0 0 0 0.1rem #8ebdb1 !important;
+}
 .logo1 {
   width: 220px;
   padding-top: 20px;
-}
-.form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
 }
