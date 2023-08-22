@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import "./login.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../images/logo.png";
 import styles from "./login.module.css";
 import Button from "react-bootstrap/Button";
 import bcrypt from "bcryptjs-react";
@@ -78,7 +77,7 @@ export default function LoginForm() {
               controlId="floatingInput"
               label="Email address"
               className="mb-2"
-              style={{ color: "#fff" }}
+              style={{ color: "#fff", background: "transparent" }}
             >
               <Form.Control
                 type="email"
@@ -106,7 +105,9 @@ export default function LoginForm() {
             </FloatingLabel>
           </div>
           {/* <button className={styles.loginBtn}>Sign in</button> */}
-          <CoolButton text="Sign In" />
+          <div style={{ marginTop: "20px" }}>
+            <CoolButton text="Sign In" />
+          </div>
         </form>
         <div>
           <p style={{ color: "#fff" }}>Or login using</p>
