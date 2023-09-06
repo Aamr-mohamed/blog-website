@@ -2,21 +2,22 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Root from "./routes/Home/root";
+import Root from "./pages/Home/root";
 import ErrorPage from "./error-page";
-import LoginForm from "./routes/Login/login";
-import SignupForm from "./routes/Signup/signup";
+import LoginForm from "./pages/Login/login";
+import SignupForm from "./pages/Signup/signup";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import NewPost from "./routes/new-post/new-post";
-import Profile from "./routes/profile/profile";
+import NewPost from "./pages/new-post/new-post";
+import Profile from "./pages/profile/profile";
+import Contact from "./pages/contact/contact";
 
 const router = createBrowserRouter([
   {
-    path: "login/",
+    path: "/login",
     element: <LoginForm />,
   },
   {
-    path: "signup/",
+    path: "/signup",
     element: <SignupForm />,
   },
   {
@@ -25,12 +26,16 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "new-post/",
+    path: "/new-post",
     element: <NewPost />,
   },
   {
-    path: "profile/",
+    path: "/profile",
     element: <Profile />,
+  },
+  {
+    path: "/contact",
+    element: <Contact />,
   },
 ]);
 export default function App() {

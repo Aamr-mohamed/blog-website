@@ -7,8 +7,8 @@ import './Sidebar.css';
 import { IconContext } from 'react-icons';
 
 function SideBar() {
-  const [sidebar, setSidebar] = useState(false);
-  const showSidebar = () => setSidebar(!sidebar);
+  const [sidebar, setSidebar] = useState(true);
+  const showSidebar = () => setSidebar(sidebar);
   return (
     <>
         <IconContext.Provider value={{ color: '#fff' }}>
@@ -20,9 +20,7 @@ function SideBar() {
           <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
             <ul className='nav-menu-items' onClick={showSidebar}>
               <li className='navbar-toggle'>
-                <Link to='#' className='menu-bars'>
-                  <AiIcons.AiOutlineClose />
-                </Link>
+                
               </li>
               {SidebarData.map((item, index) => {
                 return (

@@ -1,18 +1,18 @@
-import App from "./index";
-import ErrorPage from "./error-page";
-import LoginForm from "./routes/Login/login";
-import SignupForm from "./routes/Signup/signup";
-import NewPost from "./routes/new-post/new-post";
+import App from "../index";
+import ErrorPage from "../error-page";
+import LoginForm from "../pages/Login/login";
+import SignupForm from "../pages/Signup/signup";
+import NewPost from "../pages/new-post/new-post";
 
 var dashRoutes = [
   {
-    path: "login/",
+    path: "/login/",
     component: <LoginForm />,
     name: "Login",
     layout: "",
   },
   {
-    path: "signup/",
+    path: "/signup",
     component: <SignupForm />,
   },
   {
@@ -21,8 +21,9 @@ var dashRoutes = [
     errorElement: <ErrorPage />,
   },
   {
-    path: "new-post/",
+    path: "/new-post",
     element: <NewPost />,
   },
 ];
+
 export default dashRoutes;

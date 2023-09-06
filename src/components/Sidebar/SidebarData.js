@@ -14,19 +14,14 @@ export const SidebarData = [
   },
   {
     title: "Profile",
-    path: "/profile/",
+    path: "/profile",
     icon: <CgIcons.CgProfile />,
     cName: "nav-text",
   },
+
   {
-    title: "Login",
-    path: "/login/",
-    icon: <IoIcons.IoIosPaper />,
-    cName: "nav-text",
-  },
-  {
-    title: "Posts(Coming Soon)",
-    path: "/new-post/",
+    title: "Create New Post",
+    path: "/new-post",
     icon: <bsIcons.BsPostcardHeart />,
     cName: "nav-text",
   },
@@ -43,7 +38,13 @@ export const SidebarData = [
     cName: "nav-text",
   },
   {
-    title: "Support",
+    title: "Login",
+    path: "/login",
+    icon: <IoIcons.IoIosPaper />,
+    cName: "nav-text",
+  },
+  {
+    title: "Contact",
     path: "",
     icon: <IoIcons.IoMdHelpCircle />,
     cName: "nav-text",

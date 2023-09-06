@@ -1,15 +1,14 @@
-import Header from "../components/Header";
+import Header from "../../components/Header/Header";
 import React, { useRef } from "react";
 import { Alert } from "reactstrap";
-import profile from "../images/profile-pic.jpg";
+import ProfilePic from "../../components/profilePic/profilePic";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
-import CoolButton from "../components/button";
+import CoolButton from "../../components/Button/button";
 import "./newPost.module.css";
 
 export default function NewPost() {
-  var date = new Date().toJSON();
-  // console.log(date);
+  var date = Date.now();
   const email = localStorage.getItem("currentEmail");
   const userName = localStorage.getItem("currentUser");
   const NewPost = useRef();
@@ -56,25 +55,18 @@ export default function NewPost() {
             marginTop: "40px",
           }}
         >
-          <img
-            src={profile}
-            alt="Profile"
-            class="rounded-circle"
-            style={{
-              width: "45px",
-              height: "45px",
-              marginTop: "3px",
-              marginRight: "3px",
-            }}
-          />
-          <span
-            className="logged-person"
-            style={{ marginTop: "7px", fontSize: "20px" }}
-          >
-            {userName}
-          </span>
-          <br />
-
+          <div style={{ display: "flex" }}>
+            <ProfilePic style={{ width: "45px", height: "45px" }} />
+            <p
+              style={{
+                marginTop: "10px",
+                fontSize: "20px",
+                marginLeft: "15px",
+              }}
+            >
+              {userName}
+            </p>
+          </div>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
             <Form.Label style={{ marginLeft: "40px", fontSize: "20px" }}>
               Add your post

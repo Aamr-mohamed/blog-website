@@ -6,8 +6,8 @@ import Button from "react-bootstrap/Button";
 import bcrypt from "bcryptjs-react";
 import Form from "react-bootstrap/Form";
 import { FloatingLabel } from "react-bootstrap";
-import CoolButton from "../components/button";
-import background from "../images/background.jpg";
+import CoolButton from "../../components/Button/button";
+import background from "../../assets/images/background.jpg";
 import logoNew from "../../assets/logo/logo-no-background.png";
 
 export default function LoginForm() {
@@ -22,7 +22,6 @@ export default function LoginForm() {
   const verification = (e) => {
     e.preventDefault();
     // console.log(svdEmail.current.value);
-    // localStorage.clear();
     // console.log(users);
     if (!users) {
       alert("You are our first user please Signup first :D");
@@ -106,7 +105,28 @@ export default function LoginForm() {
           </div>
           {/* <button className={styles.loginBtn}>Sign in</button> */}
           <div style={{ marginTop: "20px" }}>
-            <CoolButton text="Sign In" />
+            <CoolButton
+              text="Sign In"
+              style={{
+                cursor: "pointer",
+                border: "none",
+                position: "relative",
+                borderRadius: "4px",
+                fontWeight: "600",
+                margin: "0 20px",
+                width: "200px",
+                padding: "10px 0",
+                boxShadow: "0 0 20px rgba(104,85,224,0.2)",
+                transition: "0.4s",
+                marginTop: "5px",
+                alignSelf: "center",
+                justifyContent: "center",
+                display: "flex",
+                textShadow:
+                  "0 0 0.125em crimson hsl(0 0% 100%/ 0.3),0 0 0.45em crimson",
+                boxShadow: "inset 0 0 0.5em 0 crimson,0 0 2em 0.5em crimson",
+              }}
+            />
           </div>
         </form>
         <div>

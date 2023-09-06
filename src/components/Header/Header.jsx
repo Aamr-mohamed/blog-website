@@ -3,47 +3,24 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import  Navbar  from "react-bootstrap/Navbar";
-import SideBar from "./SideBar";
-import SideBarNot from "./SideBarNot";
-import male from "../../assets/profilePics/male.jpg";
-import female from "../../assets/profilePics/woman.jpg"
-import nonBinary from "../../assets/profilePics/non-binary.jpg" 
-import dog from "../../assets/profilePics/dog.jpg"
-import trans from "../../assets/profilePics/trans.jpg"
-import genderfluid from "../../assets/profilePics/gender fluid.jpg"
-import weird from "../../assets/profilePics/weirdGender.jpg"
+import SideBar from "../Sidebar/SideBar";
+import SideBarNot from "../NotLoggedInSideBar/SideBarNot";
+import ProfilePic from "../profilePic/profilePic";
 
 const Header = ()=>{
   const userName=localStorage.getItem("currentUser")
-  const userGender=localStorage.getItem("usergender")
   const currentemail=localStorage.getItem("currentEmail");
-  console.log(currentemail);
-  if (userGender==="male"){
-    var profilePic=male
-  }else if(userGender==="female"){
-    var profilePic=female
-  }else if(userGender==="non-binary"){
-    var profilePic=nonBinary
-  }else if(userGender==="dog"){
-    var profilePic=dog
-  }else if(userGender==="Transgender"){
-    var profilePic=trans
-  }else if(userGender==="Genderfluid"){
-    var profilePic=genderfluid
-  }else{
-    var profilePic=weird
-  }
     return(
-    <Navbar collapseOnSelect expand="lg" className="bg-body" style={{backgroundColor:"#f67280"}} >
+    <Navbar collapseOnSelect expand="lg" className="bg-body" style={{backgroundColor:"#f67280",height:"90px"}} >
       {
         currentemail ?
           <SideBar/>
           :
           <SideBarNot/>
       }
-  <Container>
+  <Container >
   <img src={logo} alt="Bloggingway Image" style={{width: "120px",
-  paddingTop: "13px",height:"100px",marginRight:"20px"}} />
+  paddingTop: "13px",height:"100px",marginRight:"20px",marginBottom:"15px"}} />
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="me-auto">
@@ -53,9 +30,10 @@ const Header = ()=>{
     <Nav className="ms-auto">
       {
         currentemail ?
-          <div>
-            <img src={profilePic} alt="Profile" class="rounded-circle" style={{width:"35px",height:"35px",marginTop:"3px",marginRight:"3px"}}/>
-            <span className="logged-prsn" style={{marginTop:"7px"}}>{userName}</span>
+          
+          <div style={{marginRight:"20px",display:"flex"}}>
+            <ProfilePic style={{width:"35px",height:"35px"}}/>
+            <p className="logged-prsn" style={{marginTop:"10px",marginLeft:"15px"}}>{userName}</p>
           </div>
           :
           <span className="welcome" style={{marginTop:"7px"}}>Welcome</span>
@@ -71,7 +49,7 @@ const Header = ()=>{
         <NavDropdown.Divider />
         {
           currentemail ?
-        <NavDropdown.Item href="login/">
+        <NavDropdown.Item href="/login/">
           Logout
         </NavDropdown.Item>
         :
