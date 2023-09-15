@@ -27,13 +27,13 @@ export const SidebarData = [
   },
   {
     title: "Friends",
-    path: "",
+    path: "#",
     icon: <IoIcons.IoMdPeople />,
     cName: "nav-text",
   },
   {
     title: "Messages",
-    path: "",
+    path: "#",
     icon: <FaIcons.FaEnvelopeOpenText />,
     cName: "nav-text",
   },
@@ -45,7 +45,7 @@ export const SidebarData = [
   },
   {
     title: "Contact",
-    path: "",
+    path: "/contact",
     icon: <IoIcons.IoMdHelpCircle />,
     cName: "nav-text",
   },

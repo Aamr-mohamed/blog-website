@@ -12,22 +12,22 @@
 }
 .logo {
   position: relative;
+  align-self: center;
 }
 .title {
   /* margin-bottom: 0.5rem;
   padding-left: 20px; */
   color: #fff;
 }
-
-.signupCard {
+.signupCard1 {
   display: flex;
   align-items: center;
   /* justify-items: center; */
   /* flex-direction: column; */
   margin-top: 120px;
   margin-left: 350px;
-  width: 65%;
-  height: 75%;
+  width: 60%;
+  height: 90%;
   background-image: url("../../assets/images/background.jpg");
   background-position: center;
   background-size: cover;
@@ -35,35 +35,21 @@
   border-radius: 10px;
   border: none;
 }
-.leftSideCard {
-  /* display: flex; */
-  width: 50%;
-  height: 100%;
-  text-align: center;
-  padding: 0 100px;
-  backdrop-filter: blur(10px);
-  /* flex-direction: column; */
-  /* backdrop-filter: blur(20px); */
-}
-.rightSideCard {
-  display: inline-flexbox;
-  width: 50%;
-  height: 100%;
-  /* margin: auto; */
-  /* margin-left: 300px; */
-  /* position: relative; */
-  padding: 100px;
-  padding-top: 235px;
-  backdrop-filter: blur(10px);
-}
-/* .form {
-  position: relative;
-  height: 60rem;
-  margin-bottom: 0.5rem;
+.signupCard {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-} */
+  align-items: center;
+  /* justify-items: center; */
+  /* flex-direction: column; */
+
+  width: 100%;
+  height: 100%;
+
+  background-position: center;
+  background-size: cover;
+  border: 1px solid black;
+  border-radius: 10px;
+  border: none;
+}
 
 Button:hover {
   color: white;

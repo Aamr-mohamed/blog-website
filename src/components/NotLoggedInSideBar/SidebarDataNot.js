@@ -1,9 +1,6 @@
 import React from "react";
-import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
-import * as bsIcons from "react-icons/bs";
-import * as CgIcons from "react-icons/cg";
 
 export const SidebarDataNot = [
   {
@@ -26,7 +23,7 @@ export const SidebarDataNot = [
   },
   {
     title: "Support",
-    path: "",
+    path: "#",
     icon: <IoIcons.IoMdHelpCircle />,
     cName: "nav-text",
   },

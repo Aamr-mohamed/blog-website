@@ -9,37 +9,74 @@ import { FloatingLabel } from "react-bootstrap";
 import CoolButton from "../../components/Button/button";
 import background from "../../assets/images/background.jpg";
 import logoNew from "../../assets/logo/logo-no-background.png";
+import { ToastContainer, toast, Slide } from "react-toastify";
 
 export default function LoginForm() {
-  localStorage.setItem("currentEmail", []);
-  localStorage.setItem("currentUser", []);
-  localStorage.setItem("usergender", []);
+  localStorage.setItem("currentEmail", "");
+  localStorage.setItem("currentUser", "");
+  localStorage.setItem("usergender", "");
   const navigate = useNavigate();
   const svdEmail = useRef();
   const svdPassword = useRef();
   const users = JSON.parse(localStorage.getItem("users"));
-  // bcrypt.hashSync(password,10);
   const verification = (e) => {
     e.preventDefault();
-    // console.log(svdEmail.current.value);
-    // console.log(users);
     if (!users) {
-      alert("You are our first user please Signup first :D");
-      navigate("/signup/");
+      toast.warn("You are our first user please Signup first :D", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        onClose: () => navigate("/signup/"),
+      });
     }
     const user = users.filter((u) => u.email === svdEmail.current.value);
-    // console.log(user);
-    if (user == 0) {
-      alert("Email doesnt exist please type a right email or go to signup");
+    if (user === 0) {
+      toast.warn(
+        "Email doesnt exist please type a right email or go to signup",
+        {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        }
+      );
     } else {
       bcrypt.compare(
         svdPassword.current.value,
         user[0].password,
         function (err, isMatch) {
           if (err) {
-            throw err;
+            toast.error(err.message, {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
           } else if (!isMatch) {
-            alert("password doesnt match");
+            toast.warn("password doesnt match", {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
+
             return false;
           } else {
             var currentEmail = svdEmail.current.value;
@@ -48,8 +85,17 @@ export default function LoginForm() {
             localStorage.setItem("currentEmail", currentEmail);
             localStorage.setItem("currentUser", currentUser);
             localStorage.setItem("usergender", usergender);
-            alert("password matches");
-            navigate("/");
+            toast.success("Logged In successfully", {
+              position: "top-right",
+              autoClose: 800,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+              onClose: () => navigate("/"),
+            });
           }
         }
       );
@@ -66,8 +112,9 @@ export default function LoginForm() {
         height: "100vh",
       }}
     >
+      <ToastContainer transition={Slide} />
       <div className={styles.login_cover}>
-        <img src={logoNew} alt="Bloggingway Image" className={styles.logo1} />
+        <img src={logoNew} alt="Bloggingway Logo" className={styles.logo1} />
 
         <h1 style={{ color: "#fff" }}>Login</h1>
         <form onSubmit={verification}>
@@ -116,7 +163,6 @@ export default function LoginForm() {
                 margin: "0 20px",
                 width: "200px",
                 padding: "10px 0",
-                boxShadow: "0 0 20px rgba(104,85,224,0.2)",
                 transition: "0.4s",
                 marginTop: "5px",
                 alignSelf: "center",

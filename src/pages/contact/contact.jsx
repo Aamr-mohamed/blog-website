@@ -1,90 +1,32 @@
-import React from 'react'
-import Header from '../../components/Header/Header';
-import './contact.css'
+import React from "react";
+import "./contact.css";
+import Wrapper from "../../layouts/wrapper";
+import Header from "../../components/Header/Header";
+import SideBar from "../../components/Sidebar/SideBar";
+import SideBarNot from "../../components/NotLoggedInSideBar/SideBarNot";
 
 function Contact() {
+  const currentemail = localStorage.getItem("currentEmail");
   return (
-    <div>
-        <Header/>
-        <section class="section contact">
-
-        <div class="row gy-4">
-
-        <div class="col-xl-6">
-
-            <div class="row">
-            <div class="col-lg-6">
-                <div class="info-box card">
-                <i class="bi bi-geo-alt"></i>
-                <h3>Address</h3>
-                <p>Steigenberger Hotel <br/>cairo, El Tahrir</p>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="info-box card">
-                <i class="bi bi-telephone"></i>
-                <h3>Call Us</h3>
-                <p>+02 01011121314<br/>+02 01213141516</p>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="info-box card">
-                <i class="bi bi-envelope"></i>
-                <h3>Email Us</h3>
-                <p>ana@example.com<br/>awya@example.com</p>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="info-box card">
-                <i class="bi bi-clock"></i>
-                <h3>Open Hours</h3>
-                <p>Monday - Friday<br/>9:00AM - 05:00PM</p>
-                </div>
-            </div>
-            </div>
-
-        </div>
-
-        <div class="col-xl-6">
-            <div class="card p-4">
-            <form action="" method="post" class="php-email-form">
-                <div class="row gy-4">
-
-                <div class="col-md-6">
-                    <input type="text" name="name" class="form-control" placeholder="Your Name" required></input>
-                </div>
-
-                <div class="col-md-6 ">
-                    <input type="email" class="form-control" name="email" placeholder="Your Email" required></input>
-                </div>
-
-                <div class="col-md-12">
-                    <input type="text" class="form-control" name="subject" placeholder="Subject" required></input>
-                </div>
-
-                <div class="col-md-12">
-                    <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
-                </div>
-
-                <div class="col-md-12 text-center">
-                    <div class="loading">Loading</div>
-                    <div class="error-message"></div>
-                    <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                    <button type="submit">Send Message</button>
-                </div>
-
-                </div>
-            </form>
-            </div>
-
-        </div>
-
-        </div>
-
-        </section>
+    <div className="parent">
+      <div className="div1">
+        <Header />
+      </div>
+      <div className="div2">{currentemail ? <SideBar /> : <SideBarNot />}</div>
+      <div className="div3">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem
+        voluptatibus similique cumque in veniam libero vero! Quibusdam
+        consectetur excepturi quod iste maxime animi velit distinctio eum quam,
+        non, dolor corrupti?
+      </div>
+      <div className="div4">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore harum
+        architecto nesciunt ducimus accusantium placeat et praesentium pariatur
+        dignissimos laborum qui, eveniet tempora, distinctio repudiandae! Eum, a
+        quaerat. Unde, iusto.
+      </div>
     </div>
-  )
+  );
 }
 
 export default Contact;

@@ -1,5 +1,7 @@
 Button:hover {
   color: white;
-  box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
-  background-color: crimson;
+  border: none;
+}
+body {
+  background-color: #f8f4ec;
 }

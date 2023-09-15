@@ -1,7 +1,6 @@
 .likeBtn {
   color: #d8e2dc;
   transition: all 0.5s ease;
-  margin: 0 50px;
 }
 .likeBtn:hover {
   color: #3b5998;
@@ -11,7 +10,6 @@
 .dislikeBtn {
   color: #d8e2dc;
   transition: all 0.5s ease;
-  margin-left: 150px;
 }
 .dislikeBtn:hover {
   color: red;
@@ -21,10 +19,13 @@
 .shareBtn {
   color: #d8e2dc;
   transition: all 0.5s ease;
-  margin-left: 200px;
 }
 .shareBtn:hover {
   color: pink;
   text-shadow: 0 0 15px pink;
   transition: all 0.5s ease;
+}
+.shareBtn:active {
+  color: pink;
+  text-shadow: 0 0 15px pink;
 }
