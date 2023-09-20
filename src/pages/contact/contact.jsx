@@ -19,12 +19,7 @@ function Contact() {
         consectetur excepturi quod iste maxime animi velit distinctio eum quam,
         non, dolor corrupti?
       </div>
-      <div className="div4">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore harum
-        architecto nesciunt ducimus accusantium placeat et praesentium pariatur
-        dignissimos laborum qui, eveniet tempora, distinctio repudiandae! Eum, a
-        quaerat. Unde, iusto.
-      </div>
+      <div className="div4"></div>
     </div>
   );
 }

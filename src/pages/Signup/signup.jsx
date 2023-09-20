@@ -1,20 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "./signup.module.css";
 import styles from "./signup.module.css";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Button from "react-bootstrap/Button";
-import bcrypt from "bcryptjs-react";
-import Form from "react-bootstrap/Form";
-import { FloatingLabel } from "react-bootstrap";
-import CoolButton from "../../components/Button/button";
+import "react-toastify/dist/ReactToastify.css";
 import background from "../../assets/images/background.jpg";
 import logoNew from "../../assets/logo/logo-no-background.png";
+import bcrypt from "bcryptjs-react";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { FloatingLabel, Form, Button, Card, CardGroup } from "react-bootstrap";
 import { ToastContainer, toast, Slide } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import Card from "react-bootstrap/Card";
-import CardGroup from "react-bootstrap/CardGroup";
 
 export default function SignupForm() {
   localStorage.setItem("currentEmail", "");
@@ -85,17 +79,11 @@ export default function SignupForm() {
 
         onClose: () => navigate("/"),
       });
-      // toast.onChange((v) => {
-      //   if (v.status === "removed") {
-      //     // run your callback
-      //     navigate("/");
-      //   }
-      // });
-      // axios
-      //   .post("http://localhost:8080/api/user/save", values)
-      //   .then(function (response) {
-      //     navigate("/");
-      //   });
+      axios
+        .post("http://localhost:5000/users", values)
+        .then(function (response) {
+          navigate("/");
+        });
     }
   };
   return (
@@ -336,7 +324,8 @@ export default function SignupForm() {
                   marginTop: "10px",
                 }}
               >
-                <CoolButton
+                <button
+                  className="CoolButton"
                   text="SignUp"
                   style={{
                     cursor: "pointer",

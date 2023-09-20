@@ -22,9 +22,9 @@
   backdrop-filter: blur(20px);
 }
 
-Button:hover {
+.CoolButton:hover {
   color: white;
-  /* box-shadow: 0 0 20px rgba(104, 85, 224, 0.6); */
+  box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
   background-color: crimson;
   filter: blur(0.03em);
   transition: background-color 100ms linear;

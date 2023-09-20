@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import ProfilePic from "../../components/profilePic/profilePic";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
-import CoolButton from "../../components/Button/button";
 import "./newPost.module.css";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -123,7 +122,8 @@ export default function NewPost() {
               display: "flex",
             }}
           >
-            <CoolButton
+            <button
+              className="CoolButton"
               text="Submit"
               style={{
                 background: "#3CB371",

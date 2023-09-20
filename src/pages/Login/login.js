@@ -1,12 +1,9 @@
 import React, { useRef } from "react";
 import "./login.module.css";
-import { Link, useNavigate } from "react-router-dom";
 import styles from "./login.module.css";
-import Button from "react-bootstrap/Button";
 import bcrypt from "bcryptjs-react";
-import Form from "react-bootstrap/Form";
-import { FloatingLabel } from "react-bootstrap";
-import CoolButton from "../../components/Button/button";
+import { Link, useNavigate } from "react-router-dom";
+import { FloatingLabel, Form, Button } from "react-bootstrap";
 import background from "../../assets/images/background.jpg";
 import logoNew from "../../assets/logo/logo-no-background.png";
 import { ToastContainer, toast, Slide } from "react-toastify";
@@ -152,7 +149,8 @@ export default function LoginForm() {
           </div>
           {/* <button className={styles.loginBtn}>Sign in</button> */}
           <div style={{ marginTop: "20px" }}>
-            <CoolButton
+            <button
+              className="CoolButton"
               text="Sign In"
               style={{
                 cursor: "pointer",

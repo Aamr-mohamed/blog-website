@@ -1,12 +1,9 @@
 import React from "react";
-
 import ProfilePic from "../profilePic/profilePic";
-import { AiFillLike } from "react-icons/ai";
 import Like from "../likeButton/like";
 
 function Post({ postContent, title, createdAt }) {
   const userName = localStorage.getItem("currentUser");
-  const currentEmail = localStorage.getItem("currentEmail");
 
   return (
     <>
