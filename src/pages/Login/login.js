@@ -150,8 +150,7 @@ export default function LoginForm() {
           {/* <button className={styles.loginBtn}>Sign in</button> */}
           <div style={{ marginTop: "20px" }}>
             <button
-              className="CoolButton"
-              text="Sign In"
+              className={styles.CoolButton}
               style={{
                 cursor: "pointer",
                 border: "none",
@@ -170,7 +169,9 @@ export default function LoginForm() {
                   "0 0 0.125em crimson hsl(0 0% 100%/ 0.3),0 0 0.45em crimson",
                 boxShadow: "inset 0 0 0.5em 0 crimson,0 0 2em 0.5em crimson",
               }}
-            />
+            >
+              Login
+            </button>
           </div>
         </form>
         <div>

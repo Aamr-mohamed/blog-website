@@ -17,27 +17,6 @@ export default function Profile() {
   const userName = localStorage.getItem("currentUser");
   // localStorage.setItem("about", "");
   // const about = JSON.parse(localStorage.getItem("about")) || "";
-  // useEffect(() => {
-  //   const img = document.getElementsByClassName("cats");
-  //   if (!img) {
-  //     console.error("No 'img' element found in the document.");
-  //     return;
-  //   }
-
-  //   fetch(
-  //     "https://api.giphy.com/v1/gifs/translate?api_key=bb2006d9d3454578be1a99cfad65913d&s=cats",
-  //     { mode: "cors" }
-  //   )
-  //     .then(function (response) {
-  //       return response.json();
-  //     })
-  //     .then(function (response) {
-  //       img.src = response.data.images.original.url;
-  //     })
-  //     .catch((e) => {
-  //       console.error("An error occurred:", e);
-  //     });
-  // }, []);
 
   return (
     <div>
@@ -128,9 +107,7 @@ export default function Profile() {
               <Tab
                 eventKey="link-1"
                 title={<span style={{ color: "black" }}>Edit Profile</span>}
-              >
-                Edit Profile
-              </Tab>
+              ></Tab>
               <Tab
                 eventKey="link-2"
                 title={<span style={{ color: "black" }}>Settings</span>}

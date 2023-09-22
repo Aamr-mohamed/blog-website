@@ -325,7 +325,7 @@ export default function SignupForm() {
                 }}
               >
                 <button
-                  className="CoolButton"
+                  className={styles.CoolButton}
                   text="SignUp"
                   style={{
                     cursor: "pointer",
@@ -346,7 +346,9 @@ export default function SignupForm() {
                     boxShadow:
                       "inset 0 0 0.5em 0 crimson,0 0 2em 0.5em crimson",
                   }}
-                />
+                >
+                  SignUp
+                </button>
               </div>
               <div>
                 <p

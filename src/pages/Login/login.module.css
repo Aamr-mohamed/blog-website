@@ -30,14 +30,6 @@
   transition: background-color 100ms linear;
 }
 
-input:focus {
-  outline-color: crimson;
-  background-color: transparent;
-}
-Form.Control:focus {
-  border-color: #a3c4bc !important;
-  box-shadow: 0 0 0 0.1rem #8ebdb1 !important;
-}
 .logo1 {
   width: 220px;
   padding-top: 20px;

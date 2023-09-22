@@ -9,15 +9,13 @@ function Post({ postContent, title, createdAt }) {
     <>
       <div
         style={{
-          margin: "auto",
           marginTop: "20px",
           width: "700px",
           resize: "both",
-          boxShadow: "0px 0 30px rgba(1, 41, 112, 0.1)",
           border: "none",
           overflow: "auto",
           borderRadius: "5px",
-          backgroundColor: "white",
+          backgroundColor: "#fcfbf7",
         }}
       >
         <div
