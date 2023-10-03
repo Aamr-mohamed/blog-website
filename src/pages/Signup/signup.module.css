@@ -1,0 +1,103 @@
+*,
+*::before *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "poppins", sans-serif;
+}
+.signupBackground {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+}
+.logo {
+  position: relative;
+  align-self: center;
+}
+.title {
+  /* margin-bottom: 0.5rem;
+  padding-left: 20px; */
+  color: #fff;
+}
+.signupCard1 {
+  display: flex;
+  align-items: center;
+  /* justify-items: center; */
+  /* flex-direction: column; */
+  margin-top: 120px;
+  margin-left: 350px;
+  width: 60%;
+  height: 90%;
+  background-image: url("../../assets/images/background.jpg");
+  background-position: center;
+  background-size: cover;
+  border: 1px solid black;
+  border-radius: 10px;
+  border: none;
+}
+.signupCard {
+  display: flex;
+  align-items: center;
+  /* justify-items: center; */
+  /* flex-direction: column; */
+
+  width: 100%;
+  height: 100%;
+
+  background-position: center;
+  background-size: cover;
+  border: 1px solid black;
+  border-radius: 10px;
+  border: none;
+}
+
+.CoolButton:hover {
+  color: white;
+  box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
+  background-color: crimson;
+}
+
+input {
+  border: 2px solid #c0c0c0;
+  border-radius: 0.5em;
+  background-color: aliceblue;
+  height: 28px;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  font-weight: inherit;
+  outline: none;
+  padding-left: 1.5rem;
+  background: none;
+  justify-content: center;
+}
+.form-control {
+  /* margin: 6px !important; */
+}
+
+input:hover {
+  border-color: crimson;
+}
+input:focus {
+  border-color: crimson;
+}
+/* .cover {
+} */
+.logo {
+  width: 240px;
+  padding-top: 30px;
+  padding-left: 20px;
+}
+/* .form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+} */
+.chkbox {
+  width: 15px;
+  height: 15px;
+}
+.using {
+  text-align: center;
+}
