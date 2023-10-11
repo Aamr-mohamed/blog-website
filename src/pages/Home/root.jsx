@@ -13,7 +13,8 @@ export default function Root() {
   const currentemail = localStorage.getItem("currentEmail");
   const posts = JSON.parse(localStorage.getItem("Post"));
   const userPosts = currentemail
-    ? posts?.filter((post) => post.userEmail === currentemail)
+    ? posts
+        ?.filter((post) => post.userEmail === currentemail)
         .map((post, index) => (
           <Post
             postkey={index.toString()}
@@ -30,15 +31,15 @@ export default function Root() {
         backgroundColor: "#f8f4ec",
         position: "relative",
       }}
-    >      
-        <Wrapper />
-        <Container>
+    >
+      <Wrapper />
+      <Container>
         <Row>
-          <Col sm="5" xs={{  offset: 2 }}>
+          <Col sm="5" xs={{ offset: 2 }}>
             {userPosts}
           </Col>
-          <Col sm="2" xs={{offset:3}} >
-            <Row >
+          <Col sm="2" xs={{ offset: 3 }}>
+            <Row>
               <GetJokes
                 style={{ backgroundColor: "#fcfbf7", marginBottom: "30px" }}
               />
