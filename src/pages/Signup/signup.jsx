@@ -32,10 +32,9 @@ export default function SignupForm() {
           user.email === values.email || user.username === values.username
       )
     ) {
-      customToast("warn","This user already exists")
-      
+      customToast("warn", "This user already exists");
     } else if (values.password !== values.password2) {
-      customToast("Passwords do not match")
+      customToast("Passwords do not match");
     } else {
       const hashedPassword = await bcrypt.hash(values.password, 10);
       existingUsers.push({
@@ -109,7 +108,6 @@ export default function SignupForm() {
                 >
                   <Form.Control
                     type="text"
-                   
                     placeholder=""
                     name="firstname"
                     onChange={handleFormChange}

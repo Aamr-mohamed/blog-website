@@ -11,6 +11,7 @@ import { customToast } from "../../utils/toasts";
 
 export default function NewPost() {
   var date = Date.now();
+  var date = Date.now();
   const email = localStorage.getItem("currentEmail");
   const userName = localStorage.getItem("currentUser");
   const NewPost = useRef();
@@ -58,6 +59,18 @@ export default function NewPost() {
             marginTop: "40px",
           }}
         >
+          <div style={{ display: "flex" }}>
+            <ProfilePic style={{ width: "45px", height: "45px" }} />
+            <p
+              style={{
+                marginTop: "10px",
+                fontSize: "20px",
+                marginLeft: "15px",
+              }}
+            >
+              {userName}
+            </p>
+          </div>
           <div style={{ display: "flex" }}>
             <ProfilePic style={{ width: "45px", height: "45px" }} />
             <p

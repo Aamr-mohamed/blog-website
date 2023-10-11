@@ -5,17 +5,10 @@ import SignupForm from "../pages/Signup/signup";
 import NewPost from "../pages/new-post/new-post";
 import Profile from "../pages/profile/profile";
 import Contact from "../pages/contact/contact";
-import { Outlet, createBrowserRouter } from "react-router-dom";
-import Header from "../components/Header/Header";
-import SideBar from "../components/Sidebar/SideBar";
+import { createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Layout />,
-    errorElement: <ErrorPage />,
-    children:[
-      {
     path: "/login",
     element: <LoginForm />,
   },
@@ -23,7 +16,11 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <SignupForm />,
   },
-  
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <ErrorPage />,
+  },
   {
     path: "/new-post",
     element: <NewPost />,
@@ -36,20 +33,5 @@ const router = createBrowserRouter([
     path: "/contact",
     element: <Contact />,
   },
-    ]
-  },
-  
 ]);
-const Layout =()=>{
-  return(
-    <>
-    <Header/>
-    <Outlet/>
-    <SideBar/>
-    </>
-  )
-}
-
-
-
 export default router;

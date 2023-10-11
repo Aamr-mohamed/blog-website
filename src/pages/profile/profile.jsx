@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import "./profile.module.css";
 import ProfilePic from "../../components/profilePic/profilePic";
 import "../../index.css";
@@ -12,15 +12,13 @@ import {
   Tab,
   Tabs,
   FloatingLabel,
-  Form
+  Form,
 } from "react-bootstrap";
-import {ToastContainer,Toast,Slide} from "react-toastify";
-
-
+import { ToastContainer, Toast, Slide } from "react-toastify";
 
 export default function Profile() {
-  const oldEmail=localStorage.getItem("currentEmail");
-  console.log(oldEmail)
+  const oldEmail = localStorage.getItem("currentEmail");
+  console.log(oldEmail);
   const userName = localStorage.getItem("currentUser");
   // localStorage.setItem("about", "");
   // const about = JSON.parse(localStorage.getItem("about")) || "";
@@ -31,37 +29,36 @@ export default function Profile() {
       [e.target.name]: e.target.value,
     });
   };
-  const handleSubmit=()=>{
-    console.log('working')
-  }
+  const handleSubmit = () => {
+    console.log("working");
+  };
   return (
     <div>
       <Wrapper />
       <ToastContainer transition={Slide} />
-      <Container style={{marginLeft:"300px"}}>
-        <Row >
+      <Container style={{ marginLeft: "300px" }}>
+        <Row>
           <h1>Profile</h1>
           <Breadcrumb>
             <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
             <Breadcrumb.Item href="/profile">profile</Breadcrumb.Item>
           </Breadcrumb>
         </Row>
-        <Row >
-          <Col  >
-            <Card className="text-center" style={{ width: "25rem" }} >
-              
-                <ProfilePic
-                  style={{
-                    width: "150px",
-                    height: "150px",
-                  }}
-                />
-                <Card.Title tag="h2">{userName}</Card.Title>
-                <Card.Text>ComingSoon</Card.Text>
-              
+        <Row>
+          <Col>
+            <Card className="text-center" style={{ width: "25rem" }}>
+              <ProfilePic
+                style={{
+                  width: "150px",
+                  height: "150px",
+                }}
+              />
+              <Card.Title tag="h2">{userName}</Card.Title>
+              <Card.Text>ComingSoon</Card.Text>
             </Card>
           </Col>
-          <Col xs={{offset:1}}
+          <Col
+            xs={{ offset: 1 }}
             style={{
               backgroundColor: "white",
             }}
@@ -123,26 +120,46 @@ export default function Profile() {
                 eventKey="link-1"
                 title={<span style={{ color: "black" }}>Edit Profile</span>}
               >
-                <div >
-                  <Form style={{display:"flex",direction:"row"}} onSubmit={handleSubmit}>
-                    <Form.Group  controlId="Edit profile">
+                <div>
+                  <Form
+                    style={{ display: "flex", direction: "row" }}
+                    onSubmit={handleSubmit}
+                  >
+                    <Form.Group controlId="Edit profile">
                       <Form.Label>Change UserName</Form.Label>
-                      <Form.Control type="text" placeholder="Change UserName" onChange={handleFormChange} name="password" />
+                      <Form.Control
+                        type="text"
+                        placeholder="Change UserName"
+                        onChange={handleFormChange}
+                        name="password"
+                      />
                       <Form.Label>Change Password</Form.Label>
-                      <Form.Control type="password" placeholder="Change Password" onChange={handleFormChange}/>
+                      <Form.Control
+                        type="password"
+                        placeholder="Change Password"
+                        onChange={handleFormChange}
+                      />
                       <Form.Label>reEnter your Password</Form.Label>
-                      <Form.Control type="password" placeholder="reEnter your Password" onChange={handleFormChange}/>
+                      <Form.Control
+                        type="password"
+                        placeholder="reEnter your Password"
+                        onChange={handleFormChange}
+                      />
                       <Form.Label>Change Email</Form.Label>
-                      <Form.Control type="text" placeholder="Change Email" onChange={handleFormChange}/>
+                      <Form.Control
+                        type="text"
+                        placeholder="Change Email"
+                        onChange={handleFormChange}
+                      />
                       <Form.Label>Change your phone number</Form.Label>
-                      <Form.Control type="text" placeholder="Change phone number" onChange={handleFormChange}/>
+                      <Form.Control
+                        type="text"
+                        placeholder="Change phone number"
+                        onChange={handleFormChange}
+                      />
                     </Form.Group>
-
                   </Form>
                 </div>
-
-
-
               </Tab>
               <Tab
                 eventKey="link-2"

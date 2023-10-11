@@ -28,7 +28,7 @@ const Weather = (props) => {
         windspeed: res.data.wind.speed,
       });
     } catch (error) {
-      customToast("error",error.message)
+      customToast("error", error.message);
     }
   };
 

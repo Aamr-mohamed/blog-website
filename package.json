@@ -1,12 +1,19 @@
 {
   "name": "blogginway",
   "version": "1.0.0",
+  "name": "blogginway",
+  "version": "1.0.0",
   "private": true,
   "description": "Social network for developers",
   "main": "server.js",
   "author": "Amr mohamed",
   "license": "MIT",
+  "description": "Social network for developers",
+  "main": "server.js",
+  "author": "Amr mohamed",
+  "license": "MIT",
   "dependencies": {
+    "@lyket/react": "^2.1.0",
     "@lyket/react": "^2.1.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -35,6 +42,7 @@
     "react-strap": "^0.0.1",
     "react-toastify": "^9.1.3",
     "reactstrap": "^9.2.0",
+    "request": "^2.88.2",
     "request": "^2.88.2",
     "web-vitals": "^2.1.4"
   },
