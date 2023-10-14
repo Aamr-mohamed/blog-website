@@ -4,24 +4,22 @@ import { Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./newPost.module.css";
 import styles from "./newPost.module.css";
-import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Wrapper from "../../layouts/wrapper";
 import { customToast } from "../../utils/toasts";
 
 export default function NewPost() {
   var date = Date.now();
-  var date = Date.now();
   const email = localStorage.getItem("currentEmail");
   const userName = localStorage.getItem("currentUser");
   const NewPost = useRef();
   const NewTitle = useRef();
   const navigate = useNavigate();
-  const handlesubmit = () => {  
-    let postDb = localStorage.getItem("Post")
+  const handlesubmit = () => {
+    let postDb = localStorage.getItem("Post");
     var existingPosts = postDb ? JSON.parse(postDb) : [];
-    console.log(existingPosts)
-    console.log('wassup')
+    console.log(existingPosts);
+    console.log("wassup");
     var postData = {
       userEmail: email,
       Title: NewTitle.current.value,
@@ -29,24 +27,23 @@ export default function NewPost() {
       createdAt: date,
     };
     if (!email) {
-      customToast("warn", "please login first")
-      navigate("/login/"); 
+      customToast("warn", "please login first");
+      navigate("/login/");
     } else if (
-      existingPosts.find((post) => post.Title === NewTitle.current.value) 
+      existingPosts.find((post) => post.Title === NewTitle.current.value)
     ) {
-      customToast("warn", "This post was already created")
+      customToast("warn", "This post was already created");
     } else {
       existingPosts.push(postData);
       localStorage.setItem("Post", JSON.stringify(existingPosts));
-      customToast("success","Post was created successfully")
+      customToast("success", "Post was created successfully");
     }
-  
   };
 
   return (
     <div>
       <Wrapper />
-      
+
       <form onSubmit={handlesubmit}>
         <div
           style={{
@@ -60,19 +57,7 @@ export default function NewPost() {
           }}
         >
           <div style={{ display: "flex" }}>
-            <ProfilePic style={{ width: "45px", height: "45px" }} />
-            <p
-              style={{
-                marginTop: "10px",
-                fontSize: "20px",
-                marginLeft: "15px",
-              }}
-            >
-              {userName}
-            </p>
-          </div>
-          <div style={{ display: "flex" }}>
-            <ProfilePic style={{ width: "45px", height: "45px" }} />
+            <getProfilePic style={{ width: "45px", height: "45px" }} />
             <p
               style={{
                 marginTop: "10px",
@@ -125,7 +110,9 @@ export default function NewPost() {
                 textShadow: "none",
                 height: "40px",
               }}
-            >Submit</button>
+            >
+              Submit
+            </button>
           </div>
         </div>
       </form>

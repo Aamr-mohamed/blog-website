@@ -1,5 +1,4 @@
 import React from "react";
-import * as AiIcons from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
 import "./Sidebar.css";
@@ -8,21 +7,15 @@ import { IconContext } from "react-icons";
 function SideBar() {
   return (
     <>
-      <IconContext.Provider value={{ color: "#fff" }}>
-        <div className="navbar">
-          <Link to="#" className="menu-bars">
-            <AiIcons.AiOutlineMenu color="black" />
-          </Link>
-        </div>
+      <IconContext.Provider value={{ color: "#14dcb4" }}>
         <nav className="nav-menu active">
           <ul className="nav-menu-items">
-            <li className="navbar-toggle"></li>
             {SidebarData.map((item, index) => {
               return (
                 <li key={index} className={item.cName}>
                   <Link to={item.path}>
                     {item.icon}
-                    <span>{item.title}</span>
+                    <span style={{ marginLeft: "10px" }}>{item.title}</span>
                   </Link>
                 </li>
               );

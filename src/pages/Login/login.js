@@ -230,11 +230,14 @@ export default function LoginForm() {
             </svg>
             Github
           </Button>
-          <br />
-          <h5 style={{ color: "#fff" }}>Dont have an account</h5>
-          <Link to="/signup">signup</Link>
-          <br />
-          <Link to="/">homepage</Link>
+          <Link
+            to="/signup"
+            style={{ marginLeft: "20px", textDecoration: "none" }}
+          >
+            <h5 style={{ color: "#fff" }}>
+              Dont have an <span style={{ color: "black" }}>account</span>
+            </h5>
+          </Link>
         </div>
       </div>
     </div>

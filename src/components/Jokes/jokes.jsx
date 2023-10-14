@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Card, Button } from "react-bootstrap";
-import { ToastContainer, toast, Slide } from "react-toastify";
 import { customToast } from "../../utils/toasts";
 
 const GetJokes = (props) => {
@@ -27,7 +26,13 @@ const GetJokes = (props) => {
           <Card.Text>
             <p>{jokeText}</p>
           </Card.Text>
-          <Button onClick={addNewJoke}>Get Joke</Button>
+
+          <Button
+            onClick={addNewJoke}
+            style={{ backgroundColor: "#14DCB4", border: "none" }}
+          >
+            Get Joke
+          </Button>
         </Card.Body>
       </Card>
     </div>

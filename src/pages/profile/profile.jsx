@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./profile.module.css";
 import ProfilePic from "../../components/profilePic/profilePic";
 import "../../index.css";
+import { getProfilePic } from "../../utils/common";
 import Wrapper from "../../layouts/wrapper";
 import {
   Col,
@@ -11,14 +12,15 @@ import {
   Card,
   Tab,
   Tabs,
-  FloatingLabel,
   Form,
 } from "react-bootstrap";
-import { ToastContainer, Toast, Slide } from "react-toastify";
+import { Button } from "reactstrap";
 
 export default function Profile() {
+  // image picker form userPC to database "Coming soon"
+  const fileRef = useRef(null);
+  // till here
   const oldEmail = localStorage.getItem("currentEmail");
-  console.log(oldEmail);
   const userName = localStorage.getItem("currentUser");
   // localStorage.setItem("about", "");
   // const about = JSON.parse(localStorage.getItem("about")) || "";
@@ -34,31 +36,39 @@ export default function Profile() {
   };
   return (
     <div>
-      <Wrapper />
-      <ToastContainer transition={Slide} />
-      <Container style={{ marginLeft: "300px" }}>
-        <Row>
-          <h1>Profile</h1>
-          <Breadcrumb>
-            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-            <Breadcrumb.Item href="/profile">profile</Breadcrumb.Item>
-          </Breadcrumb>
-        </Row>
+      <Wrapper>
         <Row>
           <Col>
-            <Card className="text-center" style={{ width: "25rem" }}>
+            <h3>Profile</h3>
+            <Breadcrumb>
+              <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+              <Breadcrumb.Item href="/profile">profile</Breadcrumb.Item>
+            </Breadcrumb>
+          </Col>
+        </Row>
+        <Row>
+          <Col lg={4}>
+            <Card className="text-center" style={{ height: "20rem" }}>
+              <input type="file" ref={fileRef} hidden accept="image/*" />
+
               <ProfilePic
                 style={{
+                  marginTop: "20px",
                   width: "150px",
                   height: "150px",
                 }}
+                onClick={() => {
+                  console.log("nice");
+                  fileRef.current.click();
+                }}
               />
+
               <Card.Title tag="h2">{userName}</Card.Title>
               <Card.Text>ComingSoon</Card.Text>
             </Card>
           </Col>
           <Col
-            xs={{ offset: 1 }}
+            lg={6}
             style={{
               backgroundColor: "white",
             }}
@@ -69,7 +79,6 @@ export default function Profile() {
                 defaultActiveKey="/"
                 title={<span style={{ color: "black" }}>Profile</span>}
               >
-                <br />
                 <h3>About</h3>
                 <p>
                   Recent engineering graduate with a strong passion for web
@@ -78,7 +87,7 @@ export default function Profile() {
                   Quick learner, problem solver, and team player committed to
                   creating innovative web solutions
                 </p>
-                <br />
+
                 <h3>Profile details</h3>
                 <Row>
                   <Col xl="3">Fullname</Col>
@@ -120,43 +129,97 @@ export default function Profile() {
                 eventKey="link-1"
                 title={<span style={{ color: "black" }}>Edit Profile</span>}
               >
-                <div>
+                <div style={{ display: "flex" }}>
                   <Form
-                    style={{ display: "flex", direction: "row" }}
                     onSubmit={handleSubmit}
+                    style={{ width: "100%", paddingRight: "30px" }}
                   >
                     <Form.Group controlId="Edit profile">
-                      <Form.Label>Change UserName</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Change UserName"
-                        onChange={handleFormChange}
-                        name="password"
-                      />
-                      <Form.Label>Change Password</Form.Label>
-                      <Form.Control
-                        type="password"
-                        placeholder="Change Password"
-                        onChange={handleFormChange}
-                      />
-                      <Form.Label>reEnter your Password</Form.Label>
-                      <Form.Control
-                        type="password"
-                        placeholder="reEnter your Password"
-                        onChange={handleFormChange}
-                      />
-                      <Form.Label>Change Email</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Change Email"
-                        onChange={handleFormChange}
-                      />
-                      <Form.Label>Change your phone number</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Change phone number"
-                        onChange={handleFormChange}
-                      />
+                      <h3 style={{ textAlign: "center" }} className="mt-2">
+                        Edit Profile
+                      </h3>
+                      <Row>
+                        <Col className="mt-2">
+                          <span>Change username:</span>
+                        </Col>
+                        <Col xl={8}>
+                          <Form.Control
+                            className="mb-2 mt-2"
+                            type="text"
+                            placeholder=""
+                            onChange={handleFormChange}
+                            name="password"
+                          />
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col className="mt-2">
+                          <span>Change last name:</span>
+                        </Col>
+                        <Col xl={8}>
+                          <Form.Control
+                            className="mb-2"
+                            type="text"
+                            onChange={handleFormChange}
+                          />
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col className="mt-2">
+                          <span>Change email:</span>
+                        </Col>
+                        <Col xl={8}>
+                          <Form.Control
+                            className="mb-2"
+                            type="text"
+                            placeholder=""
+                            onChange={handleFormChange}
+                          />
+                        </Col>
+                      </Row>
+
+                      <Row>
+                        <Col className="mt-2">
+                          <span>Change phone number:</span>
+                        </Col>
+                        <Col xl={8}>
+                          <Form.Control
+                            className="mb-2"
+                            type="text"
+                            placeholder=""
+                            onChange={handleFormChange}
+                          />
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col className="mt-2">
+                          <span>Change gender:</span>
+                        </Col>
+                        <Col xl={8}>
+                          <Form.Control
+                            className="mb-2"
+                            type="text"
+                            placeholder=""
+                            onChange={handleFormChange}
+                          />
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col className="mt-2">
+                          <span>Change your birthday:</span>
+                        </Col>
+                        <Col xl={8}>
+                          <Form.Control
+                            className="mb-2"
+                            type="text"
+                            placeholder=""
+                            onChange={handleFormChange}
+                          />
+                        </Col>
+                      </Row>
+                      <div className="mb-3 mt-1" style={{ textAlign: "end" }}>
+                        <Button color="success">Update</Button>
+                      </div>
                     </Form.Group>
                   </Form>
                 </div>
@@ -165,18 +228,46 @@ export default function Profile() {
                 eventKey="link-2"
                 title={<span style={{ color: "black" }}>Settings</span>}
               >
-                Settings
+                settings
               </Tab>
               <Tab
                 eventKey="link-3"
                 title={<span style={{ color: "black" }}>Change Password</span>}
               >
-                ChangePassword
+                <div>
+                  <h4 className="text-center mt-2 mb-4">Change Password</h4>
+                  <Row>
+                    <Col>
+                      <span>Change password:</span>
+                    </Col>
+                    <Col xl={8}>
+                      <Form.Control
+                        className="mb-2"
+                        type="password"
+                        placeholder=""
+                        onChange={handleFormChange}
+                      />
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <span>Re-enter your Password:</span>
+                    </Col>
+                    <Col xl={8}>
+                      <Form.Control
+                        className="mb-2"
+                        type="password"
+                        placeholder=""
+                        onChange={handleFormChange}
+                      />
+                    </Col>
+                  </Row>
+                </div>
               </Tab>
             </Tabs>
           </Col>
         </Row>
-      </Container>
+      </Wrapper>
     </div>
   );
 }

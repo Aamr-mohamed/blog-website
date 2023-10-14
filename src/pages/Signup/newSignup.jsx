@@ -1,73 +1,6 @@
-import React, { useState } from "react";
-import "./signup.module.css";
-import styles from "./signup.module.css";
-import "react-toastify/dist/ReactToastify.css";
-import background from "../../assets/images/background.jpg";
-import logoNew from "../../assets/logo/logo-no-background.png";
-import bcrypt from "bcryptjs-react";
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
-import { FloatingLabel, Form, Button, Card, CardGroup } from "react-bootstrap";
-import { ToastContainer, toast, Slide } from "react-toastify";
-import { customToast } from "../../utils/toasts";
+import React from "react";
 
-export default function SignupForm() {
-  localStorage.setItem("currentEmail", "");
-  localStorage.setItem("currentUser", "");
-  localStorage.setItem("usergender", "");
-  const [values, setValues] = useState({ password: "" });
-  const handleFormChange = (e) => {
-    setValues({
-      ...values,
-      [e.target.name]: e.target.value,
-    });
-  };
-  const navigate = useNavigate();
-  const HandleSubmit = async (e) => {
-    var existingUsers = JSON.parse(localStorage.getItem("users")) || [];
-    e.preventDefault();
-    if (
-      existingUsers.find(
-        (user) =>
-          user.email === values.email || user.username === values.username
-      )
-    ) {
-      customToast("warn", "This user already exists");
-    } else if (values.password !== values.password2) {
-      customToast("warn", "Passwords do not match");
-    } else {
-      const hashedPassword = await bcrypt.hash(values.password, 10);
-      existingUsers.push({
-        firstname: values.firstname,
-        lastname: values.lastname,
-        username: values.username,
-        email: values.email,
-        password: hashedPassword,
-        gender: values.gender,
-        date: values.date,
-      });
-      localStorage.setItem("currentEmail", values.email);
-      localStorage.setItem("currentUser", values.username);
-      localStorage.setItem("usergender", values.gender);
-      localStorage.setItem("users", JSON.stringify(existingUsers));
-      axios
-        .post("http://localhost:5000/adduser", values)
-        .then(function (response) {
-          console.log("working boi");
-        });
-      toast.success("Your account was created successfully!!", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-        onClose: () => navigate("/"),
-      });
-    }
-  };
+function newSignup() {
   return (
     <div
       className={styles.signupBackground}
@@ -239,7 +172,7 @@ export default function SignupForm() {
                 paddingLeft: "100px",
                 paddingRight: "100px",
                 borderColor: "transparent",
-                paddingTop: "250px",
+                paddingTop: "200px",
               }}
             >
               <div>
@@ -342,7 +275,7 @@ export default function SignupForm() {
                   Or Signup using
                 </p>
               </div>
-              <div style={{ display: "flex" }}>
+              <div>
                 <Button
                   href="https://www.facebook.com/login/"
                   variant="primary"
@@ -377,6 +310,7 @@ export default function SignupForm() {
                   </svg>
                   Google
                 </Button>
+
                 <Button
                   href="https://github.com/login"
                   variant="dark"
@@ -384,7 +318,7 @@ export default function SignupForm() {
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="25"
+                    width="35"
                     height="25"
                     fill="currentColor"
                     className="bi bi-github"
@@ -394,13 +328,11 @@ export default function SignupForm() {
                   </svg>
                   Github
                 </Button>
-              </div>
-              <Link
-                to="/login"
-                style={{ marginLeft: "20px", textDecoration: "none" }}
-              >
                 <h5 style={{ color: "#fff" }}>Already have an account</h5>
-              </Link>
+                <Link to="/login">Login</Link>
+                <br />
+                <Link to="/">homepage</Link>
+              </div>
             </Card>
           </CardGroup>
         </CardGroup>
@@ -408,3 +340,5 @@ export default function SignupForm() {
     </div>
   );
 }
+
+export default newSignup;

@@ -16,23 +16,23 @@ function Like() {
       <Container>
         <Row>
           <Col xl="1">
-            <p style={{ marginLeft: "40px", marginTop: "15px" }}>{like}</p>
+            <p style={{}}>{like}</p>
           </Col>
           <Col xs="3">
             <AiFillLike
               className="likeBtn"
-              size="3rem"
+              size="2rem"
               onClick={onLikeButtonClick}
             />
           </Col>
           <Col xl="1">
-            <p style={{ marginLeft: "40px", marginTop: "15px" }}>{like}</p>
+            <p style={{}}>{like}</p>
           </Col>
           <Col xl="4">
-            <AiFillDislike className="dislikeBtn" size="3rem" />
+            <AiFillDislike className="dislikeBtn" size="2rem" />
           </Col>
           <Col xl="3">
-            <FaShare className="shareBtn" size="3rem" />
+            <FaShare className="shareBtn" size="2rem" />
           </Col>
         </Row>
       </Container>

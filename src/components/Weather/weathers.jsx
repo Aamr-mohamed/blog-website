@@ -10,6 +10,7 @@ const Weather = (props) => {
   }
   const [weatherData, setWeatherData] = useState({});
   const [city, setCity] = useState({ name: "" });
+  const [user, setUser] = useState(null);
 
   const fetchWeatherData = async () => {
     const key = "7351e4b29d609b131709af3ef624cd77";
@@ -39,8 +40,17 @@ const Weather = (props) => {
     });
   };
 
-  const handleGetWeather = () => {
-    fetchWeatherData();
+  const handleGetWeather = async () => {
+    const res = await axios.post("http://localhost:5000/message", {
+      username: "from front",
+      email: "from front",
+      password: "from front",
+      timestamp: Date.now(),
+    });
+    if (res.status === 200) {
+      setUser(res.data);
+    }
+    // fetchWeatherData();
   };
 
   return (
@@ -63,7 +73,18 @@ const Weather = (props) => {
               <p>Wind Speed: {weatherData.windspeed} m/s</p>
             </div>
           )}
-          <Button onClick={handleGetWeather}>Get Weather</Button>
+
+          {user && (
+            <>
+              <h1>Username: {user.username}</h1>
+            </>
+          )}
+          <Button
+            onClick={handleGetWeather}
+            style={{ backgroundColor: "#14DCB4", border: "none" }}
+          >
+            Get Weather
+          </Button>
         </Card.Body>
       </Card>
     </div>

@@ -6,7 +6,7 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { Contact, Root, Login, NewPost, Profile, Signup } from "./pages";
 
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer ,Slide} from "react-toastify";
+import { ToastContainer, Slide } from "react-toastify";
 
 export default function App() {
   return (
@@ -23,7 +23,7 @@ export default function App() {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-      <ToastContainer transition={Slide}/>
+    <ToastContainer transition={Slide} />
     <App />
   </BrowserRouter>
 );

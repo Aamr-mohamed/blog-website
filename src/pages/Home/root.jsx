@@ -5,7 +5,19 @@ import Wrapper from "../../layouts/wrapper";
 import GetJokes from "../../components/Jokes/jokes";
 import { Col, Row, Container } from "react-bootstrap";
 import Weather from "../../components/Weather/weathers.jsx";
+import adPic from "../../assets/images/macAd.jpg";
 import { Slide, ToastContainer } from "react-toastify";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  CardImg,
+  CardSubtitle,
+  CardText,
+  CardTitle,
+} from "reactstrap";
+import Burger from "../../components/ads/Burger";
 
 export default function Root() {
   const navigate = useNavigate();
@@ -26,30 +38,58 @@ export default function Root() {
         ))
     : navigate("/new-post/");
   return (
-    <div
-      style={{
-        backgroundColor: "#f8f4ec",
-        position: "relative",
-      }}
-    >
-      <Wrapper />
+    <Wrapper>
       <Container>
         <Row>
-          <Col sm="5" xs={{ offset: 2 }}>
-            {userPosts}
-          </Col>
-          <Col sm="2" xs={{ offset: 3 }}>
-            <Row>
-              <GetJokes
-                style={{ backgroundColor: "#fcfbf7", marginBottom: "30px" }}
-              />
+          <Col lg="7">{userPosts}</Col>
+          <Col lg="5">
+            <Card
+              style={{
+                width: "18rem",
+              }}
+            >
+              <img src={adPic} alt="Sample" />
+              <CardBody>
+                <CardTitle tag="h5">The Onion</CardTitle>
+                <CardSubtitle className="mb-2 text-muted" tag="h6">
+                  @TheOnion
+                </CardSubtitle>
+                <CardText>
+                  McDonald’s Appealing To Health-Conscious Consumers With New
+                  ‘You Can’t Run From Us Forever’ Ad Campaign:
+                  <a href="https://trib.al/bDvWfTz">https://trib.al/bDvWfTz</a>
+                </CardText>
+              </CardBody>
+            </Card>
+            <Card
+              className="my-2"
+              style={{
+                width: "18rem",
+              }}
+            >
+              <CardBody>
+                <CardTitle tag="h5">Friend List</CardTitle>
+                <CardText>
+                  <ul>friend 1</ul>
+                  <ul>friend 2</ul>
+                  <ul>friend 3</ul>
+                </CardText>
+              </CardBody>
+            </Card>
+            <Row className="mb-4">
+              <Col lg="7">
+                <GetJokes style={{ backgroundColor: "#fcfbf7" }} />
+                <Burger />
+              </Col>
             </Row>
             <Row>
-              <Weather style={{ backgroundColor: "#fcfbf7" }} />
+              <Col>
+                <Weather style={{ backgroundColor: "#fcfbf7" }} />
+              </Col>
             </Row>
           </Col>
         </Row>
       </Container>
-    </div>
+    </Wrapper>
   );
 }

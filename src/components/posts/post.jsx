@@ -1,13 +1,45 @@
 import React from "react";
-import ProfilePic from "../profilePic/profilePic";
+import ProfilePic, { getProfilePic } from "../profilePic/profilePic";
 import Like from "../likeButton/like";
+import {
+  CardImg,
+  Card,
+  CardHeader,
+  CardText,
+  CardSubtitle,
+  CardTitle,
+} from "reactstrap";
 
 function Post({ postContent, title, createdAt }) {
   const userName = localStorage.getItem("currentUser");
 
   return (
     <>
-      <div
+      <Card className="mb-2">
+        <div style={{ display: "flex", padding: "10px 0px 10px 10px" }}>
+          <ProfilePic
+            style={{ width: "45px", height: "45px", marginLeft: "20px" }}
+          />
+          <CardTitle style={{ padding: "10px 0px 0px 10px" }} tag="h4">
+            {userName}
+          </CardTitle>
+        </div>
+        <CardText style={{ padding: "0px 0px 0px 20px" }}>{title}</CardText>
+        <CardText style={{ padding: "0px 0px 0px 20px" }}>
+          {postContent}
+        </CardText>
+        <CardSubtitle
+          className="text-muted align-self-end"
+          style={{ padding: "0px 10px 10px 0px" }}
+        >
+          {createdAt}
+        </CardSubtitle>
+        <div className="likeComment" style={{}}>
+          <Like />
+        </div>
+      </Card>
+
+      {/* <div
         style={{
           marginTop: "20px",
           width: "700px",
@@ -65,7 +97,7 @@ function Post({ postContent, title, createdAt }) {
             <Like />
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

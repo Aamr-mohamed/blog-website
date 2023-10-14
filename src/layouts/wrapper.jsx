@@ -1,16 +1,21 @@
 import React from "react";
 import Header from "../components/Header/Header";
 import SideBar from "../components/Sidebar/SideBar";
-import SideBarNot from "../components/NotLoggedInSideBar/SideBarNot";
+import { Col, Container, Row } from "react-bootstrap";
 
-function Wrapper() {
-  const currentemail = localStorage.getItem("currentEmail");
-
+function Wrapper({ children }) {
   return (
-    <>
-      <Header />
-      {currentemail ? <SideBar /> : <SideBarNot />}
-    </>
+    <Container fluid>
+      <Row>
+        <Col lg={12}>
+          <Header />
+        </Col>
+        <Col lg={2}>
+          <SideBar />
+        </Col>
+        <Col lg={10}>{children}</Col>
+      </Row>
+    </Container>
   );
 }
 
