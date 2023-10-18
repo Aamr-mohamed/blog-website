@@ -6,18 +6,7 @@ import GetJokes from "../../components/Jokes/jokes";
 import { Col, Row, Container } from "react-bootstrap";
 import Weather from "../../components/Weather/weathers.jsx";
 import adPic from "../../assets/images/macAd.jpg";
-import { Slide, ToastContainer } from "react-toastify";
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  CardImg,
-  CardSubtitle,
-  CardText,
-  CardTitle,
-} from "reactstrap";
-import Burger from "../../components/ads/Burger";
+import { Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
 
 export default function Root() {
   const navigate = useNavigate();
@@ -41,8 +30,8 @@ export default function Root() {
     <Wrapper>
       <Container>
         <Row>
-          <Col lg="7">{userPosts}</Col>
-          <Col lg="5">
+          <Col lg="8">{userPosts}</Col>
+          <Col lg="4">
             <Card
               style={{
                 width: "18rem",
@@ -79,7 +68,6 @@ export default function Root() {
             <Row className="mb-4">
               <Col lg="7">
                 <GetJokes style={{ backgroundColor: "#fcfbf7" }} />
-                <Burger />
               </Col>
             </Row>
             <Row>

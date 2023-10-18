@@ -12,7 +12,7 @@ const GetJokes = (props) => {
       const res = await axios.get("http://icanhazdadjoke.com/", config);
       setJokeText(res.data.joke);
     } catch (err) {
-      customToast("error", err.message);
+      customToast("error", "jokes " + err.message);
     }
   };
 

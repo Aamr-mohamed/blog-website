@@ -20,7 +20,7 @@ function Post({ postContent, title, createdAt }) {
           <ProfilePic
             style={{ width: "45px", height: "45px", marginLeft: "20px" }}
           />
-          <CardTitle style={{ padding: "10px 0px 0px 10px" }} tag="h4">
+          <CardTitle style={{ padding: "10px 0px 0px 10px" }} tag="h5">
             {userName}
           </CardTitle>
         </div>

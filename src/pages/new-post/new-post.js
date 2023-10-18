@@ -41,23 +41,20 @@ export default function NewPost() {
   };
 
   return (
-    <div>
-      <Wrapper />
-
+    <Wrapper>
       <form onSubmit={handlesubmit}>
         <div
           style={{
-            position: "relative",
+            // position: "relative",
             alignSelf: "center",
             justifyContent: "center",
-            width: "40%",
+            width: "60%",
             height: "100%",
-            margin: "auto",
             marginTop: "40px",
           }}
         >
           <div style={{ display: "flex" }}>
-            <getProfilePic style={{ width: "45px", height: "45px" }} />
+            <ProfilePic style={{ width: "45px", height: "45px" }} />
             <p
               style={{
                 marginTop: "10px",
@@ -116,6 +113,6 @@ export default function NewPost() {
           </div>
         </div>
       </form>
-    </div>
+    </Wrapper>
   );
 }

@@ -7,6 +7,8 @@ import { FloatingLabel, Form, Button } from "react-bootstrap";
 import background from "../../assets/images/background.jpg";
 import logoNew from "../../assets/logo/logo-no-background.png";
 import { ToastContainer, toast, Slide } from "react-toastify";
+import { customToast } from "../../utils/toasts";
+import axios from "axios";
 
 export default function LoginForm() {
   localStorage.setItem("currentEmail", "");
@@ -33,18 +35,9 @@ export default function LoginForm() {
     }
     const user = users.filter((u) => u.email === svdEmail.current.value);
     if (user === 0) {
-      toast.warn(
-        "Email doesnt exist please type a right email or go to signup",
-        {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        }
+      customToast(
+        "warn",
+        "Email doesnt exist please type a right email or go to signup"
       );
     } else {
       bcrypt.compare(
@@ -52,27 +45,9 @@ export default function LoginForm() {
         user[0].password,
         function (err, isMatch) {
           if (err) {
-            toast.error(err.message, {
-              position: "top-right",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "colored",
-            });
+            customToast("error", err.message);
           } else if (!isMatch) {
-            toast.warn("password doesnt match", {
-              position: "top-right",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "colored",
-            });
+            customToast("warn", "password doesnt match");
 
             return false;
           } else {
@@ -82,6 +57,7 @@ export default function LoginForm() {
             localStorage.setItem("currentEmail", currentEmail);
             localStorage.setItem("currentUser", currentUser);
             localStorage.setItem("usergender", usergender);
+            // axios.
             toast.success("Logged In successfully", {
               position: "top-right",
               autoClose: 800,

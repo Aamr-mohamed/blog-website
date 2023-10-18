@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import "./profile.module.css";
 import ProfilePic from "../../components/profilePic/profilePic";
 import "../../index.css";
-import { getProfilePic } from "../../utils/common";
 import Wrapper from "../../layouts/wrapper";
 import {
   Col,

@@ -1,6 +1,6 @@
 .nav-menu {
   background-color: #f8f4ec;
-  width: 200px;
+  width: 220px;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -11,10 +11,10 @@
 .nav-text {
   display: flex;
   justify-content: start;
-  align-items: center;
-  padding: 8px 0px 8px 0px;
+  /* align-items: center; */
+  /* padding: 8px 0px 8px 0px; */
   list-style: none;
-  height: 60px;
+  height: 50px;
 }
 
 .nav-text a {
@@ -25,7 +25,7 @@
   height: 100%;
   display: flex;
   align-items: center;
-  padding: 0 16px;
+  /* padding: 0 16px; */
   border-radius: 4px;
 }
 
