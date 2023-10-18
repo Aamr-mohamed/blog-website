@@ -20,8 +20,7 @@ import { Menu } from "@headlessui/react";
 
 export default function SignupForm() {
   const [picturePath, setpicturePath] = useState(null);
-  const [values, setValues] = useState({ password: "" });
-  const { palette } = useTheme();
+  // const [values, setValues] = useState({ password: "" });
 
   const registerSchema = yup.object().shape({
     firstname: yup.string().required("required"),
@@ -59,8 +58,7 @@ export default function SignupForm() {
   //     [e.target.name]: e.target.value,
   //   });
   // };
-  const submitForm = async (e) => {
-    e.preventDefault();
+  const submitForm = async (values) => {
     try {
       const formData = new FormData();
       for (const value in values) {
@@ -69,16 +67,16 @@ export default function SignupForm() {
         formData.append(value, values[value]);
       }
       formData.append("picturePath", picturePath);
-      // console.log(formData);
-      // console.log(picturePath);
-      // console.log(formData);
-      // await axios
-      //   .post("http://localhost:3001/adduser", formData, {
-      //     headers: { "Content-Type": "multipart/form-data" },
-      //   })
-      //   .then(function (response) {
-      //     console.log(response);
-      //   });
+      console.log(formData);
+      console.log(picturePath);
+      console.log(formData);
+      await axios
+        .post("http://localhost:3001/adduser", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then(function (response) {
+          console.log(response);
+        });
     } catch (error) {
       customToast("error", error.message);
     }
@@ -102,8 +100,9 @@ export default function SignupForm() {
           <Formik
             initialValues={initialValuesSignUp}
             validationSchema={registerSchema}
-            onSubmit={(values, actions) => {
+            onSubmit={(values) => {
               console.log(values);
+              submitForm(values);
             }}
           >
             {(props) => (
