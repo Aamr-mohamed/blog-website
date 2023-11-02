@@ -17,6 +17,9 @@ import { toast } from "react-toastify";
 import { customToast } from "../../utils/toasts";
 import { CardGroup } from "reactstrap";
 import { Menu } from "@headlessui/react";
+import LoginGoogle from "../../components/Buttons/Google";
+import FacebookButton from "../../components/Buttons/facebook";
+import GithubButton from "../../components/Buttons/github";
 
 export default function SignupForm() {
   const [picturePath, setpicturePath] = useState(null);
@@ -90,13 +93,13 @@ export default function SignupForm() {
       }}
     >
       <div
-        className="flex items-center justify-center w-3/4 h-4/5 bg-cover bg-center bg-opacity-75"
+        className="flex items-center justify-center w-3/4 h-4/6 bg-cover bg-center bg-opacity-75"
         style={{
           backgroundImage: `url(${background})`,
         }}
       >
         <div className="backdrop-blur w-full h-full rounded-lg border-none text-white flex flex-col ">
-          <img src={logoNew} alt="logo" className="h-32 mx-auto mt-3" />
+          <img src={logoNew} alt="logo" className="h-36 mx-auto mt-3" />
           <Formik
             initialValues={initialValuesSignUp}
             validationSchema={registerSchema}
@@ -124,7 +127,7 @@ export default function SignupForm() {
                     className="w-2/4 h-full shadow-none"
                   >
                     <h1 className="text-3xl text-white text-center">Signup</h1>
-                    <div className="flex flex-col gap-4 w-5/6 h-full mt-2 pl-32">
+                    <div className="flex flex-col gap-6 w-5/6 h-full mt-2 pl-32">
                       <Input
                         onChange={props.handleChange}
                         onBlur={props.handleBlur}
@@ -193,7 +196,7 @@ export default function SignupForm() {
                     color="transparent"
                     className="flex w-2/4 h-full mt-9 shadow-none"
                   >
-                    <div className="flex flex-col gap-4 w-5/6 h-full mt-3 pl-20 border-transparent">
+                    <div className="flex flex-col gap-6 w-5/6 h-full mt-3 pl-20 border-transparent">
                       {/* <Input
                         className="text-white"
                         type="file"
@@ -246,7 +249,10 @@ export default function SignupForm() {
                       >
                         Or signup using
                       </Typography>
-                      <div className="flex space-x-4 items-center justify-center"></div>
+                      <div className="flex space-x-4 items-center justify-center">
+                        <LoginGoogle />
+                        <FacebookButton />
+                      </div>
                     </div>
                   </Card>
                 </CardGroup>
