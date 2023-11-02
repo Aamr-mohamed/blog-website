@@ -1,4 +1,5 @@
 import React from "react";
+import "./login.module.css";
 import { useNavigate } from "react-router-dom";
 import background from "../../assets/images/background.jpg";
 import logoNew from "../../assets/logo/logo-no-background.png";
@@ -40,19 +41,6 @@ export default function LoginForm() {
         progress: undefined,
         theme: "colored",
         onClose: () => navigate("/root"),
-      });
-    } else {
-      // axios.
-      toast.success("Logged In successfully", {
-        position: "top-right",
-        autoClose: 800,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-        onClose: () => navigate("/"),
       });
     }
   };
