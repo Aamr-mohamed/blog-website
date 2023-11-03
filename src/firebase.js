@@ -4,13 +4,13 @@ import { initializeApp } from "firebase/app";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: "bloggingway-5722e.firebaseapp.com",
-  projectId: "bloggingway-5722e",
-  storageBucket: "bloggingway-5722e.appspot.com",
-  messagingSenderId: "469820937164",
-  appId: "1:469820937164:web:74e0641c8c5733b9a30369",
+export const firebaseConfig = {
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_authDomain,
+  projectId: process.env.REACT_APP_FIREBASE_projectId,
+  storageBucket: process.env.REACT_APP_FIREBASE_storageBucket,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_messageSenderId,
+  appId: process.env.REACT_APP_FIREBASE_appId,
 };
 
 // Initialize Firebase

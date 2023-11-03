@@ -66,7 +66,7 @@ export default function LoginForm() {
         }}
       >
         <div className="backdrop-blur w-full h-full rounded-lg border-none text-white flex flex-col ">
-          <img src={logoNew} alt="logo" className="h-32 mx-auto mt-3" />
+          <img src={logoNew} alt="logo" className="h-28 mx-auto mt-3" />
           <Formik
             initialValues={initialValuesLogin}
             validationSchema={loginSchema}
@@ -79,61 +79,56 @@ export default function LoginForm() {
               <Form className="flex flex-col">
                 <Card
                   color="transparent"
-                  className=" w-3/4 h-full shadow-none gap-3 mt-2 flex m-auto"
+                  className=" w-3/4 h-full shadow-none mt-2 flex m-auto"
                 >
                   <h1 className="text-3xl text-white text-center mt-7 ">
                     Login
                   </h1>
-                  <Input
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.email}
-                    autoComplete="off"
-                    name="email"
-                    className="text-white"
-                    color="white"
-                    size="lg"
-                    variant="standard"
-                    label="Email"
-                    error={Boolean(touched.email) && Boolean(errors.email)}
-                    helperText={touched.email && errors.email}
-                  />
+                  <div className="mb-6">
+                    <Input
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.email}
+                      autoComplete="off"
+                      name="email"
+                      className="text-white "
+                      color="white"
+                      variant="standard"
+                      label="Email"
+                    />
 
-                  <Input label="Amr" color="white" variant="standard" />
-                  {errors.email && (
-                    <p id="feedback" className="text-light-green-600">
-                      {errors.email}
-                    </p>
-                  )}
-                  <Input
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.password}
-                    autoComplete="off"
-                    name="password"
-                    className="text-white"
-                    color="white"
-                    size="lg"
-                    variant="standard"
-                    label="Password"
-                    error={
-                      Boolean(touched.password) && Boolean(errors.password)
-                    }
-                    helperText={touched.password && errors.password}
-                  />
-                  {errors.password && (
-                    <p id="feedback" className="text-light-green-600">
-                      {errors.password}
-                    </p>
-                  )}
-                  <div className="flex items-center justify-center ">
-                    <button
-                      type="submit"
-                      className="rounded-full py-2 px-3 cursor-pointer bg-red-400 text-center text-lg text-black w-56 hover:bg-red-600 "
-                    >
-                      Login
-                    </button>
+                    {errors.email && (
+                      <p id="feedback" className="text-light-green-600 text-sm">
+                        {errors.email}
+                      </p>
+                    )}
                   </div>
+                  <div className="mb-10">
+                    <Input
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.password}
+                      autoComplete="off"
+                      name="password"
+                      className="text-white"
+                      color="white"
+                      variant="standard"
+                      label="Password"
+                    />
+                    {errors.password && (
+                      <p id="feedback" className="text-light-green-600 text-sm">
+                        {errors.password}
+                      </p>
+                    )}
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="flex justify-center mb-3 rounded-full py-2 px-3 cursor-pointer bg-red-400 text-center text-lg text-black w-56 hover:bg-red-600 self-center"
+                  >
+                    Login
+                  </button>
+
                   <Typography
                     className="text-center mb-4"
                     variant="h6"

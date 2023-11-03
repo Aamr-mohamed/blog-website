@@ -1,15 +1,52 @@
 import React from "react";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { app } from "../../firebase";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 function LoginGoogle() {
+  const navigate = useNavigate();
   const handleGoogleClick = async () => {
     try {
       const provider = new GoogleAuthProvider();
       const auth = getAuth(app);
 
       const result = await signInWithPopup(auth, provider);
-      console.log(result);
+      const res = await fetch("http://localhost:3001/auth/google", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: result.user.displayName,
+          email: result.user.email,
+          picturePath: result.user.photoURL,
+        }),
+      });
+      const data = await res.json();
+      console.log(data);
+      if (data.success === false) {
+        toast.warn(data.message, {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      } else {
+        toast.success("logged in successfully", {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          onClose: () => navigate("/"),
+        });
+      }
     } catch (error) {
       console.log("couldnt signin with google", error);
     }
@@ -18,7 +55,7 @@ function LoginGoogle() {
     <button
       onClick={handleGoogleClick}
       type="button"
-      class="flex items-center bg-white border border-gray-300 rounded-lg shadow-md max-w-xs px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+      class="flex items-center mt-3 bg-white border border-gray-300 rounded-lg shadow-md max-w-xs px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
     >
       <svg
         class="h-6 w-6 mr-2"

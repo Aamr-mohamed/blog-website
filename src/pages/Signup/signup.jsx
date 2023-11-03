@@ -7,23 +7,16 @@ import background from "../../assets/images/background.jpg";
 import logoNew from "../../assets/logo/logo-no-background.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Box, Button, TextField, Typography, useTheme } from "@mui/material";
-import {
-  Card,
-  Input,
-  Checkbox,
-  Select,
-  Option,
-} from "@material-tailwind/react";
+import { Typography } from "@mui/material";
+import { Card, Input, Select, Option } from "@material-tailwind/react";
 import { toast } from "react-toastify";
 import { customToast } from "../../utils/toasts";
 import { CardGroup } from "reactstrap";
 import LoginGoogle from "../../components/Buttons/Google";
-import FacebookButton from "../../components/Buttons/facebook";
+// import FacebookButton from "../../components/Buttons/facebook";
 
 export default function SignupForm() {
   const [picturePath, setpicturePath] = useState(null);
-  // const [values, setValues] = useState({ password: "" });
 
   const registerSchema = yup.object().shape({
     firstname: yup.string().required("required"),
@@ -55,12 +48,7 @@ export default function SignupForm() {
       setpicturePath(null);
     }
   };
-  // const handleFormChange = (e) => {
-  //   setValues({
-  //     ...values,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
+
   const submitForm = async (values) => {
     try {
       const formData = new FormData();
@@ -109,15 +97,7 @@ export default function SignupForm() {
             }}
           >
             {(props) => (
-              <Form
-                className="flex flex-col"
-                // onSubmit={(e) => {
-                //   e.preventDefault();
-                //   console.log("props: ", props);
-                //   console.log("submittedjkj");
-                //   props.handleSubmit();
-                // }}
-              >
+              <Form className="flex flex-col">
                 <CardGroup
                   color="transparent"
                   className="w-full h-3/5 flex border-transparent"
@@ -219,13 +199,6 @@ export default function SignupForm() {
                     className="flex w-2/4 h-full mt-9 shadow-none"
                   >
                     <div className="flex flex-col gap-2 w-5/6 h-full mt-3 pl-20 border-transparent">
-                      {/* <Input
-                        className="text-white"
-                        type="file"
-                        variant="standard"
-                        accept=".jpg,.jpeg,.png"
-                        // onChange={onInputChange}
-                      /> */}
                       <Input
                         type="file"
                         name="picture"
@@ -288,7 +261,7 @@ export default function SignupForm() {
                       </Typography>
                       <div className="flex space-x-4 items-center justify-center">
                         <LoginGoogle />
-                        <FacebookButton />
+                        {/* <FacebookButton /> */}
                       </div>
                     </div>
                   </Card>
