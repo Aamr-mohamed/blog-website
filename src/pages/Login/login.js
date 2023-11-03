@@ -30,8 +30,8 @@ export default function LoginForm() {
       body: JSON.stringify(values),
     });
     const loggedIn = await loggedInResponse.json();
-    if (loggedIn) {
-      toast.warn("You are our first user please Signup first :D", {
+    if (loggedIn.success === false) {
+      toast.warn(loggedIn.message, {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -40,7 +40,18 @@ export default function LoginForm() {
         draggable: true,
         progress: undefined,
         theme: "colored",
-        onClose: () => navigate("/root"),
+      });
+    } else {
+      toast.success("logged in successfully", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        onClose: () => navigate("/"),
       });
     }
   };
@@ -68,20 +79,20 @@ export default function LoginForm() {
               verification(values);
             }}
           >
-            {(props) => (
+            {({ values, errors, touched, handleBlur, handleChange }) => (
               <Form className="flex flex-col">
                 <Card
                   color="transparent"
-                  className=" w-3/4 h-full shadow-none gap-6 mt-2 flex m-auto"
+                  className=" w-3/4 h-full shadow-none gap-3 mt-2 flex m-auto"
                 >
-                  <h1 className="text-3xl text-white text-center mt-10">
+                  <h1 className="text-3xl text-white text-center mt-10 mb-7">
                     Login
                   </h1>
 
                   <Input
-                    onChange={props.handleChange}
-                    onBlur={props.handleBlur}
-                    value={props.values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
                     autoComplete="off"
                     name="email"
                     className="text-white"
@@ -89,14 +100,18 @@ export default function LoginForm() {
                     size="lg"
                     variant="standard"
                     label="Email"
+                    error={Boolean(touched.email) && Boolean(errors.email)}
+                    helperText={touched.email && errors.email}
                   />
-                  {props.errors.name && (
-                    <div id="feedback">{props.errors.name}</div>
+                  {errors.email && (
+                    <p id="feedback" className="text-light-green-600 mb-3">
+                      {errors.email}
+                    </p>
                   )}
                   <Input
-                    onChange={props.handleChange}
-                    onBlur={props.handleBlur}
-                    value={props.values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.password}
                     autoComplete="off"
                     name="password"
                     className="text-white"
@@ -104,11 +119,17 @@ export default function LoginForm() {
                     size="lg"
                     variant="standard"
                     label="Password"
+                    error={
+                      Boolean(touched.password) && Boolean(errors.password)
+                    }
+                    helperText={touched.password && errors.password}
                   />
-                  {props.errors.name && (
-                    <div id="feedback">{props.errors.name}</div>
+                  {errors.password && (
+                    <p id="feedback" className="text-light-green-600 mb-3">
+                      {errors.password}
+                    </p>
                   )}
-                  <div className="flex items-center justify-center">
+                  <div className="flex items-center justify-center mb-4">
                     <button
                       type="submit"
                       className="rounded-full py-2 px-3 cursor-pointer bg-red-400 text-center text-lg text-black w-48 hover:bg-red-600"
@@ -117,7 +138,7 @@ export default function LoginForm() {
                     </button>
                   </div>
                   <Typography
-                    className="text-center"
+                    className="text-center mb-4"
                     variant="h6"
                     color="white"
                   >
@@ -127,7 +148,7 @@ export default function LoginForm() {
                     </a>
                   </Typography>
                   <Typography
-                    className="text-center"
+                    className="text-center mb-4"
                     variant="h6"
                     color="white"
                   >
