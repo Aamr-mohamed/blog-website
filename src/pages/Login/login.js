@@ -8,8 +8,6 @@ import * as yup from "yup";
 import { Form, Formik } from "formik";
 import { Card, Input, Typography } from "@material-tailwind/react";
 import Google from "../../components/Buttons/Google";
-import Github from "../../components/Buttons/github";
-import Facebook from "../../components/Buttons/facebook";
 
 export default function LoginForm() {
   const loginSchema = yup.object().shape({
@@ -31,7 +29,7 @@ export default function LoginForm() {
     if (loggedIn.success === false) {
       toast.warn(loggedIn.message, {
         position: "top-right",
-        autoClose: 2000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -42,7 +40,7 @@ export default function LoginForm() {
     } else {
       toast.success("logged in successfully", {
         position: "top-right",
-        autoClose: 2000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -83,10 +81,9 @@ export default function LoginForm() {
                   color="transparent"
                   className=" w-3/4 h-full shadow-none gap-3 mt-2 flex m-auto"
                 >
-                  <h1 className="text-3xl text-white text-center mt-10 mb-7">
+                  <h1 className="text-3xl text-white text-center mt-7 ">
                     Login
                   </h1>
-
                   <Input
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -101,8 +98,10 @@ export default function LoginForm() {
                     error={Boolean(touched.email) && Boolean(errors.email)}
                     helperText={touched.email && errors.email}
                   />
+
+                  <Input label="Amr" color="white" variant="standard" />
                   {errors.email && (
-                    <p id="feedback" className="text-light-green-600 mb-3">
+                    <p id="feedback" className="text-light-green-600">
                       {errors.email}
                     </p>
                   )}
@@ -123,14 +122,14 @@ export default function LoginForm() {
                     helperText={touched.password && errors.password}
                   />
                   {errors.password && (
-                    <p id="feedback" className="text-light-green-600 mb-3">
+                    <p id="feedback" className="text-light-green-600">
                       {errors.password}
                     </p>
                   )}
-                  <div className="flex items-center justify-center mb-4">
+                  <div className="flex items-center justify-center ">
                     <button
                       type="submit"
-                      className="rounded-full py-2 px-3 cursor-pointer bg-red-400 text-center text-lg text-black w-48 hover:bg-red-600"
+                      className="rounded-full py-2 px-3 cursor-pointer bg-red-400 text-center text-lg text-black w-56 hover:bg-red-600 "
                     >
                       Login
                     </button>
@@ -146,16 +145,16 @@ export default function LoginForm() {
                     </a>
                   </Typography>
                   <Typography
-                    className="text-center mb-4"
+                    className="text-center"
                     variant="h6"
                     color="white"
                   >
                     Or signup using
                   </Typography>
-                  <div className="flex flex-col gap-3 items-center justify-center">
+                  <div className="flex flex-col items-center justify-center">
                     <Google />
-                    <Github />
-                    <Facebook />
+                    {/* <Github />
+                    <Facebook /> */}
                   </div>
                 </Card>
               </Form>

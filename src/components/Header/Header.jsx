@@ -6,21 +6,19 @@ const Header = () => {
   const userName = localStorage.getItem("currentUser");
   const currentemail = localStorage.getItem("currentEmail");
   return (
-    <Navbar
-      className="justify-content-between"
-      style={{ backgroundColor: "#f8f4ec", height: "90px" }}
-    >
+    <Navbar className="justify-between bg-#f8f4ec h-24">
       <Container>
         <img
           src={logo}
           alt="Bloggingway Logo"
-          style={{
-            width: "120px",
-            paddingTop: "13px",
-            height: "100px",
-            marginRight: "20px",
-            marginBottom: "15px",
-          }}
+          className="w-32 pt-3 h-24 mr-5 mb-3.5"
+          // style={{
+          //   width: "120px",
+          //   paddingTop: "13px",
+          //   height: "100px",
+          //   marginRight: "20px",
+          //   marginBottom: "15px",
+          // }}
         />
 
         <Nav className="me-auto">
@@ -29,19 +27,12 @@ const Header = () => {
         </Nav>
         <Nav className="justify-content-end">
           {currentemail ? (
-            <div style={{ marginRight: "20px", display: "flex" }}>
-              <ProfilePic style={{ width: "35px", height: "35px" }} />
-              <p
-                className="logged-prsn"
-                style={{ marginTop: "10px", marginLeft: "15px" }}
-              >
-                {userName}
-              </p>
+            <div className="mr-5 flex">
+              <ProfilePic className="w-8 h-8" />
+              <p className="mt-2.5 ml-3.5">{userName}</p>
             </div>
           ) : (
-            <span className="welcome" style={{ marginTop: "7px" }}>
-              Welcome
-            </span>
+            <span className="mt-2">Welcome</span>
           )}
           <Nav.Link href="">coming soon</Nav.Link>
           <NavDropdown title="Account" id="collasible-nav-dropdown">

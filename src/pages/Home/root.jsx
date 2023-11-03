@@ -5,12 +5,11 @@ import Wrapper from "../../layouts/wrapper";
 import GetJokes from "../../components/Jokes/jokes";
 import { Col, Row, Container } from "react-bootstrap";
 import Weather from "../../components/Weather/weathers.jsx";
-import adPic from "../../assets/images/macAd.jpg";
-import { Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
+import { Card, CardBody, CardText, CardTitle } from "reactstrap";
+import MacAds from "../../components/ads/macAds";
 
 export default function Root() {
   const navigate = useNavigate();
-  // localStorage.setItem("Post","")
   const currentemail = localStorage.getItem("currentEmail");
   const posts = JSON.parse(localStorage.getItem("Post"));
   const userPosts = currentemail
@@ -32,24 +31,7 @@ export default function Root() {
         <Row>
           <Col lg="8">{userPosts}</Col>
           <Col lg="4">
-            <Card
-              style={{
-                width: "18rem",
-              }}
-            >
-              <img src={adPic} alt="Sample" />
-              <CardBody>
-                <CardTitle tag="h5">The Onion</CardTitle>
-                <CardSubtitle className="mb-2 text-muted" tag="h6">
-                  @TheOnion
-                </CardSubtitle>
-                <CardText>
-                  McDonald’s Appealing To Health-Conscious Consumers With New
-                  ‘You Can’t Run From Us Forever’ Ad Campaign:
-                  <a href="https://trib.al/bDvWfTz">https://trib.al/bDvWfTz</a>
-                </CardText>
-              </CardBody>
-            </Card>
+            <MacAds />
             <Card
               className="my-2"
               style={{
