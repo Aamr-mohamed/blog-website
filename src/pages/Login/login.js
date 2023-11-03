@@ -3,9 +3,7 @@ import "./login.module.css";
 import { useNavigate } from "react-router-dom";
 import background from "../../assets/images/background.jpg";
 import logoNew from "../../assets/logo/logo-no-background.png";
-import { ToastContainer, toast, Slide } from "react-toastify";
-import { customToast } from "../../utils/toasts";
-import axios from "axios";
+import { toast } from "react-toastify";
 import * as yup from "yup";
 import { Form, Formik } from "formik";
 import { Card, Input, Typography } from "@material-tailwind/react";
@@ -33,7 +31,7 @@ export default function LoginForm() {
     if (loggedIn.success === false) {
       toast.warn(loggedIn.message, {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -44,7 +42,7 @@ export default function LoginForm() {
     } else {
       toast.success("logged in successfully", {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

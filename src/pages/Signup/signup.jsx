@@ -1,25 +1,25 @@
 import React, { useState } from "react";
 import "./signup.module.css";
-import styles from "./signup.module.css";
 import "react-toastify/dist/ReactToastify.css";
 import { Form, Formik } from "formik";
 import * as yup from "yup";
 import background from "../../assets/images/background.jpg";
 import logoNew from "../../assets/logo/logo-no-background.png";
 import axios from "axios";
-import Dropzone from "react-dropzone";
-import { Link, useNavigate } from "react-router-dom";
-import google from "../../assets/logo/icons8-google-48.png";
-import facebook from "../../assets/logo/icons8-facebook-48.png";
+import { useNavigate } from "react-router-dom";
 import { Box, Button, TextField, Typography, useTheme } from "@mui/material";
-import { Card, Input, Checkbox } from "@material-tailwind/react";
+import {
+  Card,
+  Input,
+  Checkbox,
+  Select,
+  Option,
+} from "@material-tailwind/react";
 import { toast } from "react-toastify";
 import { customToast } from "../../utils/toasts";
 import { CardGroup } from "reactstrap";
-import { Menu } from "@headlessui/react";
 import LoginGoogle from "../../components/Buttons/Google";
 import FacebookButton from "../../components/Buttons/facebook";
-import GithubButton from "../../components/Buttons/github";
 
 export default function SignupForm() {
   const [picturePath, setpicturePath] = useState(null);
@@ -127,7 +127,7 @@ export default function SignupForm() {
                     className="w-2/4 h-full shadow-none"
                   >
                     <h1 className="text-3xl text-white text-center">Signup</h1>
-                    <div className="flex flex-col gap-6 w-5/6 h-full mt-2 pl-32">
+                    <div className="flex flex-col gap-2 w-5/6 h-full mt-2 pl-32">
                       <Input
                         onChange={props.handleChange}
                         onBlur={props.handleBlur}
@@ -139,8 +139,10 @@ export default function SignupForm() {
                         label="First name"
                         autoComplete="off"
                       />
-                      {props.errors.name && (
-                        <div id="feedback">{props.errors.name}</div>
+                      {props.errors.firstname && (
+                        <div id="feedback" className="text-light-green-600 ">
+                          {props.errors.firstname}
+                        </div>
                       )}
                       <Input
                         onChange={props.handleChange}
@@ -153,6 +155,11 @@ export default function SignupForm() {
                         variant="standard"
                         label="Last name"
                       />
+                      {props.errors.lastname && (
+                        <div id="feedback" className="text-light-green-600">
+                          {props.errors.lastname}
+                        </div>
+                      )}
                       <Input
                         onChange={props.handleChange}
                         onBlur={props.handleBlur}
@@ -164,6 +171,11 @@ export default function SignupForm() {
                         variant="standard"
                         label="Username"
                       />
+                      {props.errors.username && (
+                        <div id="feedback" className="text-light-green-600 ">
+                          {props.errors.username}
+                        </div>
+                      )}
                       <Input
                         onChange={props.handleChange}
                         onBlur={props.handleBlur}
@@ -176,27 +188,37 @@ export default function SignupForm() {
                         color="white"
                         label="Birthday"
                       />
-                      <select
-                        className="form-control "
+                      {props.errors.date && (
+                        <div id="feedback" className="text-light-green-600">
+                          {props.errors.date}
+                        </div>
+                      )}
+                      <Select
+                        className="form-control pt-9"
                         onChange={props.handleChange}
                         onBlur={props.handleBlur}
                         value={props.values.gender}
                         name="gender"
                         variant="standard"
                         label="gender"
-                        color="red"
+                        color="pink"
                       >
-                        <option color="black">Male</option>
-                        <option>Female</option>
-                        <option>Prefer not to say</option>
-                      </select>
+                        <Option>Male</Option>
+                        <Option>Female</Option>
+                        <Option>Prefer not to say</Option>
+                      </Select>
+                      {props.errors.gender && (
+                        <div id="feedback" className="text-light-green-600">
+                          {props.errors.gender}
+                        </div>
+                      )}
                     </div>
                   </Card>
                   <Card
                     color="transparent"
                     className="flex w-2/4 h-full mt-9 shadow-none"
                   >
-                    <div className="flex flex-col gap-6 w-5/6 h-full mt-3 pl-20 border-transparent">
+                    <div className="flex flex-col gap-2 w-5/6 h-full mt-3 pl-20 border-transparent">
                       {/* <Input
                         className="text-white"
                         type="file"
@@ -215,6 +237,11 @@ export default function SignupForm() {
                           onInputChange(e);
                         }}
                       />
+                      {props.errors.picture && (
+                        <div id="feedback" className="text-light-green-600">
+                          {props.errors.picture}
+                        </div>
+                      )}
                       <Input
                         onChange={props.handleChange}
                         onBlur={props.handleBlur}
@@ -227,6 +254,11 @@ export default function SignupForm() {
                         variant="standard"
                         label="Email"
                       />
+                      {props.errors.email && (
+                        <div id="feedback" className="text-light-green-600">
+                          {props.errors.email}
+                        </div>
+                      )}
                       <Input
                         onChange={props.handleChange}
                         onBlur={props.handleBlur}
@@ -239,6 +271,11 @@ export default function SignupForm() {
                         variant="standard"
                         label="Password"
                       />
+                      {props.errors.password && (
+                        <div id="feedback" className="text-light-green-600">
+                          {props.errors.password}
+                        </div>
+                      )}
                       <div className="flex items-center justify-center">
                         <button type="submit">SignUp</button>
                       </div>
