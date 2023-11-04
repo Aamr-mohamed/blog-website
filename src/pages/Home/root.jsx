@@ -27,7 +27,7 @@ export default function Root() {
     : navigate("/new-post/");
   return (
     <Wrapper>
-      <Container>
+      {/* <Container>
         <Row>
           <Col lg="8">{userPosts}</Col>
           <Col lg="4">
@@ -59,7 +59,7 @@ export default function Root() {
             </Row>
           </Col>
         </Row>
-      </Container>
+      </Container> */}
     </Wrapper>
   );
 }

@@ -20,7 +20,7 @@ function Wrapper({ children }) {
       <div className="col-span-4">
         <Header />
       </div>
-      <div className="pl-8">
+      <div className="pl-8 mt-5">
         <SideBar />
       </div>
       <div className="">{children}</div>
