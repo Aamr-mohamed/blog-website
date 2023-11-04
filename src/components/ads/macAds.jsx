@@ -1,25 +1,27 @@
 import React from "react";
-import { Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Typography,
+} from "@material-tailwind/react";
 import adPic from "../../assets/images/macAd.jpg";
 
-function MacAds() {
+function MacAds(props) {
   return (
-    <Card
-      style={{
-        width: "18rem",
-      }}
-    >
-      <img src={adPic} alt="Sample" />
+    <Card className="mt-6 w-96 bg-transparent " {...props}>
+      <CardHeader>
+        <img src={adPic} alt="Sample" />
+      </CardHeader>
       <CardBody>
-        <CardTitle tag="h5">The Onion</CardTitle>
-        <CardSubtitle className="mb-2 text-muted" tag="h6">
-          @TheOnion
-        </CardSubtitle>
-        <CardText>
+        <Typography color="gray">@TheOnion</Typography>
+        <Typography color="blue-gray">
           McDonald’s Appealing To Health-Conscious Consumers With New ‘You Can’t
           Run From Us Forever’ Ad Campaign:
-          <a href="https://trib.al/bDvWfTz">https://trib.al/bDvWfTz</a>
-        </CardText>
+          <a href="https://trib.al/bDvWfTz" className="text-blue-400">
+            https://trib.al/bDvWfTz
+          </a>
+        </Typography>
       </CardBody>
     </Card>
   );

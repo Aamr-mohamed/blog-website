@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Card, Button, FloatingLabel, Form } from "react-bootstrap";
-import { ToastContainer, toast, Slide } from "react-toastify";
+import { Card, Button, Input, CardBody } from "@material-tailwind/react";
 import { customToast } from "../../utils/toasts";
 
 const Weather = (props) => {
@@ -54,40 +53,40 @@ const Weather = (props) => {
   };
 
   return (
-    <div>
-      <ToastContainer transition={Slide} />
-      <Card {...props} style={{ width: "18rem" }}>
-        <Card.Body>
-          <FloatingLabel
-            controlId="floatingInput"
-            label="Enter City Name"
-            className="mb-2"
-          >
-            <Form.Control type="text" name="name" onChange={handleCityChange} />
-          </FloatingLabel>
-          {weatherData.name && (
-            <div>
-              <p>City: {weatherData.name}</p>
-              <p>Temperature: {weatherData.temperature} °C</p>
-              <p>Description: {weatherData.description}</p>
-              <p>Wind Speed: {weatherData.windspeed} m/s</p>
-            </div>
-          )}
+    <Card {...props} style={{ width: "18rem", backgroundColor: "#fcfbf7" }}>
+      <CardBody>
+        <Input
+          onChange={handleCityChange}
+          className="mb-2"
+          variant="outlined"
+          label="enter a city"
+        ></Input>
+        {weatherData.name && (
+          <div>
+            <p>City: {weatherData.name}</p>
+            <p>Temperature: {weatherData.temperature} °C</p>
+            <p>Description: {weatherData.description}</p>
+            <p>Wind Speed: {weatherData.windspeed} m/s</p>
+          </div>
+        )}
 
-          {user && (
-            <>
-              <h1>Username: {user.username}</h1>
-            </>
-          )}
-          <Button
-            onClick={handleGetWeather}
-            style={{ backgroundColor: "#14DCB4", border: "none" }}
-          >
-            Get Weather
-          </Button>
-        </Card.Body>
-      </Card>
-    </div>
+        {user && (
+          <>
+            <h1>Username: {user.username}</h1>
+          </>
+        )}
+        <Button
+          onClick={handleGetWeather}
+          style={{
+            backgroundColor: "#14DCB4",
+            border: "none",
+            marginTop: "20px",
+          }}
+        >
+          Get Weather
+        </Button>
+      </CardBody>
+    </Card>
   );
 };
 

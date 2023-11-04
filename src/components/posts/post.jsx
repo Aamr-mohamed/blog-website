@@ -2,103 +2,33 @@ import React from "react";
 import ProfilePic, { getProfilePic } from "../profilePic/profilePic";
 import Like from "../likeButton/like";
 import {
-  CardImg,
   Card,
-  CardHeader,
-  CardText,
-  CardSubtitle,
-  CardTitle,
-} from "reactstrap";
+  CardBody,
+  CardFooter,
+  Typography,
+  Button,
+} from "@material-tailwind/react";
 
 function Post({ postContent, title, createdAt }) {
   const userName = localStorage.getItem("currentUser");
 
   return (
-    <>
-      <Card className="mb-2">
-        <div style={{ display: "flex", padding: "10px 0px 10px 10px" }}>
-          <ProfilePic
-            style={{ width: "45px", height: "45px", marginLeft: "20px" }}
-          />
-          <CardTitle style={{ padding: "10px 0px 0px 10px" }} tag="h5">
-            {userName}
-          </CardTitle>
-        </div>
-        <CardText style={{ padding: "0px 0px 0px 20px" }}>{title}</CardText>
-        <CardText style={{ padding: "0px 0px 0px 20px" }}>
-          {postContent}
-        </CardText>
-        <CardSubtitle
-          className="text-muted align-self-end"
-          style={{ padding: "0px 10px 10px 0px" }}
-        >
-          {createdAt}
-        </CardSubtitle>
-        <div className="likeComment" style={{}}>
+    <Card className="mb-2" style={{ backgroundColor: "#fcfbf7" }}>
+      <div className="flex pt-2.5 pb-2.5 pl-2.5">
+        <ProfilePic className="w-11 h-11 " />
+        <Typography className="pt-2 pl-3" variant="h5">
+          {userName}
+        </Typography>
+      </div>
+      <Typography className="pl-10">{title}</Typography>
+      <Typography className="pl-6 pt-3">{postContent}</Typography>
+      <Typography className="text-muted ml-auto pr-2.5 pb-2.5">
+        {createdAt}
+      </Typography>
+      {/* <div className="likeComment" style={{}}>
           <Like />
-        </div>
-      </Card>
-
-      {/* <div
-        style={{
-          marginTop: "20px",
-          width: "700px",
-          resize: "both",
-          border: "none",
-          overflow: "auto",
-          borderRadius: "5px",
-          backgroundColor: "#fcfbf7",
-        }}
-      >
-        <div
-          style={{
-            width: "700px",
-            margin: "auto",
-            marginTop: "30px",
-            borderBottom: "solid",
-            borderColor: "#ebeef4",
-          }}
-        >
-          <div style={{ display: "flex" }}>
-            <ProfilePic
-              style={{ width: "45px", height: "45px", marginLeft: "20px" }}
-            />
-            <p
-              style={{
-                marginTop: "10px",
-                fontSize: "20px",
-                marginLeft: "15px",
-              }}
-            >
-              {userName}
-            </p>
-          </div>
-          <div>
-            <h2 style={{ marginLeft: "30px" }}>{title}</h2>
-            <br />
-            <h3 style={{ marginLeft: "40px", whiteSpace: "normal" }}>
-              {postContent}
-            </h3>
-            <br />
-            <p
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                marginRight: "30px",
-              }}
-            >
-              {createdAt}
-            </p>
-          </div>
-          <div
-            className="likeComment"
-            style={{ borderTop: "solid", borderColor: "#ebeef4" }}
-          >
-            <Like />
-          </div>
-        </div>
-      </div> */}
-    </>
+        </div> */}
+    </Card>
   );
 }
 
