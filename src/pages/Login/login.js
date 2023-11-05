@@ -8,16 +8,21 @@ import * as yup from "yup";
 import { Form, Formik } from "formik";
 import { Card, Input, Typography } from "@material-tailwind/react";
 import Google from "../../components/Buttons/Google";
+import { useDispatch } from "react-redux";
+import { setLogin } from "../../state";
+
+const loginSchema = yup.object().shape({
+  email: yup.string().email("invalid email").required("required"),
+  password: yup.string().required("required"),
+});
+
+const initialValuesLogin = {
+  email: "",
+  password: "",
+};
 
 export default function LoginForm() {
-  const loginSchema = yup.object().shape({
-    email: yup.string().email("invalid email").required("required"),
-    password: yup.string().required("required"),
-  });
-  const initialValuesLogin = {
-    email: "",
-    password: "",
-  };
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const verification = async (values) => {
     const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
@@ -26,6 +31,7 @@ export default function LoginForm() {
       body: JSON.stringify(values),
     });
     const loggedIn = await loggedInResponse.json();
+    console.log(loggedIn.user);
     if (loggedIn.success === false) {
       toast.warn(loggedIn.message, {
         position: "top-right",
@@ -38,6 +44,7 @@ export default function LoginForm() {
         theme: "colored",
       });
     } else {
+      dispatch(setLogin({ user: loggedIn.user, token: loggedIn.token }));
       toast.success("logged in successfully", {
         position: "top-right",
         autoClose: 1000,

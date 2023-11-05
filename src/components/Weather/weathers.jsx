@@ -53,7 +53,7 @@ const Weather = (props) => {
   };
 
   return (
-    <Card {...props} style={{ width: "18rem", backgroundColor: "#fcfbf7" }}>
+    <Card {...props} style={{ backgroundColor: "#fcfbf7" }}>
       <CardBody>
         <Input
           onChange={handleCityChange}

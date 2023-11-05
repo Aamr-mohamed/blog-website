@@ -24,7 +24,7 @@ export default function SignupForm() {
     username: yup.string().required("required"),
     email: yup.string().email("invalid email").required("required"),
     password: yup.string().required("required"),
-    gender: yup.string().required("required"),
+    gender: yup.string(),
     date: yup.string().required("required"),
     picture: yup.string().required("required"),
   });
@@ -58,9 +58,9 @@ export default function SignupForm() {
         formData.append(value, values[value]);
       }
       formData.append("picturePath", picturePath);
-      console.log(formData);
+      console.log("formData:", formData);
       console.log(picturePath);
-      console.log(formData);
+
       await axios
         .post("http://localhost:3001/adduser", formData, {
           headers: { "Content-Type": "multipart/form-data" },
@@ -175,7 +175,9 @@ export default function SignupForm() {
                       )}
                       <Select
                         className="form-control pt-9"
-                        onChange={props.handleChange}
+                        onChange={(e) => {
+                          props.handleChange("gender")(e);
+                        }}
                         onBlur={props.handleBlur}
                         value={props.values.gender}
                         name="gender"
@@ -183,9 +185,11 @@ export default function SignupForm() {
                         label="gender"
                         color="pink"
                       >
-                        <Option>Male</Option>
-                        <Option>Female</Option>
-                        <Option>Prefer not to say</Option>
+                        <Option value="Male">Male</Option>
+                        <Option value="Female">Female</Option>
+                        <Option value="Prefer not to say">
+                          Prefer not to say
+                        </Option>
                       </Select>
                       {props.errors.gender && (
                         <div id="feedback" className="text-light-green-600">
@@ -201,18 +205,18 @@ export default function SignupForm() {
                     <div className="flex flex-col gap-2 w-5/6 h-full mt-3 pl-20 border-transparent">
                       <Input
                         type="file"
-                        name="picture"
+                        name="pictureName"
                         className="text-white"
                         accept=".jpg,.jpeg,.png"
                         onChange={(e) => {
                           const pictPath = e.target.value.split("\\")[2];
-                          props.setFieldValue("picture", pictPath);
+                          props.setFieldValue("pictureName", pictPath);
                           onInputChange(e);
                         }}
                       />
-                      {props.errors.picture && (
+                      {props.errors.pictureName && (
                         <div id="feedback" className="text-light-green-600">
-                          {props.errors.picture}
+                          {props.errors.pictureName}
                         </div>
                       )}
                       <Input
