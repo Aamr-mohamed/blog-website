@@ -1,7 +1,40 @@
 import React from "react";
 import { Card, Typography, Avatar } from "@material-tailwind/react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useState } from "react";
+import { setPosts } from "../../state/index";
 
 function Post() {
+  const dispatch = useDispatch();
+  const { _id, pictureName, token, firstname, lastname } = useSelector(
+    (state) => state.user
+  );
+  const [user, setUser] = useState(null);
+
+  const getUser = async () => {
+    const response = await fetch(`http://localhost:3001/users/${_id}`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response.json();
+    setUser(data);
+  };
+
+  const getPosts = async () => {
+    const response = await fetch("http://localhost:3001/posts", {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response.json();
+    dispatch(setPosts({ posts: data }));
+  };
+
+  useEffect(() => {
+    getPosts();
+  }, []);
+
+  const fullName = `${firstname} ${lastname}`;
   return (
     <Card className="mb-2" style={{ backgroundColor: "#fcfbf7" }}>
       <div className="flex pt-2.5 pb-2.5 pl-2.5">
@@ -10,10 +43,10 @@ function Post() {
           size="sm"
           alt="tania andrew"
           className="border border-gray-900 p-0.5"
-          src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+          src={`http://localhost:3001/assets/${pictureName}`}
         />
         <Typography className="pt-2 pl-3" variant="h5">
-          userName
+          {fullName}
         </Typography>
       </div>
       <Typography className="pl-10">title</Typography>

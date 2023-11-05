@@ -67,7 +67,9 @@ function Header() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { _id, pictureName, token } = useSelector((state) => state.user);
+  const { _id, pictureName, token, firstname, lastname } = useSelector(
+    (state) => state.user
+  );
 
   const getUser = async () => {
     const response = await fetch(`http://localhost:3001/users/${_id}`, {
@@ -94,15 +96,6 @@ function Header() {
     return null;
   }
 
-  const {
-    firstname,
-    lastname,
-    viewedProfile,
-    gender,
-    date,
-    friends,
-    username,
-  } = user;
   const fullName = `${firstname} ${lastname}`;
   return (
     <Navbar
@@ -133,11 +126,11 @@ function Header() {
           variant="text"
           onClick={() => {
             dispatch(setLogout());
+            navigate("/login");
           }}
         >
           <span>Logout</span>
         </Button>
-        <span>{fullName}</span>
 
         <Avatar
           variant="circular"
@@ -147,6 +140,7 @@ function Header() {
           src={`http://localhost:3001/assets/${pictureName}`}
           onClick={() => navigate("/profile")}
         />
+        <span>{fullName}</span>
       </div>
       <MobileNav open={isNavOpen} className="overflow-scroll">
         <NavList />

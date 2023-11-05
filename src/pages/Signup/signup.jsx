@@ -17,6 +17,7 @@ import LoginGoogle from "../../components/Buttons/Google";
 
 export default function SignupForm() {
   const [picturePath, setpicturePath] = useState(null);
+  const navigate = useNavigate();
 
   const registerSchema = yup.object().shape({
     firstname: yup.string().required("required"),
@@ -68,6 +69,17 @@ export default function SignupForm() {
         .then(function (response) {
           console.log(response);
         });
+      toast.success("logged in successfully", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        onClose: () => navigate("/"),
+      });
     } catch (error) {
       customToast("error", error.message);
     }
