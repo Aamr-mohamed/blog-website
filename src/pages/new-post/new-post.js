@@ -56,21 +56,21 @@ export default function NewPost() {
       if (pictureName) {
         formData.append("userPicturePath", pictureName);
       }
+
       formData.append("username", username);
       formData.append("userId", userId);
-      formData.append("picturePath", picturePath);
+      formData.append("picturePath", picturePath.name);
+      formData.append("picture", picturePath);
       console.log("formData:", formData);
 
-      await axios
-        .post(`http://localhost:3001/posts/`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then(function (response) {
-          console.log(response);
-        });
+      const res = await axios.post(`http://localhost:3001/posts/`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log(res);
 
       toast.success("Posted successfully", {
         position: "top-right",

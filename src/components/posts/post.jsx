@@ -39,6 +39,7 @@ function Post() {
           comments,
           likes,
           userPicturePath,
+          picturePath,
           createdAt,
         }) => (
           <Card
@@ -59,7 +60,21 @@ function Post() {
               </Typography>
             </div>
             <Typography className="pl-10">{Title}</Typography>
+            <div className="flex justify-center w-full h-full">
+              {picturePath && (
+                <img
+                  className="w-1/2 h-1/2"
+                  alt="post"
+                  style={{
+                    borderRadius: "0.75rem",
+                    marginTop: "0.75rem",
+                  }}
+                  src={`http://localhost:3001/assets/${picturePath}`}
+                />
+              )}
+            </div>
             <Typography className="pl-6 pt-3">{postContent}</Typography>
+
             <Typography className="text-muted ml-auto pr-2.5 pb-2.5">
               {createdAt}
             </Typography>

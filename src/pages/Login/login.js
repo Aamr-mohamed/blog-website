@@ -29,6 +29,7 @@ export default function LoginForm() {
       body: JSON.stringify(values),
     });
     const loggedIn = await loggedInResponse.json();
+    console.log(loggedIn.token);
     console.log(loggedIn.user);
     if (loggedIn.success === false) {
       toast.warn(loggedIn.message, {
@@ -46,7 +47,7 @@ export default function LoginForm() {
         loggedIn.user.username,
         loggedIn.user._id,
         loggedIn.user.pictureName,
-        loggedIn.user.token
+        loggedIn.token
       );
       toast.success("logged in successfully", {
         position: "top-right",
