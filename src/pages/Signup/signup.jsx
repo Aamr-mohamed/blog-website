@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./signup.module.css";
-import "react-toastify/dist/ReactToastify.css";
 import { Form, Formik } from "formik";
 import * as yup from "yup";
 import background from "../../assets/images/background.jpg";
@@ -27,7 +26,7 @@ export default function SignupForm() {
     password: yup.string().required("required"),
     gender: yup.string(),
     date: yup.string().required("required"),
-    picture: yup.string().required("required"),
+    pictureName: yup.string().required("required"),
   });
   const initialValuesSignUp = {
     firstname: "",
@@ -37,7 +36,7 @@ export default function SignupForm() {
     password: "",
     gender: "",
     date: "",
-    picture: "",
+    pictureName: "",
   };
 
   const onInputChange = (e) => {
@@ -59,16 +58,15 @@ export default function SignupForm() {
         formData.append(value, values[value]);
       }
       formData.append("picturePath", picturePath);
-      console.log("formData:", formData);
+      console.log(formData);
       console.log(picturePath);
+      console.log(formData);
+      const res = await axios.post("http://localhost:3001/adduser", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
-      await axios
-        .post("http://localhost:3001/adduser", formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        })
-        .then(function (response) {
-          console.log(response);
-        });
+      console.log(res);
+
       toast.success("logged in successfully", {
         position: "top-right",
         autoClose: 1000,
@@ -109,7 +107,7 @@ export default function SignupForm() {
             }}
           >
             {(props) => (
-              <Form className="flex flex-col">
+              <Form className="flex flex-col" encType="multipart/form-data">
                 <CardGroup
                   color="transparent"
                   className="w-full h-3/5 flex border-transparent"
@@ -189,6 +187,7 @@ export default function SignupForm() {
                         className="form-control pt-9"
                         onChange={(e) => {
                           props.handleChange("gender")(e);
+                          console.log("success");
                         }}
                         onBlur={props.handleBlur}
                         value={props.values.gender}
@@ -203,11 +202,6 @@ export default function SignupForm() {
                           Prefer not to say
                         </Option>
                       </Select>
-                      {props.errors.gender && (
-                        <div id="feedback" className="text-light-green-600">
-                          {props.errors.gender}
-                        </div>
-                      )}
                     </div>
                   </Card>
                   <Card
@@ -226,11 +220,7 @@ export default function SignupForm() {
                           onInputChange(e);
                         }}
                       />
-                      {props.errors.pictureName && (
-                        <div id="feedback" className="text-light-green-600">
-                          {props.errors.pictureName}
-                        </div>
-                      )}
+
                       <Input
                         onChange={props.handleChange}
                         onBlur={props.handleBlur}
@@ -265,9 +255,9 @@ export default function SignupForm() {
                           {props.errors.password}
                         </div>
                       )}
-                      <div className="flex items-center justify-center">
-                        <button type="submit">SignUp</button>
-                      </div>
+
+                      <button type="submit">SignUp</button>
+
                       <Typography
                         className="text-center"
                         variant="h6"
@@ -275,10 +265,9 @@ export default function SignupForm() {
                       >
                         Or signup using
                       </Typography>
-                      <div className="flex space-x-4 items-center justify-center">
+                      {/* <div className="flex space-x-4 items-center justify-center">
                         <LoginGoogle />
-                        {/* <FacebookButton /> */}
-                      </div>
+                      </div> */}
                     </div>
                   </Card>
                 </CardGroup>

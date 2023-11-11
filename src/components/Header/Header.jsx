@@ -11,6 +11,7 @@ import {
   MenuItem,
   Avatar,
   IconButton,
+  Collapse,
 } from "@material-tailwind/react";
 import {
   UserCircleIcon,
@@ -70,7 +71,6 @@ function Header() {
   const username = localStorage.getItem("username");
 
   const getUser = async () => {
-    console.log(token);
     const response = await fetch(`http://localhost:3001/users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
@@ -139,9 +139,9 @@ function Header() {
         />
         <span>{username}</span>
       </div>
-      <MobileNav open={isNavOpen} className="overflow-scroll">
+      <Collapse open={isNavOpen} className="overflow-scroll">
         <NavList />
-      </MobileNav>
+      </Collapse>
     </Navbar>
   );
 }

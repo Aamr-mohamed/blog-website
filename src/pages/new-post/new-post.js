@@ -53,16 +53,25 @@ export default function NewPost() {
         console.log(values[value]);
         formData.append(value, values[value]);
       }
+      if (pictureName) {
+        formData.append("userPicturePath", pictureName);
+      }
+      formData.append("username", username);
+      formData.append("userId", userId);
       formData.append("picturePath", picturePath);
       console.log("formData:", formData);
-      console.log(picturePath);
+
       await axios
-        .post("http://localhost:3001/userId/posts/", formData, {
-          headers: { "Content-Type": "multipart/form-data" },
+        .post(`http://localhost:3001/posts/`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
         })
         .then(function (response) {
           console.log(response);
         });
+
       toast.success("Posted successfully", {
         position: "top-right",
         autoClose: 1000,
@@ -117,7 +126,8 @@ export default function NewPost() {
                 accept=".jpg,.jpeg,.png"
                 onChange={(e) => {
                   const pictPath = e.target.value.split("\\")[2];
-                  props.setFieldValue("postPictureName", pictPath);
+                  console.log(pictPath);
+                  props.setFieldValue("PictureName", pictPath);
                   onInputChange(e);
                 }}
               />
@@ -136,7 +146,7 @@ export default function NewPost() {
                 onBlur={props.handleBlur}
                 value={props.values.postContent}
               />
-              <Button ripple={true} className="w-1/4 ml-auto">
+              <Button ripple={true} type="submit" className="w-1/4 ml-auto">
                 Post
               </Button>
             </Card>

@@ -8,26 +8,13 @@ import MacAds from "../../components/ads/macAds";
 
 export default function Root() {
   const navigate = useNavigate();
-  const currentemail = localStorage.getItem("currentEmail");
-  const posts = JSON.parse(localStorage.getItem("Post"));
-  const userPosts = currentemail
-    ? posts
-        ?.filter((post) => post.userEmail === currentemail)
-        .map((post, index) => (
-          <Post
-            postkey={index.toString()}
-            key={index}
-            postContent={post.post}
-            title={post.Title}
-            createdAt={post.createdAt}
-          />
-        ))
-    : console.log("fy");
-  // : navigate("/new-post/");
+
   return (
     <Wrapper>
       <div className="w-full flex">
-        <div className="w-3/5 mt-10">{userPosts}</div>
+        <div className="w-3/5 mt-10">
+          <Post />
+        </div>
         <div className=" ml-20 w-1/4">
           <MacAds
             className="mb-5 mt-10"
