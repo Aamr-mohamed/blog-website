@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import ProfilePic from "../../components/profilePic/profilePic";
 
 const initialPostValues = {
   Title: "",
@@ -28,10 +29,11 @@ const postSchema = yup.object().shape({
 
 export default function NewPost() {
   const [picturePath, setpicturePath] = useState(null);
-  const { _id, pictureName, token, firstname, lastname } = useSelector(
-    (state) => state.user
-  );
-  const fullname = `${firstname} ${lastname}`;
+
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
+  const pictureName = localStorage.getItem("pictureName");
+  const username = localStorage.getItem("username");
 
   const onInputChange = (e) => {
     const file = e.target.files[0];
@@ -55,7 +57,7 @@ export default function NewPost() {
       console.log("formData:", formData);
       console.log(picturePath);
       await axios
-        .post("http://localhost:3001/post/", formData, {
+        .post("http://localhost:3001/userId/posts/", formData, {
           headers: { "Content-Type": "multipart/form-data" },
         })
         .then(function (response) {
@@ -90,14 +92,14 @@ export default function NewPost() {
           <Form>
             <Card className="w-3/5 bg-transparent shadow-none lg:mt-10 lg:ml-20 gap-3">
               <div className="flex flex-row">
-                <Avatar
+                <ProfilePic
                   variant="circular"
                   size="lg"
                   alt="userPicture"
                   className="border border-gray-900 p-0.5"
-                  src={`http://localhost:3001/assets/${pictureName}`}
+                  image={pictureName}
                 />
-                <Typography className="mt-4 ml-2">{fullname}</Typography>
+                <Typography className="mt-4 ml-2">{username}</Typography>
               </div>
               <Input
                 variant="outlined"

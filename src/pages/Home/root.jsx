@@ -28,7 +28,7 @@ export default function Root() {
     <Wrapper>
       <div className="w-full flex">
         <div className="w-3/5 mt-10">{userPosts}</div>
-        <div className="pr-24 ml-20 w-2/5">
+        <div className=" ml-20 w-1/4">
           <MacAds
             className="mb-5 mt-10"
             style={{ backgroundColor: "#fcfbf7" }}

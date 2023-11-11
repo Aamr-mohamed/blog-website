@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { setLogout } from "../../state/index";
 import { useNavigate } from "react-router-dom";
 import {
   Navbar,
@@ -22,7 +21,6 @@ import {
   PowerIcon,
   Bars2Icon,
 } from "@heroicons/react/24/solid";
-import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
 // nav list component
@@ -66,13 +64,14 @@ function Header() {
   const [isNavOpen, setIsNavOpen] = React.useState(false);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { _id, pictureName, token, firstname, lastname } = useSelector(
-    (state) => state.user
-  );
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
+  const pictureName = localStorage.getItem("pictureName");
+  const username = localStorage.getItem("username");
 
   const getUser = async () => {
-    const response = await fetch(`http://localhost:3001/users/${_id}`, {
+    console.log(token);
+    const response = await fetch(`http://localhost:3001/users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -96,7 +95,6 @@ function Header() {
     return null;
   }
 
-  const fullName = `${firstname} ${lastname}`;
   return (
     <Navbar
       className="mx-auto max-w-screen-3xl p-2  lg:pl-6 bg-transparent shadow-none border-none"
@@ -125,7 +123,6 @@ function Header() {
           size="sm"
           variant="text"
           onClick={() => {
-            dispatch(setLogout());
             navigate("/login");
           }}
         >
@@ -140,7 +137,7 @@ function Header() {
           src={`http://localhost:3001/assets/${pictureName}`}
           onClick={() => navigate("/profile")}
         />
-        <span>{fullName}</span>
+        <span>{username}</span>
       </div>
       <MobileNav open={isNavOpen} className="overflow-scroll">
         <NavList />

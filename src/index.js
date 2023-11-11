@@ -6,33 +6,6 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { Contact, Root, Login, NewPost, Profile, Signup } from "./pages";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, Slide } from "react-toastify";
-import { Provider } from "react-redux";
-import storage from "redux-persist/lib/storage";
-import authReducer from "./state";
-import { PersistGate } from "redux-persist/integration/react";
-import {
-  PURGE,
-  PAUSE,
-  PERSIST,
-  REGISTER,
-  REHYDRATE,
-  FLUSH,
-  persistStore,
-  persistReducer,
-} from "redux-persist";
-import { configureStore } from "@reduxjs/toolkit";
-
-const persistConfig = { key: "root", storage, version: 1 };
-const persistedReducer = persistReducer(persistConfig, authReducer);
-const store = configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
-});
 
 export default function App() {
   return (
@@ -48,12 +21,8 @@ export default function App() {
 }
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistStore(store)}>
-      <BrowserRouter>
-        <ToastContainer transition={Slide} />
-        <App />
-      </BrowserRouter>
-    </PersistGate>
-  </Provider>
+  <BrowserRouter>
+    <ToastContainer transition={Slide} />
+    <App />
+  </BrowserRouter>
 );

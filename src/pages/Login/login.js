@@ -8,8 +8,7 @@ import * as yup from "yup";
 import { Form, Formik } from "formik";
 import { Card, Input, Typography } from "@material-tailwind/react";
 import Google from "../../components/Buttons/Google";
-import { useDispatch } from "react-redux";
-import { setLogin } from "../../state";
+import handleCredentials from "../../store/store";
 
 const loginSchema = yup.object().shape({
   email: yup.string().email("invalid email").required("required"),
@@ -22,7 +21,6 @@ const initialValuesLogin = {
 };
 
 export default function LoginForm() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const verification = async (values) => {
     const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
@@ -44,7 +42,12 @@ export default function LoginForm() {
         theme: "colored",
       });
     } else {
-      dispatch(setLogin({ user: loggedIn.user, token: loggedIn.token }));
+      handleCredentials(
+        loggedIn.user.username,
+        loggedIn.user._id,
+        loggedIn.user.pictureName,
+        loggedIn.token
+      );
       toast.success("logged in successfully", {
         position: "top-right",
         autoClose: 1000,

@@ -1,11 +1,12 @@
+import { Avatar } from "@material-tailwind/react";
 import React from "react";
 
-function ProfilePic({ style, ...rootDOMAttributes }) {
+function ProfilePic({ image, style, ...rootDOMAttributes }) {
   return (
     <div>
-      <img
+      <Avatar
         {...rootDOMAttributes}
-        src=""
+        src={`http://localhost:3001/assets/${image}`}
         alt="Profile"
         className="rounded-circle"
         style={style}
