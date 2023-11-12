@@ -28,7 +28,7 @@ const Weather = (props) => {
         windspeed: res.data.wind.speed,
       });
     } catch (error) {
-      customToast("error", error.message);
+      customToast("error", "weather" + error.message);
     }
   };
 
@@ -40,16 +40,20 @@ const Weather = (props) => {
   };
 
   const handleGetWeather = async () => {
-    const res = await axios.post("http://localhost:5000/message", {
-      username: "from front",
-      email: "from front",
-      password: "from front",
-      timestamp: Date.now(),
-    });
-    if (res.status === 200) {
-      setUser(res.data);
+    try {
+      const res = await axios.post("http://localhost:5000/message", {
+        username: "from front",
+        email: "from front",
+        password: "from front",
+        timestamp: Date.now(),
+      });
+      if (res.status === 200) {
+        setUser(res.data);
+      }
+      fetchWeatherData();
+    } catch (error) {
+      customToast("error", "Weather " + error.message);
     }
-    // fetchWeatherData();
   };
 
   return (

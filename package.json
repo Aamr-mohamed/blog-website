@@ -11,6 +11,7 @@
     "@heroicons/react": "^2.0.18",
     "@lyket/react": "^2.1.0",
     "@material-tailwind/react": "^2.1.2",
+    "@mui/icons-material": "^5.14.16",
     "@mui/material": "^5.14.13",
     "@reduxjs/toolkit": "^1.9.7",
     "@testing-library/jest-dom": "^5.16.5",

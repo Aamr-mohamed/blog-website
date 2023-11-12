@@ -2,24 +2,37 @@ import React from "react";
 import { Card, Typography, Avatar } from "@material-tailwind/react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { IconButton } from "@mui/material";
+import {
+  ChatBubbleOutlineOutlined,
+  FavoriteBorderOutlined,
+  FavoriteOutlined,
+  ShareOutlined,
+} from "@mui/icons-material";
 
 function Post() {
   const token = localStorage.getItem("token");
+  const [like, setLike] = useState(false);
   const userId = localStorage.getItem("userId");
-  const username = localStorage.getItem("username");
-  const pictureName = localStorage.getItem("pictureName");
   const [posts, setPosts] = useState([]);
 
+  async function patchLike(postId) {
+    const res = await fetch(`http://localhost:3001/posts/${postId}/like`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId: userId }),
+    });
+  }
   const getPosts = async () => {
     const response = await fetch("http://localhost:3001/posts", {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
-    console.log(data);
-    console.log(data[0].Title);
     setPosts(data);
-    console.log(posts);
     // dispatch(setPosts({ posts: data }));
   };
 
@@ -74,6 +87,29 @@ function Post() {
               )}
             </div>
             <Typography className="pl-6 pt-3">{postContent}</Typography>
+
+            <div className="">
+              <IconButton
+                onClick={() => {
+                  setLike(!like);
+                  patchLike(_id);
+                }}
+              >
+                {like ? (
+                  <FavoriteOutlined sx={{ color: "#00D5FA" }} />
+                ) : (
+                  <FavoriteBorderOutlined />
+                )}
+              </IconButton>
+
+              <IconButton>
+                <ChatBubbleOutlineOutlined />
+              </IconButton>
+
+              <IconButton>
+                <ShareOutlined />
+              </IconButton>
+            </div>
 
             <Typography className="text-muted ml-auto pr-2.5 pb-2.5">
               {createdAt}
