@@ -22,7 +22,7 @@ export default function Root() {
             style={{ backgroundColor: "#fcfbf7" }}
           />
           <GetJokes className="mb-5" style={{ backgroundColor: "#fcfbf7" }} />
-          <Weather style={{ backgroundColor: "#fcfbf7" }} />
+          <Weather className="mb-5" style={{ backgroundColor: "#fcfbf7" }} />
           <Friends />
         </div>
       </div>

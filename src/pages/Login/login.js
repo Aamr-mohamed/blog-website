@@ -47,7 +47,8 @@ export default function LoginForm() {
         loggedIn.user.username,
         loggedIn.user._id,
         loggedIn.user.pictureName,
-        loggedIn.token
+        loggedIn.token,
+        loggedIn.user.friends
       );
       toast.success("logged in successfully", {
         position: "top-right",

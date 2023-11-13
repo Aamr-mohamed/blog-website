@@ -6,7 +6,7 @@ import { Button, Card, IconButton, Typography } from "@material-tailwind/react";
 import { PersonAddOutlined, PersonRemoveOutlined } from "@mui/icons-material";
 
 function Friend(token, friendId, id, name, userPicturePath) {
-  const friends = localStorage.getItem("friends");
+  const friends = JSON.parse(localStorage.getItem("friends")) || [];
 
   const isFriend = friends.find((friend) => friend._id === friendId);
 

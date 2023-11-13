@@ -46,7 +46,7 @@ function Friends() {
             key={friend._id}
             friendId={friend._id}
             name={friend.username}
-            userPicturePath={friend.picturePath}
+            userPicturePath={friend.pictureName}
           />
         ))}
       </Box>
