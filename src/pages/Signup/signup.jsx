@@ -244,6 +244,7 @@ export default function SignupForm() {
                         value={props.values.password}
                         autoComplete="off"
                         name="password"
+                        type="password"
                         className="text-white"
                         color="white"
                         size="lg"

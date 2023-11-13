@@ -3,10 +3,22 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Post from "./post";
 
-function PostCard() {
+function PostCard({ isProfile = false }) {
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
   const [posts, setPosts] = useState([]);
+
+  const getUserPosts = async () => {
+    const response = await fetch(
+      `http://localhost:3001/posts/${userId}/posts`,
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    const data = await response.json();
+    setPosts(data);
+  };
 
   const getPosts = async () => {
     const response = await fetch("http://localhost:3001/posts", {
@@ -18,7 +30,11 @@ function PostCard() {
   };
 
   useEffect(() => {
-    getPosts();
+    if (isProfile) {
+      getUserPosts();
+    } else {
+      getPosts();
+    }
   }, []);
 
   return (

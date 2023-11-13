@@ -121,6 +121,7 @@ export default function LoginForm() {
                       value={values.password}
                       autoComplete="off"
                       name="password"
+                      type="password"
                       className="text-white"
                       color="white"
                       variant="standard"
