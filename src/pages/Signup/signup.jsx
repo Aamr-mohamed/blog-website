@@ -108,7 +108,7 @@ export default function SignupForm() {
           >
             {(props) => (
               <Form className="flex flex-col" encType="multipart/form-data">
-                <CardGroup
+                <div
                   color="transparent"
                   className="w-full h-3/5 flex border-transparent"
                 >
@@ -270,7 +270,7 @@ export default function SignupForm() {
                       </div> */}
                     </div>
                   </Card>
-                </CardGroup>
+                </div>
               </Form>
             )}
           </Formik>
