@@ -1,18 +1,15 @@
 import React, { useState, useRef } from "react";
-import "./profile.module.css";
 import ProfilePic from "../../components/profilePic/profilePic";
 import "../../index.css";
 import Wrapper from "../../layouts/wrapper";
 import {
   Card,
-  Breadcrumbs,
   Typography,
   Tabs,
   TabsHeader,
   TabsBody,
   Tab,
   TabPanel,
-  Button,
 } from "@material-tailwind/react";
 import PostCard from "../../components/posts/postCard";
 import Edit from "./edit";
@@ -39,35 +36,12 @@ export default function Profile() {
     },
   ];
 
-  // image picker form userPC to database "Coming soon"
-
   const username = localStorage.getItem("username");
   const image = localStorage.getItem("pictureName");
 
-  const [values, setValues] = useState({ password: "" });
-  const handleFormChange = (e) => {
-    setValues({
-      ...values,
-      [e.target.name]: e.target.value,
-    });
-  };
-  const handleSubmit = () => {
-    console.log("working");
-  };
   return (
     <Wrapper>
       <div className="w-full flex flex-col">
-        {/* <Typography variant="h3">Profile</Typography>
-          <Breadcrumbs>
-            <a href="/">
-              <Typography>Home</Typography>
-            </a>
-            <a href="/profile">
-              {" "}
-              <Typography>Profile</Typography>
-            </a>
-          </Breadcrumbs> */}
-
         <Card
           className="w-full bg-transparent shadow-none flex flex-row"
           style={{ height: "10rem" }}

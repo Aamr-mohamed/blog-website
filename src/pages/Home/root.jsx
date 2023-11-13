@@ -5,6 +5,7 @@ import GetJokes from "../../components/Jokes/jokes";
 import Weather from "../../components/Weather/weathers.jsx";
 import MacAds from "../../components/ads/macAds";
 import PostCard from "../../components/posts/postCard.jsx";
+import Friends from "../../components/friends/friendList.jsx";
 
 export default function Root() {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ export default function Root() {
           />
           <GetJokes className="mb-5" style={{ backgroundColor: "#fcfbf7" }} />
           <Weather style={{ backgroundColor: "#fcfbf7" }} />
+          <Friends />
         </div>
       </div>
     </Wrapper>
