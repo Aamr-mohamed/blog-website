@@ -10,10 +10,11 @@ import { Form, Formik } from "formik";
 import React from "react";
 import { toast } from "react-toastify";
 import { customToast } from "../../utils/toasts";
+import { useSelector } from "react-redux";
 
 function Edit() {
-  const userId = localStorage.getItem("userId");
-  const token = localStorage.getItem("token");
+  const userId = useSelector((state) => state.user._id);
+  const token = useSelector((state) => state.token);
 
   const initialValuesEdit = {
     username: "",
@@ -35,8 +36,6 @@ function Edit() {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-
-      console.log(res);
 
       toast.success("User updated successfully", {
         position: "top-right",

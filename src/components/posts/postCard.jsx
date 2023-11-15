@@ -8,7 +8,7 @@ import { setPosts } from "../../store/store";
 function PostCard({ isProfile = false, userId }) {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts);
-  const token = localStorage.getItem("token");
+  const token = useSelector((state) => state.token);
 
   const getUserPosts = async () => {
     const response = await fetch(

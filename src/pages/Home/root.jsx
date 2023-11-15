@@ -8,7 +8,7 @@ import PostCard from "../../components/posts/postCard.jsx";
 import Friends from "../../components/friends/friendList.jsx";
 import { useSelector } from "react-redux";
 
-export default function Root() {
+export default function Home() {
   const navigate = useNavigate();
   const { _id } = useSelector((state) => state.user);
 

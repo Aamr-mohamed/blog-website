@@ -33,7 +33,7 @@ function Friends({ userId }) {
     getFriends();
   }, []);
   return (
-    <Card className="bg-transparent">
+    <Card style={{ backgroundColor: "#fcfbf7" }}>
       <Typography
         //   color={palette.neutral.dark}
         variant="h5"

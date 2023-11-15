@@ -14,9 +14,24 @@ import {
 import PostCard from "../../components/posts/postCard";
 import Edit from "./edit";
 import About from "./about";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 export default function Profile() {
   const [activeTab, setActiveTab] = React.useState("post");
+  const [user, setUser] = useState(null);
+  const token = useSelector((state) => state.token);
+  const { userId } = useParams();
+
+  const getUser = async () => {
+    const response = await fetch(`http://localhost:3001/users/${userId}`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response.json();
+    setUser(data);
+  };
 
   const data = [
     {
@@ -36,9 +51,11 @@ export default function Profile() {
     },
   ];
 
-  const username = localStorage.getItem("username");
-  const image = localStorage.getItem("pictureName");
+  useEffect(() => {
+    getUser();
+  }, []);
 
+  if (!user) return null;
   return (
     <Wrapper>
       <div className="w-full flex flex-col">
@@ -49,21 +66,17 @@ export default function Profile() {
           {/* <input type="file" hidden accept="image/*" /> */}
 
           <ProfilePic
-            style={{
-              marginTop: "20px",
-              width: "150px",
-              height: "150px",
-            }}
-            image={image}
+            size="150px"
+            image={user.pictureName}
             onClick={() => {
               console.log("nice");
             }}
           />
           <div>
             <Typography variant="h3" className="mt-8 ml-8">
-              {username}
+              {user.username}
             </Typography>
-            <Typography className="ml-10">@{username}</Typography>
+            <Typography className="ml-10">@{user.username}</Typography>
           </div>
         </Card>
       </div>
@@ -90,7 +103,11 @@ export default function Profile() {
           <TabsBody>
             {data.map(({ value, desc }) => (
               <TabPanel key={value} value={value}>
-                {value === "post" ? <PostCard isProfile /> : desc}
+                {value === "post" ? (
+                  <PostCard isProfile userId={userId} />
+                ) : (
+                  desc
+                )}
                 {value === "edit" ? <Edit /> : desc}
                 {value === "about" ? <About /> : desc}
               </TabPanel>

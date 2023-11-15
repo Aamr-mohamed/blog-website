@@ -3,10 +3,11 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { customToast } from "../../utils/toasts";
+import { useSelector } from "react-redux";
 
 function About() {
-  const userId = localStorage.getItem("userId");
-  const token = localStorage.getItem("token");
+  const userId = useSelector((state) => state.user._id);
+  const token = useSelector((state) => state.token);
   const [about, setAbout] = useState("");
 
   const getUser = async () => {

@@ -2,73 +2,25 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Navbar,
-  MobileNav,
   Typography,
   Button,
-  Menu,
-  MenuHandler,
-  MenuList,
   MenuItem,
   Avatar,
   IconButton,
   Collapse,
 } from "@material-tailwind/react";
-import {
-  UserCircleIcon,
-  ChevronDownIcon,
-  Cog6ToothIcon,
-  InboxArrowDownIcon,
-  LifebuoyIcon,
-  PowerIcon,
-  Bars2Icon,
-} from "@heroicons/react/24/solid";
-import axios from "axios";
+import { Bars2Icon } from "@heroicons/react/24/solid";
+import { useSelector } from "react-redux";
+import { setLogout } from "../../store/store";
 
 // nav list component
-const navListItems = [
-  {
-    label: "PROFILE",
-    href: "/profile",
-  },
-  {
-    label: "POSTS",
-    href: "/new-post",
-  },
-  {
-    label: "SETTINGS",
-    href: "#",
-  },
-];
-
-function NavList() {
-  return (
-    <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
-      {navListItems.map(({ label, href }, key) => (
-        <Typography
-          key={label}
-          as="a"
-          href={href}
-          variant="small"
-          color="gray"
-          className="font-medium text-blue-gray-500"
-        >
-          <MenuItem className="flex items-center gap-2 lg:rounded-full">
-            <span className="text-gray-900"> {label}</span>
-          </MenuItem>
-        </Typography>
-      ))}
-    </ul>
-  );
-}
 
 function Header() {
   const [isNavOpen, setIsNavOpen] = React.useState(false);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
-  const userId = localStorage.getItem("userId");
-  const pictureName = localStorage.getItem("pictureName");
-  const username = localStorage.getItem("username");
+  const token = useSelector((state) => state.token);
+  const userId = useSelector((state) => state.user._id);
 
   const getUser = async () => {
     const response = await fetch(`http://localhost:3001/users/${userId}`, {
@@ -102,13 +54,25 @@ function Header() {
     >
       <div className="relative mx-auto flex items-center justify-between text-blue-gray-900">
         <Typography
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/Home")}
           className="mr-4 ml-2 cursor-pointer py-1.5 font-medium text-2xl text-red-600"
         >
           Blogging Way
         </Typography>
         <div className="hidden lg:block ml-auto">
-          <NavList />
+          <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
+            <Typography
+              as="a"
+              href={`/profile/${userId}`}
+              variant="small"
+              color="gray"
+              className="font-medium text-blue-gray-500"
+            >
+              <MenuItem className="flex items-center gap-2 lg:rounded-full">
+                <span className="text-gray-900"> PROFILE</span>
+              </MenuItem>
+            </Typography>
+          </ul>
         </div>
         <IconButton
           size="sm"
@@ -123,7 +87,8 @@ function Header() {
           size="sm"
           variant="text"
           onClick={() => {
-            navigate("/login");
+            setLogout();
+            navigate("/");
           }}
         >
           <span>Logout</span>
@@ -134,13 +99,25 @@ function Header() {
           size="sm"
           alt="tania andrew"
           className="border border-gray-900 p-0.5"
-          src={`http://localhost:3001/assets/${pictureName}`}
-          onClick={() => navigate("/profile")}
+          src={`http://localhost:3001/assets/${user.pictureName}`}
+          onClick={() => navigate(`/profile/${userId}`)}
         />
-        <span>{username}</span>
+        <span>{user.username}</span>
       </div>
       <Collapse open={isNavOpen} className="overflow-scroll">
-        <NavList />
+        <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
+          <Typography
+            as="a"
+            href={`/profile/${userId}`}
+            variant="small"
+            color="gray"
+            className="font-medium text-blue-gray-500"
+          >
+            <MenuItem className="flex items-center gap-2 lg:rounded-full">
+              <span className="text-gray-900"> PROFILE</span>
+            </MenuItem>
+          </Typography>
+        </ul>
       </Collapse>
     </Navbar>
   );

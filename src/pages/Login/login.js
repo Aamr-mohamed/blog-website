@@ -41,7 +41,7 @@ export default function LoginForm() {
           token: loggedIn.token,
         })
       );
-      const tots = localStorage.setItem("token", loggedIn.token);
+
       toast.success("logged in successfully", {
         position: "top-right",
         autoClose: 1000,
@@ -51,7 +51,7 @@ export default function LoginForm() {
         draggable: true,
         progress: undefined,
         theme: "colored",
-        onClose: () => navigate("/"),
+        onClose: () => navigate("/Home"),
       });
     } else {
       toast.warn(loggedIn.message, {

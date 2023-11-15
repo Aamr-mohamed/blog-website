@@ -8,14 +8,8 @@ import * as CgIcons from "react-icons/cg";
 export const SidebarData = [
   {
     title: "Home",
-    path: "/",
+    path: "/Home",
     icon: <AiIcons.AiFillHome />,
-    cName: "nav-text",
-  },
-  {
-    title: "Profile",
-    path: "/profile",
-    icon: <CgIcons.CgProfile />,
     cName: "nav-text",
   },
 
@@ -39,7 +33,7 @@ export const SidebarData = [
   },
   {
     title: "Login",
-    path: "/login",
+    path: "/",
     icon: <IoIcons.IoIosPaper />,
     cName: "nav-text",
   },
