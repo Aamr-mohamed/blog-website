@@ -5,14 +5,13 @@ import { useState } from "react";
 import { customToast } from "../../utils/toasts";
 import { useSelector } from "react-redux";
 
-function About() {
-  const userId = useSelector((state) => state.user._id);
+function About({ userId }) {
   const token = useSelector((state) => state.token);
   const [about, setAbout] = useState("");
 
   const getUser = async () => {
     try {
-      const user = await axios.get(`http://localhost:3001/${userId}`, {
+      const user = await axios.get(`http://localhost:3001/users/${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAbout(user.data.about);

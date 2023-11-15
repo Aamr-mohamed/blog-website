@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Typography, Avatar } from "@material-tailwind/react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setPost } from "../../store/store";
 import { Box, Divider, IconButton } from "@mui/material";
@@ -25,6 +26,7 @@ function Post({
   createdAt,
 }) {
   const [isComments, setIsComments] = useState(false);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.user._id);
   const token = useSelector((state) => state.token);
@@ -48,8 +50,20 @@ function Post({
   return (
     <Card className="mb-2" style={{ backgroundColor: "#fcfbf7" }} key={postId}>
       <div className="flex pt-2.5 pb-2.5 pl-2.5">
-        <ProfilePic image={userPicturePath} size="55px" />
-        <Typography className="pt-2 pl-3" variant="h5">
+        <ProfilePic
+          image={userPicturePath}
+          size="55px"
+          onClick={() => {
+            navigate(`/profile/${postUserId}`);
+          }}
+        />
+        <Typography
+          className="pt-2 pl-3"
+          variant="h5"
+          onClick={() => {
+            navigate(`/profile/${postUserId}`);
+          }}
+        >
           {username}
         </Typography>
       </div>

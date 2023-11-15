@@ -109,7 +109,7 @@ export default function Profile() {
                   desc
                 )}
                 {value === "edit" ? <Edit /> : desc}
-                {value === "about" ? <About /> : desc}
+                {value === "about" ? <About userId={userId} /> : desc}
               </TabPanel>
             ))}
           </TabsBody>
