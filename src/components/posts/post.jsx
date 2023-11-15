@@ -1,7 +1,8 @@
 import React from "react";
 import { Card, Typography, Avatar } from "@material-tailwind/react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setPost } from "../../store/store";
 import { Box, Divider, IconButton } from "@mui/material";
 import {
   ChatBubbleOutlineOutlined,
@@ -9,6 +10,7 @@ import {
   FavoriteOutlined,
   ShareOutlined,
 } from "@mui/icons-material";
+import ProfilePic from "../profilePic/profilePic";
 
 function Post({
   postId,
@@ -22,12 +24,12 @@ function Post({
   picturePath,
   createdAt,
 }) {
-  let likeCount = Object.keys(likes).length;
   const [isComments, setIsComments] = useState(false);
-  const [like, setLike] = useState();
-  let [likeCounter, setLikeCounter] = useState(likeCount);
-  const token = localStorage.getItem("token");
-  const userId = localStorage.getItem("userId");
+  const dispatch = useDispatch();
+  const userId = useSelector((state) => state.user._id);
+  const token = useSelector((state) => state.token);
+  const isLiked = Boolean(likes[userId]);
+  const likeCount = Object.keys(likes).length;
 
   async function patchLike() {
     const res = await fetch(`http://localhost:3001/posts/${postId}/like`, {
@@ -40,28 +42,13 @@ function Post({
     });
     const updatedPost = await res.json();
 
-    const isLiked = Boolean(updatedPost.likes[userId]);
-    if (isLiked) {
-      console.log("true");
-      setLikeCounter((likeCounter += 1));
-      setLike(true);
-    } else {
-      console.log("false");
-      setLikeCounter((likeCounter -= 1));
-      setLike(false);
-    }
+    dispatch(setPost({ post: updatedPost }));
   }
 
   return (
     <Card className="mb-2" style={{ backgroundColor: "#fcfbf7" }} key={postId}>
       <div className="flex pt-2.5 pb-2.5 pl-2.5">
-        <Avatar
-          variant="circular"
-          size="sm"
-          alt="tania andrew"
-          className="border border-gray-900 p-0.5"
-          src={`http://localhost:3001/assets/${userPicturePath}`}
-        />
+        <ProfilePic image={userPicturePath} size="55px" />
         <Typography className="pt-2 pl-3" variant="h5">
           {username}
         </Typography>
@@ -84,12 +71,12 @@ function Post({
 
       <div className="">
         <IconButton onClick={patchLike}>
-          {like ? (
+          {isLiked ? (
             <FavoriteOutlined sx={{ color: "#00D5FA" }} />
           ) : (
             <FavoriteBorderOutlined />
           )}
-          <Typography>{likeCounter}</Typography>
+          <Typography>{likeCount}</Typography>
         </IconButton>
 
         <IconButton

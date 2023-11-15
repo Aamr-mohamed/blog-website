@@ -6,11 +6,13 @@ import { useState } from "react";
 import { Card, Typography } from "@material-tailwind/react";
 import { Box } from "@mui/material";
 import Friend from "./friends";
+import { useSelector, useDispatch } from "react-redux";
+import { setFriends } from "../../store/store";
 
-function Friends() {
-  const userId = localStorage.getItem("userId");
-  const token = localStorage.getItem("token");
-  const [friends, setFriends] = useState([]);
+function Friends({ userId }) {
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.token);
+  const friends = useSelector((state) => state.user.friends);
 
   const getFriends = async () => {
     try {
@@ -20,18 +22,18 @@ function Friends() {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-
-      setFriends(result.data);
+      const array = result.data;
+      console.log(array);
+      dispatch(setFriends({ friends: array }));
     } catch (error) {
       customToast("error", error.message);
     }
   };
   useEffect(() => {
-    console.log(friends);
     getFriends();
   }, []);
   return (
-    <Card>
+    <Card className="bg-transparent">
       <Typography
         //   color={palette.neutral.dark}
         variant="h5"

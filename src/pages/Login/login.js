@@ -8,7 +8,8 @@ import * as yup from "yup";
 import { Form, Formik } from "formik";
 import { Card, Input, Typography } from "@material-tailwind/react";
 import Google from "../../components/Buttons/Google";
-import handleCredentials from "../../store/store";
+import { useDispatch } from "react-redux";
+import { setLogin } from "../../store/store";
 
 const loginSchema = yup.object().shape({
   email: yup.string().email("invalid email").required("required"),
@@ -22,34 +23,25 @@ const initialValuesLogin = {
 
 export default function LoginForm() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const verification = async (values) => {
     const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(values),
     });
+
     const loggedIn = await loggedInResponse.json();
-    console.log(loggedIn.token);
-    console.log(loggedIn.user);
-    if (loggedIn.success === false) {
-      toast.warn(loggedIn.message, {
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
-    } else {
-      handleCredentials(
-        loggedIn.user.username,
-        loggedIn.user._id,
-        loggedIn.user.pictureName,
-        loggedIn.token,
-        loggedIn.user.friends
+
+    if (loggedIn) {
+      dispatch(
+        setLogin({
+          user: loggedIn.user,
+          token: loggedIn.token,
+        })
       );
+      const tots = localStorage.setItem("token", loggedIn.token);
       toast.success("logged in successfully", {
         position: "top-right",
         autoClose: 1000,
@@ -61,9 +53,19 @@ export default function LoginForm() {
         theme: "colored",
         onClose: () => navigate("/"),
       });
+    } else {
+      toast.warn(loggedIn.message, {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
   };
-
   return (
     <div
       className="bg-cover bg-center h-full flex items-center justify-center"

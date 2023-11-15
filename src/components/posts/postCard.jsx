@@ -2,11 +2,13 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import Post from "./post";
+import { useDispatch, useSelector } from "react-redux";
+import { setPosts } from "../../store/store";
 
-function PostCard({ isProfile = false }) {
-  const userId = localStorage.getItem("userId");
+function PostCard({ isProfile = false, userId }) {
+  const dispatch = useDispatch();
+  const posts = useSelector((state) => state.posts);
   const token = localStorage.getItem("token");
-  const [posts, setPosts] = useState([]);
 
   const getUserPosts = async () => {
     const response = await fetch(
@@ -17,7 +19,7 @@ function PostCard({ isProfile = false }) {
       }
     );
     const data = await response.json();
-    setPosts(data);
+    dispatch(setPosts({ posts: data }));
   };
 
   const getPosts = async () => {
@@ -26,7 +28,7 @@ function PostCard({ isProfile = false }) {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
-    setPosts(data);
+    dispatch(setPosts({ posts: data }));
   };
 
   useEffect(() => {
