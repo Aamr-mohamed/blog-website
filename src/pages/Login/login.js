@@ -33,8 +33,20 @@ export default function LoginForm() {
     });
 
     const loggedIn = await loggedInResponse.json();
+    console.log(loggedIn);
 
-    if (loggedIn) {
+    if (loggedIn.success === false) {
+      toast.warn(loggedIn.message, {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    } else {
       dispatch(
         setLogin({
           user: loggedIn.user,
@@ -52,17 +64,6 @@ export default function LoginForm() {
         progress: undefined,
         theme: "colored",
         onClose: () => navigate("/Home"),
-      });
-    } else {
-      toast.warn(loggedIn.message, {
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
       });
     }
   };

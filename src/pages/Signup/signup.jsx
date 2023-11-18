@@ -76,7 +76,7 @@ export default function SignupForm() {
         draggable: true,
         progress: undefined,
         theme: "colored",
-        onClose: () => navigate("/login/"),
+        onClose: () => navigate("/"),
       });
     } catch (error) {
       customToast("error", error.message);
