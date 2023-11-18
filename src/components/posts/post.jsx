@@ -58,7 +58,7 @@ function Post({
           }}
         />
         <Typography
-          className="pt-2 pl-3"
+          className="pt-2 pl-3 "
           variant="h5"
           onClick={() => {
             navigate(`/profile/${postUserId}`);
@@ -67,7 +67,9 @@ function Post({
           {username}
         </Typography>
       </div>
-      <Typography className="pl-10">{Title}</Typography>
+      <Typography variant="h5" className="pl-10 font-bold">
+        {Title}
+      </Typography>
       <div className="flex justify-center w-full h-full">
         {picturePath && (
           <img
@@ -81,7 +83,7 @@ function Post({
           />
         )}
       </div>
-      <Typography className="pl-6 pt-3">{postContent}</Typography>
+      <Typography className="pl-6 pt-3 ">{postContent}</Typography>
 
       <div className="">
         <IconButton onClick={patchLike}>

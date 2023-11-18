@@ -12,13 +12,6 @@ export const SidebarData = [
     icon: <AiIcons.AiFillHome />,
     cName: "nav-text",
   },
-
-  {
-    title: "Create New Post",
-    path: "/new-post",
-    icon: <bsIcons.BsPostcardHeart />,
-    cName: "nav-text",
-  },
   {
     title: "Friends",
     path: "#",
@@ -29,12 +22,6 @@ export const SidebarData = [
     title: "Messages",
     path: "#",
     icon: <FaIcons.FaEnvelopeOpenText />,
-    cName: "nav-text",
-  },
-  {
-    title: "Login",
-    path: "/",
-    icon: <IoIcons.IoIosPaper />,
     cName: "nav-text",
   },
   {

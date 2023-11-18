@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import ProfilePic from "../../components/profilePic/profilePic";
 import "../../index.css";
 import Wrapper from "../../layouts/wrapper";

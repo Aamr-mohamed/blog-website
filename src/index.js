@@ -21,6 +21,9 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { PersistGate } from "redux-persist/integration/react";
+import { ThemeProvider, createTheme } from "@mui/material";
+import { useMemo } from "react";
+import { themeSettings } from "./theme.js";
 
 const persistConfig = { key: "root", storage, version: 1 };
 const persistedReducer = persistReducer(persistConfig, authReducer);
@@ -35,22 +38,22 @@ const store = configureStore({
 });
 
 export default function App() {
+  const mode = useSelector((state) => state.mode);
   const isAuth = Boolean(useSelector((state) => state.token));
+  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   return (
-    <Routes>
-      <Route exact path="/" element={<Login />} />
-      <Route path="/Home" element={isAuth ? <Home /> : <Navigate to="/" />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route
-        path="/new-post"
-        element={isAuth ? <NewPost /> : <Navigate to="/" />}
-      />
-      <Route path="/contact" element={<Contact />} />
-      <Route
-        path="/profile/:userId"
-        element={isAuth ? <Profile /> : <Navigate to="/" />}
-      />
-    </Routes>
+    <ThemeProvider theme={theme}>
+      <Routes>
+        <Route exact path="/" element={<Login />} />
+        <Route path="/Home" element={isAuth ? <Home /> : <Navigate to="/" />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route
+          path="/profile/:userId"
+          element={isAuth ? <Profile /> : <Navigate to="/" />}
+        />
+      </Routes>
+    </ThemeProvider>
   );
 }
 const root = ReactDOM.createRoot(document.getElementById("root"));
