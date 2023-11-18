@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import * as yup from "yup";
 import { Form, Formik } from "formik";
 import { Card, Input, Typography } from "@material-tailwind/react";
+import { useTheme } from "@mui/material";
 import Google from "../../components/Buttons/Google";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../../store/store";
@@ -24,6 +25,7 @@ const initialValuesLogin = {
 export default function LoginForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   const verification = async (values) => {
     const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
@@ -71,13 +73,13 @@ export default function LoginForm() {
     <div
       className="bg-cover bg-center h-full flex items-center justify-center"
       style={{
-        backgroundImage: `url(${background})`,
+        backgroundColor: theme.palette.background.alt,
       }}
     >
       <div
         className="flex items-center justify-center w-1/4 h-4/5 bg-cover bg-center bg-opacity-75"
         style={{
-          backgroundImage: `url(${background})`,
+          backgroundColor: theme.palette.background.alt,
         }}
       >
         <div className="backdrop-blur w-full h-full rounded-lg border-none text-white flex flex-col ">

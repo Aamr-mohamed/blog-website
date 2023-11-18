@@ -1,12 +1,9 @@
 .nav-menu {
-  background-color: #f8f4ec;
   width: 220px;
   height: 100vh;
   display: flex;
   justify-content: center;
 }
-
-
 
 .nav-text {
   display: flex;
@@ -30,12 +27,9 @@
 }
 
 .nav-text a:hover {
-  background-color: #87EDD9;
+  background-color: #87edd9;
 }
 
 .nav-menu-items {
   width: 100%;
 }
-
-
-

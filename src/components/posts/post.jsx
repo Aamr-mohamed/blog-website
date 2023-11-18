@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setPost } from "../../store/store";
-import { Box, Divider, IconButton } from "@mui/material";
+import { Box, Divider, IconButton, useTheme } from "@mui/material";
 import {
   ChatBubbleOutlineOutlined,
   FavoriteBorderOutlined,
@@ -12,6 +12,7 @@ import {
   ShareOutlined,
 } from "@mui/icons-material";
 import ProfilePic from "../profilePic/profilePic";
+import { formatDistanceToNow } from "date-fns";
 
 function Post({
   postId,
@@ -32,6 +33,7 @@ function Post({
   const token = useSelector((state) => state.token);
   const isLiked = Boolean(likes[userId]);
   const likeCount = Object.keys(likes).length;
+  const theme = useTheme();
 
   async function patchLike() {
     const res = await fetch(`http://localhost:3001/posts/${postId}/like`, {
@@ -47,8 +49,22 @@ function Post({
     dispatch(setPost({ post: updatedPost }));
   }
 
+  const [timeAgo, setTimeAgo] = useState("");
+  useEffect(() => {
+    const originalDateTime = new Date(createdAt);
+    const timeAgoString = formatDistanceToNow(originalDateTime, {
+      addSuffix: true,
+    });
+
+    setTimeAgo(timeAgoString);
+  }, [createdAt]);
+
   return (
-    <Card className="mb-2" style={{ backgroundColor: "#fcfbf7" }} key={postId}>
+    <Card
+      className="mb-2"
+      key={postId}
+      style={{ backgroundColor: theme.palette.background.alt }}
+    >
       <div className="flex pt-2.5 pb-2.5 pl-2.5">
         <ProfilePic
           image={userPicturePath}
@@ -110,7 +126,7 @@ function Post({
       </div>
 
       <Typography className="text-muted ml-auto pr-2.5 pb-2.5">
-        {createdAt}
+        {timeAgo}
       </Typography>
       {isComments && (
         <Box mt="0.5rem">

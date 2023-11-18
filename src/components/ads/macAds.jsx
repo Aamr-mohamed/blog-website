@@ -6,10 +6,16 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import adPic from "../../assets/images/macAd.jpg";
+import { useTheme } from "@mui/material";
 
 function MacAds(props) {
+  const theme = useTheme();
   return (
-    <Card className="mt-6 w-96 bg-transparent " {...props}>
+    <Card
+      className="mt-6 w-96 bg-transparent "
+      {...props}
+      style={{ backgroundColor: theme.palette.background.alt }}
+    >
       <CardHeader>
         <img src={adPic} alt="Sample" />
       </CardHeader>

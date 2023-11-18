@@ -21,7 +21,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { PersistGate } from "redux-persist/integration/react";
-import { ThemeProvider, createTheme } from "@mui/material";
+import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { useMemo } from "react";
 import { themeSettings } from "./theme.js";
 
@@ -43,6 +43,7 @@ export default function App() {
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Routes>
         <Route exact path="/" element={<Login />} />
         <Route path="/Home" element={isAuth ? <Home /> : <Navigate to="/" />} />

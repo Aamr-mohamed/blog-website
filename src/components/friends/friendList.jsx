@@ -8,11 +8,13 @@ import { Box } from "@mui/material";
 import Friend from "./friends";
 import { useSelector, useDispatch } from "react-redux";
 import { setFriends } from "../../store/store";
+import { useTheme } from "@mui/material";
 
 function Friends({ userId }) {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
   const friends = useSelector((state) => state.user.friends);
+  const theme = useTheme();
 
   const getFriends = async () => {
     try {
@@ -33,7 +35,7 @@ function Friends({ userId }) {
     getFriends();
   }, []);
   return (
-    <Card style={{ backgroundColor: "#fcfbf7" }}>
+    <Card style={{ backgroundColor: theme.palette.background.alt }}>
       <Typography
         //   color={palette.neutral.dark}
         variant="h5"

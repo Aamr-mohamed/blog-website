@@ -9,9 +9,11 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
+import { useTheme } from "@mui/material";
 
 const GetJokes = (props) => {
   const [jokeText, setJokeText] = useState(""); // State to store the joke text
+  const theme = useTheme();
 
   const addNewJoke = async () => {
     try {
@@ -27,7 +29,11 @@ const GetJokes = (props) => {
     addNewJoke();
   }, []);
   return (
-    <Card className="mt-6 w-96 bg-transparent " {...props}>
+    <Card
+      className="mt-6 w-96 bg-transparent "
+      {...props}
+      style={{ backgroundColor: theme.palette.background.alt }}
+    >
       <CardBody>
         <Typography>{jokeText}</Typography>
       </CardBody>

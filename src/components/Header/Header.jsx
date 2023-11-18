@@ -9,9 +9,11 @@ import {
   IconButton,
   Collapse,
 } from "@material-tailwind/react";
+import { useTheme } from "@mui/material";
 import { Bars2Icon } from "@heroicons/react/24/solid";
-import { useSelector } from "react-redux";
-import { setLogout } from "../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { setLogout, setMode } from "../../store/store";
+import { DarkMode, LightMode } from "@mui/icons-material";
 
 // nav list component
 
@@ -19,8 +21,15 @@ function Header() {
   const [isNavOpen, setIsNavOpen] = React.useState(false);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
   const userId = useSelector((state) => state.user._id);
+  const theme = useTheme();
+  const neutralLight = theme.palette.neutral.light;
+  const dark = theme.palette.neutral.dark;
+  const background = theme.palette.background.default;
+  const primaryLight = theme.palette.primary.light;
+  const alt = theme.palette.background.alt;
 
   const getUser = async () => {
     const response = await fetch(`http://localhost:3001/users/${userId}`, {
@@ -50,7 +59,7 @@ function Header() {
   return (
     <Navbar
       className="mx-auto max-w-screen-3xl p-2  lg:pl-6 bg-transparent shadow-none border-none"
-      style={{ backgroundColor: "#f8f4ec" }}
+      style={{ backgroundColor: alt, marginBottom: "20px" }}
     >
       <div className="relative mx-auto flex items-center justify-between text-blue-gray-900">
         <Typography
@@ -72,6 +81,19 @@ function Header() {
                 <span className="text-gray-900"> PROFILE</span>
               </MenuItem>
             </Typography>
+            <IconButton onClick={() => dispatch(setMode())}>
+              {theme.palette.mode === "dark" ? (
+                <DarkMode sx={{ fontSize: "25px" }} />
+              ) : (
+                <LightMode
+                  sx={{
+                    color: "dark",
+                    fontSize: "25px",
+                    // backgroundColor: "white",
+                  }}
+                />
+              )}
+            </IconButton>
           </ul>
         </div>
         <IconButton

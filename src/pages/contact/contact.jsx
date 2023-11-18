@@ -1,5 +1,4 @@
 import React from "react";
-import "./contact.css";
 import Wrapper from "../../layouts/wrapper";
 import SideBar from "../../components/Sidebar/SideBar";
 import { useState } from "react";

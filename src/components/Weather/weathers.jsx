@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Card, Button, Input, CardBody } from "@material-tailwind/react";
 import { customToast } from "../../utils/toasts";
+import { useTheme } from "@mui/material";
 
 const Weather = (props) => {
+  const theme = useTheme();
   function convertion(val) {
     return (val - 273).toFixed(2);
   }
@@ -57,7 +59,7 @@ const Weather = (props) => {
   };
 
   return (
-    <Card {...props} style={{ backgroundColor: "#fcfbf7" }}>
+    <Card {...props} style={{ backgroundColor: theme.palette.background.alt }}>
       <CardBody>
         <Input
           onChange={handleCityChange}
