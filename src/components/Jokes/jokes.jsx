@@ -1,30 +1,52 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Card, Button } from "react-bootstrap";
+
+import { customToast } from "../../utils/toasts";
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  Typography,
+  Button,
+} from "@material-tailwind/react";
+import { useTheme } from "@mui/material";
 
 const GetJokes = (props) => {
   const [jokeText, setJokeText] = useState(""); // State to store the joke text
+  const theme = useTheme();
+  const primary = theme.palette.primary.main;
 
   const addNewJoke = async () => {
-    const config = { headers: { Accept: "application/json" } };
-    const res = await axios.get("http://icanhazdadjoke.com/", config);
-    setJokeText(res.data.joke); // Update the joke text in state
+    try {
+      const config = { headers: { Accept: "application/json" } };
+      const res = await axios.get("http://icanhazdadjoke.com/", config);
+      setJokeText(res.data.joke);
+    } catch (err) {
+      customToast("error", "jokes " + err.message);
+    }
   };
+
   useEffect(() => {
-    // Fetch and set the joke text when the component mounts
     addNewJoke();
   }, []);
   return (
-    <div>
-      <Card {...props}>
-        <Card.Body>
-          <Card.Text>
-            <p>{jokeText}</p>
-          </Card.Text>
-          <Button onClick={addNewJoke}>Get Joke</Button>
-        </Card.Body>
-      </Card>
-    </div>
+    <Card
+      className="mt-6 w-96 bg-transparent "
+      {...props}
+      style={{ backgroundColor: theme.palette.background.alt }}
+    >
+      <CardBody>
+        <Typography>{jokeText}</Typography>
+      </CardBody>
+      <CardFooter className="pt-0">
+        <Button
+          onClick={addNewJoke}
+          style={{ backgroundColor: "rgb(220 38 38)", border: "none" }}
+        >
+          Get Joke
+        </Button>
+      </CardFooter>
+    </Card>
   );
 };
 

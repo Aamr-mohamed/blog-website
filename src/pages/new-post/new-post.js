@@ -1,144 +1,185 @@
-import React, { useRef } from "react";
+import {
+  EditOutlined,
+  DeleteOutlined,
+  AttachFileOutlined,
+  GifBoxOutlined,
+  ImageOutlined,
+  MicOutlined,
+  MoreHorizOutlined,
+} from "@mui/icons-material";
+import {
+  Box,
+  Divider,
+  Typography,
+  InputBase,
+  useTheme,
+  Button,
+  IconButton,
+  useMediaQuery,
+  Input,
+} from "@mui/material";
+import FlexBetween from "../../components/Buttons/flexBetween";
+import Dropzone from "react-dropzone";
 import ProfilePic from "../../components/profilePic/profilePic";
-import Form from "react-bootstrap/Form";
-import { useNavigate } from "react-router-dom";
-import "./newPost.module.css";
-import { ToastContainer, toast, Slide } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import Wrapper from "../../layouts/wrapper";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setPosts } from "../../store/store";
+import { Card } from "@material-tailwind/react";
+import axios from "axios";
 
-export default function NewPost() {
-  var date = Date.now();
-  const email = localStorage.getItem("currentEmail");
-  const userName = localStorage.getItem("currentUser");
-  const NewPost = useRef();
-  const navigate = useNavigate();
-  const NewTitle = useRef();
-  const handlesubmit = (e) => {
-    var existingPosts = JSON.parse(localStorage.getItem("Post"));
-    if (existingPosts == null) existingPosts = [];
-    e.preventDefault();
-    var postData = {
-      userEmail: email,
-      Title: NewTitle.current.value,
-      post: NewPost.current.value,
-      createdAt: date,
-    };
-    if (!postData.email) {
-      toast.warn("please login first", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-      navigate("/login/");
-    } else if (
-      existingPosts.find((post) => post.Title === NewTitle.current.value)
-    ) {
-      toast.warn("This post already created before", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-    } else {
-      existingPosts.push(postData);
-      localStorage.setItem("Post", JSON.stringify(existingPosts));
-      toast.success("Post was created sucessfully", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
+const NewPost = ({ pictureName }) => {
+  const dispatch = useDispatch();
+  const [isImage, setIsImage] = useState(false);
+  const [image, setImage] = useState(null);
+  const [Title, setTitle] = useState("");
+  const [post, setPost] = useState("");
+  const { palette } = useTheme();
+  const { _id } = useSelector((state) => state.user);
+  const token = useSelector((state) => state.token);
+  const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+  const mediumMain = palette.neutral.mediumMain;
+  const medium = palette.neutral.medium;
+
+  const handlePost = async () => {
+    const formData = new FormData();
+    formData.append("userId", _id);
+    formData.append("Title", Title);
+    formData.append("postContent", post);
+    if (image) {
+      formData.append("picture", image);
+      formData.append("picturePath", image.name);
     }
+
+    if (pictureName) {
+      formData.append("userPicturePath", pictureName);
+    }
+
+    const response = await fetch(`${backendUrl}/posts`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}` },
+      body: formData,
+    });
+
+    const posts = await response.json();
+    dispatch(setPosts({ posts }));
+    setImage(null);
+    setPost("");
+    setTitle("");
   };
 
   return (
-    <div>
-      <Wrapper />
-      <ToastContainer transition={Slide} />
-      <form onSubmit={handlesubmit}>
-        <div
-          style={{
-            position: "relative",
-            alignSelf: "center",
-            justifyContent: "center",
-            width: "40%",
-            height: "100%",
-            margin: "auto",
-            marginTop: "40px",
+    <Card
+      style={{
+        padding: "1.5rem 1.5rem 0.75rem 1.5rem",
+        backgroundColor: palette.background.alt,
+        borderRadius: "0.75rem",
+      }}
+    >
+      <div className="flex flex-row">
+        <ProfilePic image={pictureName} size={"55px"} />
+        <div className="flex w-full pl-5 gap-3">
+          <Input
+            placeholder="Title"
+            onChange={(e) => setTitle(e.target.value)}
+            value={Title}
+            sx={{
+              width: "60%",
+              backgroundColor: palette.neutral.light,
+              borderRadius: "2rem",
+              padding: "1rem 2rem",
+            }}
+            disableUnderline
+          />
+          <Input
+            placeholder="What's on your mind..."
+            onChange={(e) => setPost(e.target.value)}
+            value={post}
+            sx={{
+              width: "100%",
+              backgroundColor: palette.neutral.light,
+              borderRadius: "2rem",
+              padding: "1rem 2rem",
+            }}
+            disableUnderline
+          />
+        </div>
+      </div>
+
+      {isImage && (
+        <Box
+          border={`1px solid ${medium}`}
+          borderRadius="5px"
+          mt="1rem"
+          p="1rem"
+        >
+          <Dropzone
+            acceptedFiles=".jpg,.jpeg,.png"
+            multiple={false}
+            onDrop={(acceptedFiles) => setImage(acceptedFiles[0])}
+          >
+            {({ getRootProps, getInputProps }) => (
+              <FlexBetween>
+                <Box
+                  {...getRootProps()}
+                  border={`2px dashed ${palette.primary.main}`}
+                  p="1rem"
+                  width="100%"
+                  sx={{ "&:hover": { cursor: "pointer" } }}
+                >
+                  <input {...getInputProps()} />
+                  {!image ? (
+                    <p>Add Image Here</p>
+                  ) : (
+                    <FlexBetween>
+                      <Typography>{image.name}</Typography>
+                      <EditOutlined />
+                    </FlexBetween>
+                  )}
+                </Box>
+                {image && (
+                  <IconButton
+                    onClick={() => setImage(null)}
+                    sx={{ width: "15%" }}
+                  >
+                    <DeleteOutlined />
+                  </IconButton>
+                )}
+              </FlexBetween>
+            )}
+          </Dropzone>
+        </Box>
+      )}
+
+      <Divider sx={{ margin: "1.25rem 0" }} />
+
+      <FlexBetween>
+        <FlexBetween gap="0.25rem" onClick={() => setIsImage(!isImage)}>
+          <ImageOutlined sx={{ color: mediumMain }} />
+          <Typography
+            color={mediumMain}
+            sx={{ "&:hover": { cursor: "pointer", color: medium } }}
+          >
+            Image
+          </Typography>
+        </FlexBetween>
+
+        <Button
+          disabled={!post}
+          onClick={handlePost}
+          // cursor="pointer"
+          sx={{
+            color: palette.background.alt,
+            backgroundColor: "rgb(220 38 38)",
+            borderRadius: "3rem",
           }}
         >
-          <div style={{ display: "flex" }}>
-            <ProfilePic style={{ width: "45px", height: "45px" }} />
-            <p
-              style={{
-                marginTop: "10px",
-                fontSize: "20px",
-                marginLeft: "15px",
-              }}
-            >
-              {userName}
-            </p>
-          </div>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Label style={{ marginLeft: "40px", fontSize: "20px" }}>
-              Add your post
-            </Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Title"
-              style={{ marginBottom: "10px" }}
-              size="lg"
-              ref={NewTitle}
-            />
-            <Form.Control
-              as="textarea"
-              type="text"
-              rows={4}
-              size="lg"
-              placeholder="What's on your mind"
-              ref={NewPost}
-              required
-            />
-          </Form.Group>
-
-          <div
-            style={{
-              alignSelf: "right",
-              justifyContent: "right",
-              display: "flex",
-            }}
-          >
-            <button
-              className="CoolButton"
-              text="Submit"
-              style={{
-                background: "#3CB371",
-                color: "#fff",
-                border: "1px solid #eee",
-                borderRadius: "20px",
-                boxShadow: "5px 5px 5px #eee",
-                width: "200px",
-                textShadow: "none",
-                height: "40px",
-              }}
-            />
-          </div>
-        </div>
-      </form>
-    </div>
+          POST
+        </Button>
+      </FlexBetween>
+    </Card>
   );
-}
+};
+
+export default NewPost;

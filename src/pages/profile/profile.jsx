@@ -1,129 +1,107 @@
-import React from "react";
-import "./profile.module.css";
+import React, { useState } from "react";
 import ProfilePic from "../../components/profilePic/profilePic";
 import "../../index.css";
 import Wrapper from "../../layouts/wrapper";
 import {
-  Col,
-  Row,
-  Container,
-  Breadcrumb,
   Card,
-  Tab,
+  Typography,
   Tabs,
-} from "react-bootstrap";
+  TabsHeader,
+  TabsBody,
+  Tab,
+  TabPanel,
+} from "@material-tailwind/react";
+import PostCard from "../../components/posts/postCard";
+import Edit from "./edit";
+import About from "./about";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { useTheme } from "@mui/material";
+
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 export default function Profile() {
-  const userName = localStorage.getItem("currentUser");
-  // localStorage.setItem("about", "");
-  // const about = JSON.parse(localStorage.getItem("about")) || "";
+  const [activeTab, setActiveTab] = React.useState("post");
+  const [user, setUser] = useState(null);
+  const token = useSelector((state) => state.token);
+  const { userId } = useParams();
+  const { palette } = useTheme();
+  const dark = palette.neutral.dark;
+  const medium = palette.neutral.medium;
+  const main = palette.neutral.main;
 
+  const getUser = async () => {
+    const response = await fetch(`${backendUrl}users/${userId}`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response.json();
+    setUser(data);
+  };
+
+  const data = [
+    {
+      label: "Post",
+      value: "post",
+      desc: ``,
+    },
+    {
+      label: "About",
+      value: "about",
+      desc: ``,
+    },
+    {
+      label: "Edit",
+      value: "edit",
+      desc: ``,
+    },
+  ];
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  if (!user) return null;
   return (
-    <div>
-      <Wrapper />
-      <Container>
-        <Row>
-          <h1>Profile</h1>
-          <Breadcrumb>
-            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-            <Breadcrumb.Item href="/profile">profile</Breadcrumb.Item>
-          </Breadcrumb>
-        </Row>
-        <Row>
-          <Col>
-            <Card style={{ width: "30rem" }}>
-              <div className="card-body d-flex flex-column align-items-center">
-                <ProfilePic
-                  style={{
-                    width: "150px",
-                    height: "150px",
-                  }}
-                />
-
-                <Card.Title>{userName}</Card.Title>
-                <Card.Text>ComingSoon</Card.Text>
-              </div>
-            </Card>
-          </Col>
-          <Col
-            style={{
-              backgroundColor: "white",
+    <Wrapper>
+      <div className="w-3/5 mt-10">
+        <Tabs value={activeTab}>
+          <TabsHeader
+            color={dark}
+            className="rounded-none border-b border-blue-gray-50 bg-transparent p-0"
+            indicatorProps={{
+              className:
+                "bg-transparent border-b-2 border-gray-900 shadow-none rounded-none",
             }}
           >
-            <Tabs id="fill-tab-example" fill className="myclass">
+            {data.map(({ label, value }) => (
               <Tab
-                eventKey="link-0"
-                defaultActiveKey="/"
-                title={<span style={{ color: "black" }}>Edit Profile</span>}
+                color={dark}
+                key={value}
+                value={value}
+                onClick={() => setActiveTab(value)}
+                className={activeTab === value ? "text-gray-900" : ""}
               >
-                <br />
-                <h3>About</h3>
-
-                <p>
-                  Recent engineering graduate with a strong passion for web
-                  development. Proficient in HTML, CSS, JavaScript, PHP, and
-                  eager to contribute technical skills to dynamic web projects.
-                  Quick learner, problem solver, and team player committed to
-                  creating innovative web solutions
-                </p>
-                <br />
-                <h3>Profile details</h3>
-                <Row>
-                  <Col xl="3">Fullname</Col>
-                  <Col xl="6">Amr mohamed</Col>
-                </Row>
-                <br />
-                <Row>
-                  <Col xl="3">Company</Col>
-                  <Col xl="6">Lueilwitz, Wisoky and Leuschke</Col>
-                </Row>
-                <br />
-                <Row>
-                  <Col xl="3">Job</Col>
-                  <Col xl="6">Web Developer</Col>
-                </Row>
-                <br />
-                <Row>
-                  <Col xl="3">Country</Col>
-                  <Col xl="6">Egypt</Col>
-                </Row>
-                <br />
-                <Row>
-                  <Col xl="3">Address</Col>
-                  <Col xl="6">A108 Adam Street, New York, NY 535022</Col>
-                </Row>
-                <br />
-                <Row>
-                  <Col xl="3">Phone</Col>
-                  <Col xl="6">01281855126</Col>
-                </Row>
-                <br />
-                <Row>
-                  <Col xl="3">Email</Col>
-                  <Col xl="6">amr1236661@gmail.com</Col>
-                </Row>
-                <br />
+                <span style={{ color: dark }}>{label}</span>
               </Tab>
-              <Tab
-                eventKey="link-1"
-                title={<span style={{ color: "black" }}>Edit Profile</span>}
-              ></Tab>
-              <Tab
-                eventKey="link-2"
-                title={<span style={{ color: "black" }}>Settings</span>}
-              >
-                Settings
-              </Tab>
-              <Tab
-                eventKey="link-3"
-                title={<span style={{ color: "black" }}>Change Password</span>}
-              >
-                ChangePassword
-              </Tab>
-            </Tabs>
-          </Col>
-        </Row>
-      </Container>
-    </div>
+            ))}
+          </TabsHeader>
+          <TabsBody>
+            {data.map(({ value, desc }) => (
+              <TabPanel key={value} value={value}>
+                {value === "post" ? (
+                  <PostCard isProfile userId={userId} />
+                ) : (
+                  desc
+                )}
+                {value === "edit" ? <Edit /> : desc}
+                {value === "about" ? <About userId={userId} /> : desc}
+              </TabPanel>
+            ))}
+          </TabsBody>
+        </Tabs>
+      </div>
+    </Wrapper>
   );
 }

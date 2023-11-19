@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Card, Button, FloatingLabel, Form } from "react-bootstrap";
-import { ToastContainer, toast, Slide } from "react-toastify";
+import { Card, Button, Input, CardBody } from "@material-tailwind/react";
+import { customToast } from "../../utils/toasts";
+import { useTheme } from "@mui/material";
 
 const Weather = (props) => {
+  const theme = useTheme();
+  const primary = theme.palette.primary.main;
+
   function convertion(val) {
     return (val - 273).toFixed(2);
   }
   const [weatherData, setWeatherData] = useState({});
   const [city, setCity] = useState({ name: "" });
+  const [user, setUser] = useState(null);
 
   const fetchWeatherData = async () => {
     const key = "7351e4b29d609b131709af3ef624cd77";
@@ -27,17 +32,7 @@ const Weather = (props) => {
         windspeed: res.data.wind.speed,
       });
     } catch (error) {
-      console.log("error", error);
-      toast.error("please enter a valid city", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      customToast("error", "weather" + error.message);
     }
   };
 
@@ -48,34 +43,58 @@ const Weather = (props) => {
     });
   };
 
-  const handleGetWeather = () => {
-    fetchWeatherData();
+  const handleGetWeather = async () => {
+    try {
+      const res = await axios.post("http://localhost:5000/message", {
+        username: "from front",
+        email: "from front",
+        password: "from front",
+        timestamp: Date.now(),
+      });
+      if (res.status === 200) {
+        setUser(res.data);
+      }
+      fetchWeatherData();
+    } catch (error) {
+      customToast("error", "Weather " + error.message);
+    }
   };
 
   return (
-    <div>
-      <ToastContainer transition={Slide} />
-      <Card {...props} style={{ width: "18rem" }}>
-        <Card.Body>
-          <FloatingLabel
-            controlId="floatingInput"
-            label="Enter City Name"
-            className="mb-2"
-          >
-            <Form.Control type="text" name="name" onChange={handleCityChange} />
-          </FloatingLabel>
-          {weatherData.name && (
-            <div>
-              <p>City: {weatherData.name}</p>
-              <p>Temperature: {weatherData.temperature} °C</p>
-              <p>Description: {weatherData.description}</p>
-              <p>Wind Speed: {weatherData.windspeed} m/s</p>
-            </div>
-          )}
-          <Button onClick={handleGetWeather}>Get Weather</Button>
-        </Card.Body>
-      </Card>
-    </div>
+    <Card {...props} style={{ backgroundColor: theme.palette.background.alt }}>
+      <CardBody>
+        <Input
+          onChange={handleCityChange}
+          className="mb-2"
+          variant="outlined"
+          label="enter a city"
+        ></Input>
+        {weatherData.name && (
+          <div>
+            <p>City: {weatherData.name}</p>
+            <p>Temperature: {weatherData.temperature} °C</p>
+            <p>Description: {weatherData.description}</p>
+            <p>Wind Speed: {weatherData.windspeed} m/s</p>
+          </div>
+        )}
+
+        {user && (
+          <>
+            <h1>Username: {user.username}</h1>
+          </>
+        )}
+        <Button
+          onClick={handleGetWeather}
+          style={{
+            backgroundColor: "rgb(220 38 38)",
+            border: "none",
+            marginTop: "20px",
+          }}
+        >
+          Get Weather
+        </Button>
+      </CardBody>
+    </Card>
   );
 };
 
