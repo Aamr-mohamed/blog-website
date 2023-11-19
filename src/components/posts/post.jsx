@@ -149,7 +149,7 @@ function Post({
           {comments.map((comment, i) => (
             <Box key={`${username}-${i}`}>
               <Divider />
-              <Typography sx={{ m: "0.5rem 0", pl: "1rem" }}>
+              <Typography sx={{ m: "0.5rem 0", pl: "1rem" }} color={main}>
                 {comment}
               </Typography>
             </Box>

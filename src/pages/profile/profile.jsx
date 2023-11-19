@@ -32,7 +32,7 @@ export default function Profile() {
   const main = palette.neutral.main;
 
   const getUser = async () => {
-    const response = await fetch(`${backendUrl}users/${userId}`, {
+    const response = await fetch(`${backendUrl}/users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });

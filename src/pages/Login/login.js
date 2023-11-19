@@ -28,7 +28,7 @@ export default function LoginForm() {
   const dispatch = useDispatch();
 
   const verification = async (values) => {
-    const loggedInResponse = await fetch(`${backendUrl}auth/login`, {
+    const loggedInResponse = await fetch(`${backendUrl}/auth/login`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(values),

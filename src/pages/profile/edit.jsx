@@ -88,6 +88,7 @@ function Edit() {
                 variant="static"
                 placeholder="Kevin malone - Noobslayer ,etc.."
                 label="Username"
+                color="red"
               />
 
               <Input
@@ -101,6 +102,7 @@ function Edit() {
                 variant="static"
                 label="Password"
                 type="password"
+                color="red"
               />
 
               <Select
@@ -113,6 +115,7 @@ function Edit() {
                 variant="static"
                 label="Gender"
                 placeholder="Enter ur gender"
+                color="red"
               >
                 <Option value="Male">Male</Option>
                 <Option value="Female">Female</Option>
@@ -128,6 +131,7 @@ function Edit() {
                 autoComplete="off"
                 variant="static"
                 label="Birthday"
+                color="red"
               />
 
               <Textarea
@@ -141,9 +145,15 @@ function Edit() {
                 autoComplete="off"
                 size="lg"
                 rows={6}
+                color="red"
               />
 
-              <Button type="submit">Submit</Button>
+              <Button
+                type="submit"
+                style={{ backgroundColor: "rgb(220 38 38)" }}
+              >
+                Submit
+              </Button>
             </div>
           </Form>
         )}
