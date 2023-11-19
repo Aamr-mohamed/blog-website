@@ -34,6 +34,9 @@ function Post({
   const isLiked = Boolean(likes[userId]);
   const likeCount = Object.keys(likes).length;
   const theme = useTheme();
+  const { palette } = useTheme();
+  const main = palette.neutral.main;
+  const primary = palette.primary.main;
 
   async function patchLike() {
     const res = await fetch(`http://localhost:3001/posts/${postId}/like`, {
@@ -83,7 +86,7 @@ function Post({
           {username}
         </Typography>
       </div>
-      <Typography variant="h5" className="pl-10 font-bold">
+      <Typography color={main} variant="h5" className="pl-10 font-bold">
         {Title}
       </Typography>
       <div className="flex justify-center w-full h-full">
@@ -99,12 +102,14 @@ function Post({
           />
         )}
       </div>
-      <Typography className="pl-6 pt-3 ">{postContent}</Typography>
+      <Typography className="pl-6 pt-3 " color={main}>
+        {postContent}
+      </Typography>
 
       <div className="">
         <IconButton onClick={patchLike}>
           {isLiked ? (
-            <FavoriteOutlined sx={{ color: "#00D5FA" }} />
+            <FavoriteOutlined sx={{ color: primary }} />
           ) : (
             <FavoriteBorderOutlined />
           )}

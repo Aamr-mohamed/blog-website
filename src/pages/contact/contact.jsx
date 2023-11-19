@@ -1,6 +1,6 @@
 import React from "react";
 import Wrapper from "../../layouts/wrapper";
-import SideBar from "../../components/Sidebar/SideBar";
+import SideBar from "../../components/profiler/Profiler";
 import { useState } from "react";
 import axios from "axios";
 
