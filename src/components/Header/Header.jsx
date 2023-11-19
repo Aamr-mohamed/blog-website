@@ -2,14 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Navbar,
-  Typography,
   Button,
-  MenuItem,
   Avatar,
   IconButton,
   Collapse,
 } from "@material-tailwind/react";
-import { useTheme } from "@mui/material";
+import {
+  InputBase,
+  Select,
+  Typography,
+  MenuItem,
+  useTheme,
+} from "@mui/material";
 import { Bars2Icon } from "@heroicons/react/24/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogout, setMode } from "../../store/store";
@@ -63,24 +67,20 @@ function Header() {
     >
       <div className="relative mx-auto flex items-center justify-between text-blue-gray-900">
         <Typography
-          onClick={() => navigate("/Home")}
-          className="mr-4 ml-2 cursor-pointer py-1.5 font-medium text-2xl text-red-600"
+          fontWeight="bold"
+          fontSize="clamp(1rem, 2rem, 2.25rem)"
+          onClick={() => navigate("/home")}
+          sx={{
+            "&:hover": {
+              cursor: "pointer",
+            },
+          }}
+          className="mr-4 ml-2 cursor-pointer py-1.5 font-medium  text-red-600"
         >
           Blogging Way
         </Typography>
         <div className="hidden lg:block ml-auto">
           <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
-            <Typography
-              as="a"
-              href={`/profile/${userId}`}
-              variant="small"
-              color="gray"
-              className="font-medium text-blue-gray-500"
-            >
-              <MenuItem className="flex items-center gap-2 lg:rounded-full">
-                <span className="text-gray-900"> PROFILE</span>
-              </MenuItem>
-            </Typography>
             <IconButton onClick={() => dispatch(setMode())}>
               {theme.palette.mode === "dark" ? (
                 <DarkMode sx={{ fontSize: "25px" }} />
@@ -94,6 +94,18 @@ function Header() {
                 />
               )}
             </IconButton>
+
+            <Typography
+              color={dark}
+              as="a"
+              href={`/profile/${userId}`}
+              variant="small"
+              className="font-medium text-blue-gray-500"
+            >
+              <MenuItem className="flex items-center gap-2 lg:rounded-full">
+                <span> PROFILE</span>
+              </MenuItem>
+            </Typography>
           </ul>
         </div>
         <IconButton
@@ -105,16 +117,6 @@ function Header() {
         >
           <Bars2Icon className="h-6 w-6" />
         </IconButton>
-        <Button
-          size="sm"
-          variant="text"
-          onClick={() => {
-            setLogout();
-            navigate("/");
-          }}
-        >
-          <span>Logout</span>
-        </Button>
 
         <Avatar
           variant="circular"
@@ -124,7 +126,35 @@ function Header() {
           src={`http://localhost:3001/assets/${user.pictureName}`}
           onClick={() => navigate(`/profile/${userId}`)}
         />
-        <span>{user.username}</span>
+        <Select
+          value={user.username}
+          sx={{
+            backgroundColor: neutralLight,
+            width: "150px",
+            borderRadius: "0.25rem",
+            p: "0.25rem 1rem",
+            "& .MuiSvgIcon-root": {
+              pr: "0.25rem",
+              width: "3rem",
+            },
+            "& .MuiSelect-select:focus": {
+              backgroundColor: neutralLight,
+            },
+          }}
+          input={<InputBase />}
+        >
+          <MenuItem value={user.username}>
+            <Typography>{user.username}</Typography>
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              dispatch(setLogout());
+              navigate("/");
+            }}
+          >
+            Log Out
+          </MenuItem>
+        </Select>
       </div>
       <Collapse open={isNavOpen} className="overflow-scroll">
         <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">

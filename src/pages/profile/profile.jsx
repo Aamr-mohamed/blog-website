@@ -17,12 +17,17 @@ import About from "./about";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { useTheme } from "@mui/material";
 
 export default function Profile() {
   const [activeTab, setActiveTab] = React.useState("post");
   const [user, setUser] = useState(null);
   const token = useSelector((state) => state.token);
   const { userId } = useParams();
+  const { palette } = useTheme();
+  const dark = palette.neutral.dark;
+  const medium = palette.neutral.medium;
+  const main = palette.neutral.main;
 
   const getUser = async () => {
     const response = await fetch(`http://localhost:3001/users/${userId}`, {
@@ -58,31 +63,10 @@ export default function Profile() {
   if (!user) return null;
   return (
     <Wrapper>
-      <div className="w-full flex flex-col">
-        <Card
-          className="w-full bg-transparent shadow-none flex flex-row"
-          style={{ height: "10rem" }}
-        >
-          {/* <input type="file" hidden accept="image/*" /> */}
-
-          <ProfilePic
-            size="150px"
-            image={user.pictureName}
-            onClick={() => {
-              console.log("nice");
-            }}
-          />
-          <div>
-            <Typography variant="h3" className="mt-8 ml-8">
-              {user.username}
-            </Typography>
-            <Typography className="ml-10">@{user.username}</Typography>
-          </div>
-        </Card>
-      </div>
       <div className="w-3/5 mt-10">
         <Tabs value={activeTab}>
           <TabsHeader
+            color={dark}
             className="rounded-none border-b border-blue-gray-50 bg-transparent p-0"
             indicatorProps={{
               className:
@@ -91,12 +75,13 @@ export default function Profile() {
           >
             {data.map(({ label, value }) => (
               <Tab
+                color={dark}
                 key={value}
                 value={value}
                 onClick={() => setActiveTab(value)}
                 className={activeTab === value ? "text-gray-900" : ""}
               >
-                {label}
+                <span style={{ color: dark }}>{label}</span>
               </Tab>
             ))}
           </TabsHeader>

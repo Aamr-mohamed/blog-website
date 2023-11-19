@@ -14,6 +14,7 @@ import { useTheme } from "@mui/material";
 const GetJokes = (props) => {
   const [jokeText, setJokeText] = useState(""); // State to store the joke text
   const theme = useTheme();
+  const primary = theme.palette.primary.main;
 
   const addNewJoke = async () => {
     try {
@@ -40,7 +41,7 @@ const GetJokes = (props) => {
       <CardFooter className="pt-0">
         <Button
           onClick={addNewJoke}
-          style={{ backgroundColor: "#14DCB4", border: "none" }}
+          style={{ backgroundColor: "rgb(220 38 38)", border: "none" }}
         >
           Get Joke
         </Button>

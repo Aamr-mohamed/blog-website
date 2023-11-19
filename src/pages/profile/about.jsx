@@ -1,4 +1,4 @@
-import { Typography } from "@material-tailwind/react";
+import { Typography, useTheme } from "@mui/material";
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 function About({ userId }) {
   const token = useSelector((state) => state.token);
   const [about, setAbout] = useState("");
+  const { palette } = useTheme();
+  const dark = palette.neutral.dark;
 
   const getUser = async () => {
     try {
@@ -24,7 +26,9 @@ function About({ userId }) {
   }, []);
   return (
     <div>
-      <Typography>{about}</Typography>
+      <Typography variant="h5" color={dark}>
+        {about}
+      </Typography>
     </div>
   );
 }

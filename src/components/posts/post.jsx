@@ -1,10 +1,10 @@
 import React from "react";
-import { Card, Typography, Avatar } from "@material-tailwind/react";
+import { Card, Avatar } from "@material-tailwind/react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setPost } from "../../store/store";
-import { Box, Divider, IconButton, useTheme } from "@mui/material";
+import { Box, Divider, IconButton, Typography, useTheme } from "@mui/material";
 import {
   ChatBubbleOutlineOutlined,
   FavoriteBorderOutlined,
@@ -33,10 +33,10 @@ function Post({
   const token = useSelector((state) => state.token);
   const isLiked = Boolean(likes[userId]);
   const likeCount = Object.keys(likes).length;
-  const theme = useTheme();
   const { palette } = useTheme();
   const main = palette.neutral.main;
   const primary = palette.primary.main;
+  const dark = palette.neutral.dark;
 
   async function patchLike() {
     const res = await fetch(`http://localhost:3001/posts/${postId}/like`, {
@@ -66,27 +66,31 @@ function Post({
     <Card
       className="mb-2"
       key={postId}
-      style={{ backgroundColor: theme.palette.background.alt }}
+      style={{ backgroundColor: palette.background.alt }}
     >
-      <div className="flex pt-2.5 pb-2.5 pl-2.5">
-        <ProfilePic
-          image={userPicturePath}
-          size="55px"
-          onClick={() => {
-            navigate(`/profile/${postUserId}`);
-          }}
-        />
+      <div
+        className="flex pt-2.5 pb-2.5 pl-2.5"
+        onClick={() => {
+          navigate(`/profile/${postUserId}`);
+        }}
+      >
+        <ProfilePic image={userPicturePath} size="55px" />
         <Typography
           className="pt-2 pl-3 "
-          variant="h5"
-          onClick={() => {
-            navigate(`/profile/${postUserId}`);
+          variant="h4"
+          color={dark}
+          fontWeight="500"
+          sx={{
+            "&:hover": {
+              color: palette.primary.light,
+              cursor: "pointer",
+            },
           }}
         >
           {username}
         </Typography>
       </div>
-      <Typography color={main} variant="h5" className="pl-10 font-bold">
+      <Typography color={main} variant="h4" className="pl-10 pt-3 font-bold">
         {Title}
       </Typography>
       <div className="flex justify-center w-full h-full">
@@ -102,14 +106,14 @@ function Post({
           />
         )}
       </div>
-      <Typography className="pl-6 pt-3 " color={main}>
+      <Typography className="pl-6 pt-3" color={main}>
         {postContent}
       </Typography>
 
       <div className="">
         <IconButton onClick={patchLike}>
           {isLiked ? (
-            <FavoriteOutlined sx={{ color: primary }} />
+            <FavoriteOutlined sx={{ color: "rgb(220 38 38) " }} />
           ) : (
             <FavoriteBorderOutlined />
           )}
@@ -130,7 +134,12 @@ function Post({
         </IconButton>
       </div>
 
-      <Typography className="text-muted ml-auto pr-2.5 pb-2.5">
+      <Typography
+        ml="auto"
+        pr={2.5}
+        pb={2.5}
+        className="text-muted ml-auto pr-2.5 pb-2.5"
+      >
         {timeAgo}
       </Typography>
       {isComments && (

@@ -6,6 +6,8 @@ import { useTheme } from "@mui/material";
 
 const Weather = (props) => {
   const theme = useTheme();
+  const primary = theme.palette.primary.main;
+
   function convertion(val) {
     return (val - 273).toFixed(2);
   }
@@ -84,7 +86,7 @@ const Weather = (props) => {
         <Button
           onClick={handleGetWeather}
           style={{
-            backgroundColor: "#14DCB4",
+            backgroundColor: "rgb(220 38 38)",
             border: "none",
             marginTop: "20px",
           }}

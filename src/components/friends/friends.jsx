@@ -2,17 +2,25 @@ import axios from "axios";
 import React, { useState } from "react";
 import ProfilePic from "../profilePic/profilePic.jsx";
 import { customToast } from "../../utils/toasts.js";
-import { Button, Card, IconButton, Typography } from "@material-tailwind/react";
+import { Button, Card, IconButton } from "@material-tailwind/react";
 import { PersonAddOutlined, PersonRemoveOutlined } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { setFriends } from "../../store/store.js";
+import { Typography, useTheme } from "@mui/material";
+import FlexBetween from "../Buttons/flexBetween.jsx";
+import { useNavigate } from "react-router-dom";
 
 function Friend({ friendId, name, userPicturePath }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { _id } = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const friends = useSelector((state) => state.user.friends);
   const isFriend = friends.find((friend) => friend._id === friendId);
+  const { palette } = useTheme();
+  const main = palette.neutral.main;
+  const primaryLight = palette.primary.light;
+  const primaryDark = palette.primary.dark;
   console.log(token);
 
   const patchFriend = async () => {
@@ -33,28 +41,40 @@ function Friend({ friendId, name, userPicturePath }) {
   };
 
   return (
-    <div className="flex justify-between items-center gap-1">
-      <ProfilePic
-        size="45px"
-        image={userPicturePath}
-        onClick={() => {
-          console.log("nice");
-        }}
-      />
-      <Typography variant="h5" fontWeight="500">
-        {name}
-      </Typography>
-      <IconButton
-        onClick={() => patchFriend()}
-        sx={{ backgroundColor: "#001519", p: "0.6rem" }}
-      >
-        {isFriend ? (
-          <PersonRemoveOutlined sx={{ color: "#99EEFD" }} />
-        ) : (
-          <PersonAddOutlined sx={{ color: "#99EEFD" }} />
-        )}
-      </IconButton>
-    </div>
+    <FlexBetween pl={2}>
+      <FlexBetween gap="1rem">
+        <ProfilePic
+          size="55px"
+          image={userPicturePath}
+          onClick={() => {
+            navigate(`/profile/${friendId}`);
+          }}
+        />
+        <Typography
+          color={main}
+          variant="h5"
+          fontWeight="500"
+          sx={{
+            "&:hover": {
+              color: palette.primary.light,
+              cursor: "pointer",
+            },
+          }}
+        >
+          {name}
+        </Typography>
+        <IconButton
+          onClick={() => patchFriend()}
+          sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
+        >
+          {isFriend ? (
+            <PersonRemoveOutlined sx={{ color: primaryDark }} />
+          ) : (
+            <PersonAddOutlined sx={{ color: primaryDark }} />
+          )}
+        </IconButton>
+      </FlexBetween>
+    </FlexBetween>
   );
 }
 

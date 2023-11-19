@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { customToast } from "../../utils/toasts";
 import axios from "axios";
 import { useState } from "react";
-import { Card, Typography } from "@material-tailwind/react";
-import { Box } from "@mui/material";
+import { Card } from "@material-tailwind/react";
+import { Box, Typography } from "@mui/material";
 import Friend from "./friends";
 import { useSelector, useDispatch } from "react-redux";
 import { setFriends } from "../../store/store";
@@ -12,6 +12,7 @@ import { useTheme } from "@mui/material";
 
 function Friends({ userId }) {
   const dispatch = useDispatch();
+  const { palette } = useTheme();
   const token = useSelector((state) => state.token);
   const friends = useSelector((state) => state.user.friends);
   const theme = useTheme();
@@ -37,10 +38,10 @@ function Friends({ userId }) {
   return (
     <Card style={{ backgroundColor: theme.palette.background.alt }}>
       <Typography
-        //   color={palette.neutral.dark}
+        color={palette.neutral.dark}
         variant="h5"
         fontWeight="500"
-        sx={{ mb: "1.5rem" }}
+        sx={{ mb: "1.5rem", pt: "1rem", pl: "1rem" }}
       >
         Friend List
       </Typography>

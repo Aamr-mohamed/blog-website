@@ -163,35 +163,13 @@ const NewPost = ({ pictureName }) => {
           </Typography>
         </FlexBetween>
 
-        {isNonMobileScreens ? (
-          <>
-            <FlexBetween gap="0.25rem">
-              <GifBoxOutlined sx={{ color: mediumMain }} />
-              <Typography color={mediumMain}>Clip</Typography>
-            </FlexBetween>
-
-            <FlexBetween gap="0.25rem">
-              <AttachFileOutlined sx={{ color: mediumMain }} />
-              <Typography color={mediumMain}>Attachment</Typography>
-            </FlexBetween>
-
-            <FlexBetween gap="0.25rem">
-              <MicOutlined sx={{ color: mediumMain }} />
-              <Typography color={mediumMain}>Audio</Typography>
-            </FlexBetween>
-          </>
-        ) : (
-          <FlexBetween gap="0.25rem">
-            <MoreHorizOutlined sx={{ color: mediumMain }} />
-          </FlexBetween>
-        )}
-
         <Button
           disabled={!post}
           onClick={handlePost}
+          // cursor="pointer"
           sx={{
             color: palette.background.alt,
-            backgroundColor: palette.primary.main,
+            backgroundColor: "rgb(220 38 38)",
             borderRadius: "3rem",
           }}
         >
