@@ -10,6 +10,8 @@ import { Typography, useTheme } from "@mui/material";
 import FlexBetween from "../Buttons/flexBetween.jsx";
 import { useNavigate } from "react-router-dom";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 function Friend({ friendId, name, userPicturePath }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,7 +28,7 @@ function Friend({ friendId, name, userPicturePath }) {
   const patchFriend = async () => {
     try {
       const result = await axios.patch(
-        `http://localhost:3001/users/${_id}/${friendId}`,
+        `${backendUrl}/users/${_id}/${friendId}`,
         null,
         {
           headers: { Authorization: `Bearer ${token}` },

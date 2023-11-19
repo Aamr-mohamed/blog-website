@@ -11,6 +11,8 @@ import { EditOutlined, ManageAccountsOutlined } from "@mui/icons-material";
 import linkedIn from "../../assets/logo/linkedin.png";
 import twiter from "../../assets/logo/twitter.png";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 function Profiler() {
   const token = useSelector((state) => state.token);
   const { _id, pictureName } = useSelector((state) => state.user);
@@ -22,7 +24,7 @@ function Profiler() {
   const main = palette.neutral.main;
 
   const getUser = async () => {
-    const response = axios.get(`http://localhost:3001/users/${_id}`, {
+    const response = axios.get(`${backendUrl}/users/${_id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response;

@@ -10,6 +10,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { setFriends } from "../../store/store";
 import { useTheme } from "@mui/material";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 function Friends({ userId }) {
   const dispatch = useDispatch();
   const { palette } = useTheme();
@@ -19,12 +21,9 @@ function Friends({ userId }) {
 
   const getFriends = async () => {
     try {
-      const result = await axios.get(
-        `http://localhost:3001/users/${userId}/friends`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const result = await axios.get(`${backendUrl}/users/${userId}/friends`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       const array = result.data;
       console.log(array);
       dispatch(setFriends({ friends: array }));

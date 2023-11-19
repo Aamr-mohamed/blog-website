@@ -27,6 +27,8 @@ import { setPosts } from "../../store/store";
 import { Card } from "@material-tailwind/react";
 import axios from "axios";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 const NewPost = ({ pictureName }) => {
   const dispatch = useDispatch();
   const [isImage, setIsImage] = useState(false);
@@ -54,7 +56,7 @@ const NewPost = ({ pictureName }) => {
       formData.append("userPicturePath", pictureName);
     }
 
-    const response = await fetch(`http://localhost:3001/posts`, {
+    const response = await fetch(`${backendUrl}/posts`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
       body: formData,

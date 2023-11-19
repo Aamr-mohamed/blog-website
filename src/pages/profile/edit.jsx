@@ -12,6 +12,8 @@ import { toast } from "react-toastify";
 import { customToast } from "../../utils/toasts";
 import { useSelector } from "react-redux";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 function Edit() {
   const userId = useSelector((state) => state.user._id);
   const token = useSelector((state) => state.token);
@@ -30,7 +32,7 @@ function Edit() {
       // console.log(picturePath);
 
       const res = await axios.patch(
-        `http://localhost:3001/users/${userId}/edit`,
+        `${backendUrl}/users/${userId}/edit`,
         values,
         {
           headers: { Authorization: `Bearer ${token}` },

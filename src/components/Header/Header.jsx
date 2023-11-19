@@ -19,7 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLogout, setMode } from "../../store/store";
 import { DarkMode, LightMode } from "@mui/icons-material";
 
-// nav list component
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 function Header() {
   const [isNavOpen, setIsNavOpen] = React.useState(false);
@@ -123,7 +123,7 @@ function Header() {
           size="sm"
           alt="tania andrew"
           className="border border-gray-900 p-0.5"
-          src={`http://localhost:3001/assets/${user.pictureName}`}
+          src={`${backendUrl}/assets/${user.pictureName}`}
           onClick={() => navigate(`/profile/${userId}`)}
         />
         <Select

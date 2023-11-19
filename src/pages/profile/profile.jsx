@@ -19,6 +19,8 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useTheme } from "@mui/material";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 export default function Profile() {
   const [activeTab, setActiveTab] = React.useState("post");
   const [user, setUser] = useState(null);
@@ -30,7 +32,7 @@ export default function Profile() {
   const main = palette.neutral.main;
 
   const getUser = async () => {
-    const response = await fetch(`http://localhost:3001/users/${userId}`, {
+    const response = await fetch(`${backendUrl}users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });

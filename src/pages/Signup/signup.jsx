@@ -14,6 +14,8 @@ import { CardGroup } from "reactstrap";
 import LoginGoogle from "../../components/Buttons/Google";
 // import FacebookButton from "../../components/Buttons/facebook";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 export default function SignupForm() {
   const [picturePath, setpicturePath] = useState(null);
   const navigate = useNavigate();
@@ -61,7 +63,7 @@ export default function SignupForm() {
       console.log(formData);
       console.log(picturePath);
       console.log(formData);
-      const res = await axios.post("http://localhost:3001/adduser", formData, {
+      const res = await axios.post(`${backendUrl}/adduser`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

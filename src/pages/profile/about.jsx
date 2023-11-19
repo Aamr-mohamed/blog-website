@@ -5,6 +5,8 @@ import { useState } from "react";
 import { customToast } from "../../utils/toasts";
 import { useSelector } from "react-redux";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 function About({ userId }) {
   const token = useSelector((state) => state.token);
   const [about, setAbout] = useState("");
@@ -13,7 +15,7 @@ function About({ userId }) {
 
   const getUser = async () => {
     try {
-      const user = await axios.get(`http://localhost:3001/users/${userId}`, {
+      const user = await axios.get(`${backendUrl}/users/${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAbout(user.data.about);

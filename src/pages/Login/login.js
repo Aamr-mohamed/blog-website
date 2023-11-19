@@ -11,6 +11,8 @@ import Google from "../../components/Buttons/Google";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../../store/store";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 const loginSchema = yup.object().shape({
   email: yup.string().email("invalid email").required("required"),
   password: yup.string().required("required"),
@@ -26,7 +28,7 @@ export default function LoginForm() {
   const dispatch = useDispatch();
 
   const verification = async (values) => {
-    const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
+    const loggedInResponse = await fetch(`${backendUrl}auth/login`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(values),
@@ -80,7 +82,7 @@ export default function LoginForm() {
           backgroundImage: `url(${background})`,
         }}
       >
-        <div className="backdrop-blur w-full h-full rounded-lg border-none text-white flex flex-col ">
+        <div className=" w-full h-full rounded-lg border-none text-white flex flex-col ">
           <img src={logoNew} alt="logo" className="h-28 mx-auto mt-3" />
           <Formik
             initialValues={initialValuesLogin}

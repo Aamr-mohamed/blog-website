@@ -1,6 +1,8 @@
 import { Box } from "@mui/material";
 import React from "react";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 function ProfilePic({ image, size = "60px" }) {
   return (
     <Box width={size} height={size}>
@@ -9,7 +11,7 @@ function ProfilePic({ image, size = "60px" }) {
         width={size}
         height={size}
         alt="user"
-        src={`http://localhost:3001/assets/${image}`}
+        src={`${backendUrl}/assets/${image}`}
       />
     </Box>
   );

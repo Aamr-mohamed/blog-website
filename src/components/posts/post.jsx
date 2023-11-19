@@ -14,6 +14,8 @@ import {
 import ProfilePic from "../profilePic/profilePic";
 import { formatDistanceToNow } from "date-fns";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 function Post({
   postId,
   postUserId,
@@ -102,7 +104,7 @@ function Post({
               borderRadius: "0.75rem",
               marginTop: "0.75rem",
             }}
-            src={`http://localhost:3001/assets/${picturePath}`}
+            src={`${backendUrl}/assets/${picturePath}`}
           />
         )}
       </div>

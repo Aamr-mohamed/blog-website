@@ -5,25 +5,24 @@ import Post from "./post";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "../../store/store";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 function PostCard({ isProfile = false, userId }) {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts);
   const token = useSelector((state) => state.token);
 
   const getUserPosts = async () => {
-    const response = await fetch(
-      `http://localhost:3001/posts/${userId}/posts`,
-      {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
+    const response = await fetch(`${backendUrl}/posts/${userId}/posts`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    });
     const data = await response.json();
     dispatch(setPosts({ posts: data }));
   };
 
   const getPosts = async () => {
-    const response = await fetch("http://localhost:3001/posts", {
+    const response = await fetch(`${backendUrl}/posts`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
