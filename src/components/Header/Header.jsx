@@ -63,7 +63,7 @@ function Header() {
   return (
     <Navbar
       className="mx-auto max-w-screen-3xl p-2  lg:pl-6 bg-transparent shadow-none border-none"
-      style={{ backgroundColor: alt, marginBottom: "20px" }}
+      style={{ backgroundColor: background, marginBottom: "20px" }}
     >
       <div className="relative mx-auto flex items-center justify-between text-blue-gray-900">
         <Typography

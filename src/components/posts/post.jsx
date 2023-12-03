@@ -1,7 +1,7 @@
 import React from "react";
-import { Card, Avatar } from "@material-tailwind/react";
+import { Card } from "@material-tailwind/react";
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setPost } from "../../store/store";
 import { Box, Divider, IconButton, Typography, useTheme } from "@mui/material";
@@ -18,6 +18,7 @@ import { formatDistanceToNow } from "date-fns";
 import axios from "axios";
 import { setFriends } from "../../store/store.js";
 import { customToast } from "../../utils/toasts.js";
+import FlexBetween from "../Buttons/flexBetween.jsx";
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -50,7 +51,7 @@ function Post({
 
   const { palette } = useTheme();
   const main = palette.neutral.main;
-  const primary = palette.primary.main;
+  // const primary = palette.primary.main;
   const dark = palette.neutral.dark;
 
   async function patchLike() {
@@ -103,45 +104,47 @@ function Post({
         backgroundColor: palette.background.alt,
       }}
     >
-      <div className="flex pt-2.5 pb-2.5 pl-2.5">
-        <ProfilePic
-          image={userPicturePath}
-          size="55px"
-          onClick={() => {
-            navigate(`/profile/${postUserId}`);
-          }}
-        />
-        <Typography
-          className="pt-2 pl-3 "
-          variant="h4"
-          color={dark}
-          fontWeight="500"
-          sx={{
-            "&:hover": {
-              color: palette.primary.light,
-              cursor: "pointer",
-            },
-          }}
-          onClick={() => {
-            navigate(`/profile/${postUserId}`);
-          }}
-        >
-          {username}
-        </Typography>
-
-        {userId !== postUserId && !isProfile ? (
-          <IconButton
-            onClick={() => patchFriend()}
-            sx={{ backgroundColor: palette.primary.light, p: "0.6rem" }}
+      <FlexBetween p={2}>
+        <FlexBetween gap="1rem">
+          <ProfilePic
+            image={userPicturePath}
+            size="55px"
+            onClick={() => {
+              navigate(`/profile/${postUserId}`);
+            }}
+          />
+          <Typography
+            className="pt-2 pl-3 "
+            variant="h4"
+            color={dark}
+            fontWeight="500"
+            sx={{
+              "&:hover": {
+                color: palette.primary.light,
+                cursor: "pointer",
+              },
+            }}
+            onClick={() => {
+              navigate(`/profile/${postUserId}`);
+            }}
           >
-            {isFriend ? (
-              <PersonRemoveOutlined sx={{ color: palette.primary.dark }} />
-            ) : (
-              <PersonAddOutlined sx={{ color: palette.primary.dark }} />
-            )}
-          </IconButton>
-        ) : null}
-      </div>
+            {username}
+          </Typography>
+
+          {userId !== postUserId && !isProfile ? (
+            <IconButton
+              onClick={() => patchFriend()}
+              sx={{ backgroundColor: palette.primary.light, p: "0.6rem" }}
+            >
+              {isFriend ? (
+                <PersonRemoveOutlined sx={{ color: palette.primary.dark }} />
+              ) : (
+                <PersonAddOutlined sx={{ color: palette.primary.dark }} />
+              )}
+            </IconButton>
+          ) : null}
+        </FlexBetween>
+      </FlexBetween>
       <Typography
         color={main}
         variant="h4"
