@@ -37,7 +37,7 @@ export default function LoginForm() {
     console.log(loggedIn);
 
     if (loggedIn.success === false) {
-      toast.warn(loggedIn.message, {
+      toast.error(loggedIn.message, {
         position: "top-right",
         autoClose: 1000,
         hideProgressBar: false,
