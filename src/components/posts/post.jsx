@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Avatar } from "@material-tailwind/react";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setPost } from "../../store/store";
 import { Box, Divider, IconButton, Typography, useTheme } from "@mui/material";
@@ -9,14 +9,20 @@ import {
   ChatBubbleOutlineOutlined,
   FavoriteBorderOutlined,
   FavoriteOutlined,
+  PersonAddOutlined,
+  PersonRemoveOutlined,
   ShareOutlined,
 } from "@mui/icons-material";
 import ProfilePic from "../profilePic/profilePic";
 import { formatDistanceToNow } from "date-fns";
+import axios from "axios";
+import { setFriends } from "../../store/store.js";
+import { customToast } from "../../utils/toasts.js";
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 function Post({
+  isProfile,
   postId,
   postUserId,
   username,
@@ -28,13 +34,20 @@ function Post({
   picturePath,
   createdAt,
 }) {
-  const [isComments, setIsComments] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [timeAgo, setTimeAgo] = useState("");
+
   const userId = useSelector((state) => state.user._id);
   const token = useSelector((state) => state.token);
+
+  const [isComments, setIsComments] = useState(false);
   const isLiked = Boolean(likes[userId]);
+  const friends = useSelector((state) => state.user.friends);
+  const isFriend = friends.find((friend) => friend._id === postUserId);
   const likeCount = Object.keys(likes).length;
+
   const { palette } = useTheme();
   const main = palette.neutral.main;
   const primary = palette.primary.main;
@@ -54,13 +67,31 @@ function Post({
     dispatch(setPost({ post: updatedPost }));
   }
 
-  const [timeAgo, setTimeAgo] = useState("");
+  const patchFriend = async () => {
+    try {
+      const result = await axios.patch(
+        `${backendUrl}/users/${userId}/${postUserId}`,
+        null,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      const array = result.data;
+      dispatch(setFriends({ friends: array }));
+
+      !isFriend
+        ? customToast("success", "Friend added successfully")
+        : customToast("warn", "Friend removed successfully");
+    } catch (error) {
+      customToast("error", error.message);
+    }
+  };
+
   useEffect(() => {
     const originalDateTime = new Date(createdAt);
     const timeAgoString = formatDistanceToNow(originalDateTime, {
       addSuffix: true,
     });
-
     setTimeAgo(timeAgoString);
   }, [createdAt]);
 
@@ -72,13 +103,14 @@ function Post({
         backgroundColor: palette.background.alt,
       }}
     >
-      <div
-        className="flex pt-2.5 pb-2.5 pl-2.5"
-        onClick={() => {
-          navigate(`/profile/${postUserId}`);
-        }}
-      >
-        <ProfilePic image={userPicturePath} size="55px" />
+      <div className="flex pt-2.5 pb-2.5 pl-2.5">
+        <ProfilePic
+          image={userPicturePath}
+          size="55px"
+          onClick={() => {
+            navigate(`/profile/${postUserId}`);
+          }}
+        />
         <Typography
           className="pt-2 pl-3 "
           variant="h4"
@@ -90,9 +122,25 @@ function Post({
               cursor: "pointer",
             },
           }}
+          onClick={() => {
+            navigate(`/profile/${postUserId}`);
+          }}
         >
           {username}
         </Typography>
+
+        {userId !== postUserId && !isProfile ? (
+          <IconButton
+            onClick={() => patchFriend()}
+            sx={{ backgroundColor: palette.primary.light, p: "0.6rem" }}
+          >
+            {isFriend ? (
+              <PersonRemoveOutlined sx={{ color: palette.primary.dark }} />
+            ) : (
+              <PersonAddOutlined sx={{ color: palette.primary.dark }} />
+            )}
+          </IconButton>
+        ) : null}
       </div>
       <Typography
         color={main}

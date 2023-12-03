@@ -9,6 +9,7 @@ const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 function PostCard({ isProfile = false, userId }) {
   const dispatch = useDispatch();
+  const id = useSelector((state) => state.user._id);
   const posts = useSelector((state) => state.posts);
   const token = useSelector((state) => state.token);
 
@@ -54,6 +55,7 @@ function PostCard({ isProfile = false, userId }) {
           createdAt,
         }) => (
           <Post
+            isProfile={isProfile}
             key={_id}
             postId={_id}
             postUserId={userId}
