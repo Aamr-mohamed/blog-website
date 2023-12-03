@@ -94,7 +94,11 @@ function Post({
           {username}
         </Typography>
       </div>
-      <Typography color={main} variant="h4" className="pl-10 pt-3 font-bold">
+      <Typography
+        color={main}
+        variant="h4"
+        className="pl-10 pt-3 font-bold pr-10"
+      >
         {Title}
       </Typography>
       <div className="flex justify-center w-full h-full">
@@ -111,7 +115,7 @@ function Post({
         )}
       </div>
       <Typography
-        className="pl-6 pt-3 "
+        className="pl-6 pt-3 pr-6"
         color={main}
         style={{ overflowWrap: "break-word" }}
       >

@@ -26,6 +26,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "../../store/store";
 import { Card } from "@material-tailwind/react";
 import axios from "axios";
+import { customToast } from "../../utils/toasts";
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -43,30 +44,34 @@ const NewPost = ({ pictureName }) => {
   const medium = palette.neutral.medium;
 
   const handlePost = async () => {
-    const formData = new FormData();
-    formData.append("userId", _id);
-    formData.append("Title", Title);
-    formData.append("postContent", post);
-    if (image) {
-      formData.append("picture", image);
-      formData.append("picturePath", image.name);
+    try {
+      const formData = new FormData();
+      formData.append("userId", _id);
+      formData.append("Title", Title);
+      formData.append("postContent", post);
+      if (image) {
+        formData.append("picture", image);
+        formData.append("picturePath", image.name);
+      }
+
+      if (pictureName) {
+        formData.append("userPicturePath", pictureName);
+      }
+
+      const response = await fetch(`${backendUrl}/posts`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
+      });
+      const posts = await response.json();
+      customToast("success", "post created successfully");
+      dispatch(setPosts({ posts }));
+      setImage(null);
+      setPost("");
+      setTitle("");
+    } catch (error) {
+      customToast("error", error.message);
     }
-
-    if (pictureName) {
-      formData.append("userPicturePath", pictureName);
-    }
-
-    const response = await fetch(`${backendUrl}/posts`, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
-      body: formData,
-    });
-
-    const posts = await response.json();
-    dispatch(setPosts({ posts }));
-    setImage(null);
-    setPost("");
-    setTitle("");
   };
 
   return (

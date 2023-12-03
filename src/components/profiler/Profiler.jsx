@@ -64,7 +64,6 @@ function Profiler() {
             </Typography>
           </Box>
         </FlexBetween>
-        <ManageAccountsOutlined />
       </FlexBetween>
 
       <Divider />

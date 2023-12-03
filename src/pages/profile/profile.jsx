@@ -4,7 +4,6 @@ import "../../index.css";
 import Wrapper from "../../layouts/wrapper";
 import {
   Card,
-  Typography,
   Tabs,
   TabsHeader,
   TabsBody,
@@ -17,13 +16,15 @@ import About from "./about";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { useTheme } from "@mui/material";
+import { useTheme, Typography } from "@mui/material";
+import FlexBetween from "../../components/Buttons/flexBetween";
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 export default function Profile() {
   const [activeTab, setActiveTab] = React.useState("post");
   const [user, setUser] = useState(null);
+  const id = useSelector((state) => state.user._id);
   const token = useSelector((state) => state.token);
   const { userId } = useParams();
   const { palette } = useTheme();
@@ -66,6 +67,12 @@ export default function Profile() {
   return (
     <Wrapper>
       <div className="w-3/5 mt-10">
+        <FlexBetween pl={2}>
+          <FlexBetween gap="1rem">
+            <ProfilePic image={user.pictureName} size="100px" />
+            <Typography variant="h4">{user.username}</Typography>
+          </FlexBetween>
+        </FlexBetween>
         <Tabs value={activeTab}>
           <TabsHeader
             color={dark}
@@ -95,7 +102,7 @@ export default function Profile() {
                 ) : (
                   desc
                 )}
-                {value === "edit" ? <Edit /> : desc}
+                {value === "edit" && userId === id ? <Edit /> : null}
                 {value === "about" ? <About userId={userId} /> : desc}
               </TabPanel>
             ))}
