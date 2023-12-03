@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 import * as yup from "yup";
 import { Form, Formik } from "formik";
 import { Card, Input, Typography } from "@material-tailwind/react";
-import Google from "../../components/Buttons/Google";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../../store/store";
 
@@ -165,7 +164,6 @@ export default function LoginForm() {
                     Or signup using
                   </Typography>
                   <div className="flex flex-col items-center justify-center">
-                    <Google />
                     {/* <Github />
                     <Facebook /> */}
                   </div>

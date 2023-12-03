@@ -18,7 +18,7 @@ function Profiler() {
   const { _id, pictureName } = useSelector((state) => state.user);
   const { palette } = useTheme();
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
   const dark = palette.neutral.dark;
   const medium = palette.neutral.medium;
   const main = palette.neutral.main;
@@ -36,9 +36,6 @@ function Profiler() {
     getUser();
   }, []);
 
-  if (!user) {
-    return null;
-  }
   return (
     <>
       <FlexBetween>
@@ -63,7 +60,7 @@ function Profiler() {
               {user.username}
             </Typography>
             <Typography color={medium}>
-              {user.friends.length} friends
+              {user.friends?.length} friends
             </Typography>
           </Box>
         </FlexBetween>
@@ -78,37 +75,6 @@ function Profiler() {
           {user.viewedProfile}
         </Typography>
       </FlexBetween>
-      <Box p="1rem 0">
-        <Typography fontSize="1rem" color={main} fontWeight="500" mb="1rem">
-          Social Profiles
-        </Typography>
-
-        <FlexBetween gap="1rem" mb="0.5rem">
-          <FlexBetween gap="1rem">
-            <img src={twiter} alt="twitter" />
-            <Box>
-              <Typography color={main} fontWeight="500">
-                Twitter
-              </Typography>
-              <Typography color={medium}>Social Network</Typography>
-            </Box>
-          </FlexBetween>
-          <EditOutlined sx={{ color: main }} />
-        </FlexBetween>
-
-        <FlexBetween gap="1rem">
-          <FlexBetween gap="1rem">
-            <img src={linkedIn} alt="linkedin" />
-            <Box>
-              <Typography color={main} fontWeight="500">
-                Linkedin
-              </Typography>
-              <Typography color={medium}>Network Platform</Typography>
-            </Box>
-          </FlexBetween>
-          <EditOutlined sx={{ color: main }} />
-        </FlexBetween>
-      </Box>
     </>
   );
 }

@@ -93,7 +93,7 @@ const NewPost = ({ pictureName }) => {
             disableUnderline
           />
           <Input
-            placeholder="What's on your mind..."
+            placeholder="Post Content"
             onChange={(e) => setPost(e.target.value)}
             value={post}
             sx={{
@@ -133,6 +133,12 @@ const NewPost = ({ pictureName }) => {
                     <p>Add Image Here</p>
                   ) : (
                     <FlexBetween>
+                      <img
+                        src={`${backendUrl}/assets/${image.name}`} // Use createObjectURL to display the image
+                        alt={image.name}
+                        style={{ maxWidth: "100%", maxHeight: "150px" }}
+                      />
+
                       <Typography>{image.name}</Typography>
                       <EditOutlined />
                     </FlexBetween>

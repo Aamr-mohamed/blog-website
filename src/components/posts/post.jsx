@@ -68,7 +68,9 @@ function Post({
     <Card
       className="mb-2"
       key={postId}
-      style={{ backgroundColor: palette.background.alt }}
+      style={{
+        backgroundColor: palette.background.alt,
+      }}
     >
       <div
         className="flex pt-2.5 pb-2.5 pl-2.5"
@@ -108,7 +110,11 @@ function Post({
           />
         )}
       </div>
-      <Typography className="pl-6 pt-3" color={main}>
+      <Typography
+        className="pl-6 pt-3 "
+        color={main}
+        style={{ overflowWrap: "break-word" }}
+      >
         {postContent}
       </Typography>
 
