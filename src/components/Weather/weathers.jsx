@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Card, Button, Input, CardBody } from "@material-tailwind/react";
 import { customToast } from "../../utils/toasts";
-import { useTheme } from "@mui/material";
+import { Typography, useTheme } from "@mui/material";
 
 const Weather = (props) => {
   const theme = useTheme();
@@ -43,38 +43,30 @@ const Weather = (props) => {
     });
   };
 
-  const handleGetWeather = async () => {
-    try {
-      const res = await axios.post("http://localhost:5000/message", {
-        username: "from front",
-        email: "from front",
-        password: "from front",
-        timestamp: Date.now(),
-      });
-      if (res.status === 200) {
-        setUser(res.data);
-      }
-      fetchWeatherData();
-    } catch (error) {
-      customToast("error", "Weather " + error.message);
-    }
-  };
-
   return (
     <Card {...props} style={{ backgroundColor: theme.palette.background.alt }}>
       <CardBody>
         <Input
+          name="name"
           onChange={handleCityChange}
           className="mb-2"
           variant="outlined"
           label="enter a city"
-        ></Input>
+        />
         {weatherData.name && (
           <div>
-            <p>City: {weatherData.name}</p>
-            <p>Temperature: {weatherData.temperature} °C</p>
-            <p>Description: {weatherData.description}</p>
-            <p>Wind Speed: {weatherData.windspeed} m/s</p>
+            <Typography variant="h5" color={theme.palette.neutral.dark}>
+              City: {weatherData.name}
+            </Typography>
+            <Typography variant="h5" color={theme.palette.neutral.dark}>
+              Temperature: {weatherData.temperature} °C
+            </Typography>
+            <Typography variant="h5" color={theme.palette.neutral.dark}>
+              Description: {weatherData.description}
+            </Typography>
+            <Typography variant="h5" color={theme.palette.neutral.dark}>
+              Wind Speed: {weatherData.windspeed} m/s
+            </Typography>
           </div>
         )}
 
@@ -84,7 +76,7 @@ const Weather = (props) => {
           </>
         )}
         <Button
-          onClick={handleGetWeather}
+          onClick={fetchWeatherData}
           style={{
             backgroundColor: "rgb(220 38 38)",
             border: "none",

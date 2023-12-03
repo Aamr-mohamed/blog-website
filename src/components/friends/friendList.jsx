@@ -9,6 +9,7 @@ import Friend from "./friends";
 import { useSelector, useDispatch } from "react-redux";
 import { setFriends } from "../../store/store";
 import { useTheme } from "@mui/material";
+import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -25,6 +26,11 @@ function Friends({ userId }) {
         headers: { Authorization: `Bearer ${token}` },
       });
       const array = result.data;
+      console.log(array.length);
+
+      if (array.length === 0) {
+        return;
+      }
       console.log(array);
       dispatch(setFriends({ friends: array }));
     } catch (error) {
@@ -45,14 +51,27 @@ function Friends({ userId }) {
         Friend List
       </Typography>
       <Box display="flex" flexDirection="column" gap="1.5rem">
-        {friends.map((friend) => (
-          <Friend
-            key={friend._id}
-            friendId={friend._id}
-            name={friend.username}
-            userPicturePath={friend.pictureName}
-          />
-        ))}
+        {friends.length === 0 ? (
+          <div className="flex flex-col justify-center items-center">
+            <PeopleOutlineIcon
+              fontSize="large"
+              color="error"
+              icon="fa-solid fa-user-group"
+            />
+            <Typography p={2} color={palette.neutral.dark}>
+              You dont have any friend yet
+            </Typography>
+          </div>
+        ) : (
+          friends.map((friend) => (
+            <Friend
+              key={friend._id}
+              friendId={friend._id}
+              name={friend.username}
+              userPicturePath={friend.pictureName}
+            />
+          ))
+        )}
       </Box>
     </Card>
   );

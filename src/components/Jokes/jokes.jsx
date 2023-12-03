@@ -2,14 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import { customToast } from "../../utils/toasts";
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  Typography,
-  Button,
-} from "@material-tailwind/react";
-import { useTheme } from "@mui/material";
+import { Card, CardBody, CardFooter, Button } from "@material-tailwind/react";
+import { useTheme, Typography } from "@mui/material";
 
 const GetJokes = (props) => {
   const [jokeText, setJokeText] = useState(""); // State to store the joke text
@@ -36,7 +30,9 @@ const GetJokes = (props) => {
       style={{ backgroundColor: theme.palette.background.alt }}
     >
       <CardBody>
-        <Typography>{jokeText}</Typography>
+        <Typography variant="h5" color={theme.palette.neutral.dark}>
+          {jokeText}
+        </Typography>
       </CardBody>
       <CardFooter className="pt-0">
         <Button
