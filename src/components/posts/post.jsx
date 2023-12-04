@@ -55,7 +55,7 @@ function Post({
   const dark = palette.neutral.dark;
 
   async function patchLike() {
-    const res = await fetch(`http://localhost:3001/posts/${postId}/like`, {
+    const res = await fetch(`${backendUrl}/posts/${postId}/like`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,

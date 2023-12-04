@@ -4,8 +4,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { customToast } from "../../utils/toasts";
 import { useSelector } from "react-redux";
-
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
+import { getUser } from "../../utils/quickfoo";
 
 function About({ userId }) {
   const token = useSelector((state) => state.token);
@@ -13,19 +12,18 @@ function About({ userId }) {
   const { palette } = useTheme();
   const dark = palette.neutral.dark;
 
-  const getUser = async () => {
-    try {
-      const user = await axios.get(`${backendUrl}/users/${userId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setAbout(user.data.about);
-    } catch (error) {
-      customToast("error", error.message);
-    }
-  };
   useEffect(() => {
-    getUser();
-  }, []);
+    const fetchUserData = async () => {
+      try {
+        const userData = await getUser(token, userId);
+        setAbout(userData.about);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, [token, userId]);
   return (
     <div>
       <Typography variant="h5" color={dark}>

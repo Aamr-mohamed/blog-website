@@ -26,12 +26,11 @@ function Friends({ userId }) {
         headers: { Authorization: `Bearer ${token}` },
       });
       const array = result.data;
-      console.log(array.length);
 
       if (array.length === 0) {
         return;
       }
-      console.log(array);
+
       dispatch(setFriends({ friends: array }));
     } catch (error) {
       customToast("error", error.message);

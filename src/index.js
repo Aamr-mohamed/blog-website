@@ -45,7 +45,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Routes>
-        <Route exact path="/" element={<Login />} />
+        <Route exact path="/login" element={<Login />} />
         <Route path="/Home" element={isAuth ? <Home /> : <Navigate to="/" />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/contact" element={<Contact />} />

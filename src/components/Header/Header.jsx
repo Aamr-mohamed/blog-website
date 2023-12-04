@@ -18,6 +18,7 @@ import { Bars2Icon } from "@heroicons/react/24/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogout, setMode } from "../../store/store";
 import { DarkMode, LightMode } from "@mui/icons-material";
+import { getUser } from "../../utils/quickfoo";
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -35,18 +36,18 @@ function Header() {
   const primaryLight = theme.palette.primary.light;
   const alt = theme.palette.background.alt;
 
-  const getUser = async () => {
-    const response = await fetch(`http://localhost:3001/users/${userId}`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    const data = await response.json();
-    setUser(data);
-  };
-
   useEffect(() => {
-    getUser();
-  }, []);
+    const fetchUserData = async () => {
+      try {
+        const userData = await getUser(token, userId);
+        setUser(userData);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, [token, userId]);
 
   const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
 
@@ -149,7 +150,7 @@ function Header() {
           <MenuItem
             onClick={() => {
               dispatch(setLogout());
-              navigate("/");
+              navigate("/login");
             }}
           >
             Log Out

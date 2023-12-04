@@ -23,7 +23,6 @@ function Friend({ friendId, name, userPicturePath }) {
   const main = palette.neutral.main;
   const primaryLight = palette.primary.light;
   const primaryDark = palette.primary.dark;
-  console.log(token);
 
   const patchFriend = async () => {
     try {

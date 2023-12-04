@@ -10,8 +10,7 @@ import FlexBetween from "../Buttons/flexBetween";
 import { EditOutlined, ManageAccountsOutlined } from "@mui/icons-material";
 import linkedIn from "../../assets/logo/linkedin.png";
 import twiter from "../../assets/logo/twitter.png";
-
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
+import { getUser } from "../../utils/quickfoo";
 
 function Profiler() {
   const token = useSelector((state) => state.token);
@@ -23,18 +22,18 @@ function Profiler() {
   const medium = palette.neutral.medium;
   const main = palette.neutral.main;
 
-  const getUser = async () => {
-    const response = axios.get(`${backendUrl}/users/${_id}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    const data = await response;
-    setUser(data.data);
-    // setUser();
-  };
-
   useEffect(() => {
-    getUser();
-  }, []);
+    const fetchUserData = async () => {
+      try {
+        const userData = await getUser(token, _id);
+        setUser(userData);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, [token, _id]);
 
   return (
     <>
