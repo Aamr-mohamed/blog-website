@@ -45,13 +45,16 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
         <Route exact path="/login" element={<Login />} />
-        <Route path="/Home" element={isAuth ? <Home /> : <Navigate to="/" />} />
+        <Route
+          path="/Home"
+          element={isAuth ? <Home /> : <Navigate to="/login" />}
+        />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/contact" element={<Contact />} />
         <Route
           path="/profile/:userId"
-          element={isAuth ? <Profile /> : <Navigate to="/" />}
+          element={isAuth ? <Profile /> : <Navigate to="/login" />}
         />
       </Routes>
     </ThemeProvider>
