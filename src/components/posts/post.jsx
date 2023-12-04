@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setPost } from "../../store/store";
 import { Box, Divider, IconButton, Typography, useTheme } from "@mui/material";
 import {
+  RemoveCircleRounded,
   ChatBubbleOutlineOutlined,
   FavoriteBorderOutlined,
   FavoriteOutlined,
@@ -42,12 +43,53 @@ function Post({
 
   const userId = useSelector((state) => state.user._id);
   const token = useSelector((state) => state.token);
+  const isAdmin = useSelector((state) => state.user.role);
 
   const [isComments, setIsComments] = useState(false);
   const isLiked = Boolean(likes[userId]);
   const friends = useSelector((state) => state.user.friends);
   const isFriend = friends.find((friend) => friend._id === postUserId);
   const likeCount = Object.keys(likes).length;
+
+  const checkAdmin = async () => {
+    try {
+      const response = await fetch(`${backendUrl}/users/${userId}/admin`, {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await response.json();
+
+      console.log(data);
+    } catch (error) {
+      customToast("error", error.message);
+    }
+  };
+
+  const removePost = async () => {
+    try {
+      const response = await fetch(
+        `${backendUrl}/posts/${userId}/removePost/${postId}`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
+      }
+
+      const responseData = await response.json();
+      console.log(responseData);
+      customToast("warn", "Post removed successfully");
+    } catch (error) {
+      customToast("error", error.message);
+    }
+  };
 
   const { palette } = useTheme();
   const main = palette.neutral.main;
@@ -89,6 +131,7 @@ function Post({
   };
 
   useEffect(() => {
+    checkAdmin();
     const originalDateTime = new Date(createdAt);
     const timeAgoString = formatDistanceToNow(originalDateTime, {
       addSuffix: true,
@@ -143,6 +186,11 @@ function Post({
               )}
             </IconButton>
           ) : null}
+          {isAdmin && (
+            <IconButton onClick={() => removePost()}>
+              <RemoveCircleRounded fontSize="large" color="error" />
+            </IconButton>
+          )}
         </FlexBetween>
       </FlexBetween>
       <Typography

@@ -12,6 +12,8 @@ import linkedIn from "../../assets/logo/linkedin.png";
 import twiter from "../../assets/logo/twitter.png";
 import { getUser } from "../../utils/quickfoo";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 function Profiler() {
   const token = useSelector((state) => state.token);
   const { _id, pictureName } = useSelector((state) => state.user);
@@ -22,18 +24,18 @@ function Profiler() {
   const medium = palette.neutral.medium;
   const main = palette.neutral.main;
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const userData = await getUser(token, _id);
-        setUser(userData);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
+  const getUser = async () => {
+    const response = axios.get(`${backendUrl}/users/${_id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response;
+    setUser(data.data);
+    // setUser();
+  };
 
-    fetchUserData();
-  }, [token, _id]);
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <>

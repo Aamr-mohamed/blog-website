@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLogout, setMode } from "../../store/store";
 import { DarkMode, LightMode } from "@mui/icons-material";
 import { getUser } from "../../utils/quickfoo";
+import axios from "axios";
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -36,18 +37,18 @@ function Header() {
   const primaryLight = theme.palette.primary.light;
   const alt = theme.palette.background.alt;
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const userData = await getUser(token, userId);
-        setUser(userData);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
+  const getUser = async () => {
+    const response = axios.get(`${backendUrl}/users/${userId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response;
+    setUser(data.data);
+    // setUser();
+  };
 
-    fetchUserData();
-  }, [token, userId]);
+  useEffect(() => {
+    getUser();
+  }, []);
 
   const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
 
