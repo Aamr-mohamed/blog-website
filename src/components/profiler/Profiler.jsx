@@ -7,10 +7,6 @@ import { useEffect } from "react";
 import { useState } from "react";
 import ProfilePic from "../profilePic/profilePic";
 import FlexBetween from "../Buttons/flexBetween";
-import { EditOutlined, ManageAccountsOutlined } from "@mui/icons-material";
-import linkedIn from "../../assets/logo/linkedin.png";
-import twiter from "../../assets/logo/twitter.png";
-import { getUser } from "../../utils/quickfoo";
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 

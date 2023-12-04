@@ -19,6 +19,9 @@ import { useParams } from "react-router-dom";
 import { useTheme, Typography } from "@mui/material";
 import FlexBetween from "../../components/Buttons/flexBetween";
 import { getUser } from "../../utils/quickfoo";
+import axios from "axios";
+
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 export default function Profile() {
   const [activeTab, setActiveTab] = React.useState("post");
@@ -31,18 +34,18 @@ export default function Profile() {
   const medium = palette.neutral.medium;
   const main = palette.neutral.main;
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const userData = await getUser(token, userId);
-        setUser(userData);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
+  const getUser = async () => {
+    const response = axios.get(`${backendUrl}/users/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response;
+    setUser(data.data);
+    // setUser();
+  };
 
-    fetchUserData();
-  }, [token, userId]);
+  useEffect(() => {
+    getUser();
+  }, []);
 
   const data = [
     {

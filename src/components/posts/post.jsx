@@ -51,20 +51,6 @@ function Post({
   const isFriend = friends.find((friend) => friend._id === postUserId);
   const likeCount = Object.keys(likes).length;
 
-  const checkAdmin = async () => {
-    try {
-      const response = await fetch(`${backendUrl}/users/${userId}/admin`, {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const data = await response.json();
-
-      console.log(data);
-    } catch (error) {
-      customToast("error", error.message);
-    }
-  };
-
   const removePost = async () => {
     try {
       const response = await fetch(
@@ -77,11 +63,6 @@ function Post({
           },
         }
       );
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message);
-      }
 
       const responseData = await response.json();
       console.log(responseData);
@@ -131,7 +112,6 @@ function Post({
   };
 
   useEffect(() => {
-    checkAdmin();
     const originalDateTime = new Date(createdAt);
     const timeAgoString = formatDistanceToNow(originalDateTime, {
       addSuffix: true,

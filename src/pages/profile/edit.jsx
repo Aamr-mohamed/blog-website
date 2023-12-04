@@ -5,18 +5,20 @@ import {
   Select,
   Textarea,
 } from "@material-tailwind/react";
-import axios from "axios";
 import { Form, Formik } from "formik";
 import React from "react";
-import { toast } from "react-toastify";
 import { customToast } from "../../utils/toasts";
 import { useSelector } from "react-redux";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setLogin } from "../../store/store";
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 function Edit() {
   const userId = useSelector((state) => state.user._id);
   const token = useSelector((state) => state.token);
+  const dispatch = useDispatch();
 
   const initialValuesEdit = {
     username: "",
@@ -28,27 +30,24 @@ function Edit() {
 
   const submitForm = async (values) => {
     try {
-      // formData.append("picturePath", picturePath);
-      // console.log(picturePath);
-
-      const res = await axios.patch(
+      const response = await axios.patch(
         `${backendUrl}/users/${userId}/edit`,
         values,
         {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
-
-      toast.success("User updated successfully", {
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      dispatch(
+        setLogin({
+          user: response.data.result,
+          token: token,
+        })
+      );
+      console.log(response.data.result);
+      customToast("success", "User updated successfully");
     } catch (error) {
       customToast("error", error.message);
     }
@@ -134,6 +133,19 @@ function Edit() {
                 color="red"
               />
 
+              <Input
+                onChange={props.handleChange}
+                onBlur={props.handleBlur}
+                value={props.values.key}
+                name="key"
+                size="lg"
+                autoComplete="off"
+                placeholder="Enter the secret key"
+                variant="static"
+                label="Apply for admin"
+                type="password"
+                color="red"
+              />
               <Textarea
                 variant="static"
                 placeholder="Enter stuff about yourself"
