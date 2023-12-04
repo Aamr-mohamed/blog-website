@@ -5,14 +5,25 @@ import Post from "./post";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "../../store/store";
 import { Typography } from "@mui/material";
+import axios from "axios";
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 function PostCard({ isProfile = false, userId }) {
   const dispatch = useDispatch();
-  const id = useSelector((state) => state.user._id);
+  const [user, setUser] = useState(null);
   const posts = useSelector((state) => state.posts);
   const token = useSelector((state) => state.token);
+
+  const getUser = async () => {
+    const response = axios.get(`${backendUrl}/users/${userId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response;
+    console.log(data);
+    setUser(data.data);
+    // setUser();
+  };
 
   const getUserPosts = async () => {
     const response = await fetch(`${backendUrl}/posts/${userId}/posts`, {
@@ -33,6 +44,7 @@ function PostCard({ isProfile = false, userId }) {
   };
 
   useEffect(() => {
+    getUser();
     if (isProfile) {
       getUserPosts();
     } else {

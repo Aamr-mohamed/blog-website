@@ -5,6 +5,8 @@ import { customToast } from "../../utils/toasts";
 import { Card, CardBody, CardFooter, Button } from "@material-tailwind/react";
 import { useTheme, Typography } from "@mui/material";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 const GetJokes = (props) => {
   const [jokeText, setJokeText] = useState(""); // State to store the joke text
   const theme = useTheme();
@@ -12,8 +14,9 @@ const GetJokes = (props) => {
 
   const addNewJoke = async () => {
     try {
-      const config = { headers: { Accept: "application/json" } };
-      const res = await axios.get("http://icanhazdadjoke.com/", config);
+      const res = await axios.get(`${backendUrl}/getJoke`, {
+        headers: { Accept: "application/json" },
+      });
       setJokeText(res.data.joke);
     } catch (err) {
       customToast("error", "jokes " + err.message);

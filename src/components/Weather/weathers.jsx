@@ -13,7 +13,6 @@ const Weather = (props) => {
   }
   const [weatherData, setWeatherData] = useState({});
   const [city, setCity] = useState({ name: "" });
-  const [user, setUser] = useState(null);
 
   const fetchWeatherData = async () => {
     const key = "7351e4b29d609b131709af3ef624cd77";
@@ -70,11 +69,6 @@ const Weather = (props) => {
           </div>
         )}
 
-        {user && (
-          <>
-            <h1>Username: {user.username}</h1>
-          </>
-        )}
         <Button
           onClick={fetchWeatherData}
           style={{

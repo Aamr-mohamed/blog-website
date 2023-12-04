@@ -9,6 +9,7 @@ import { Form, Formik } from "formik";
 import { Card, Input, Typography } from "@material-tailwind/react";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../../store/store";
+import axios from "axios";
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -27,17 +28,21 @@ export default function LoginForm() {
   const dispatch = useDispatch();
 
   const verification = async (values) => {
-    const loggedInResponse = await fetch(`${backendUrl}/auth/login`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(values),
-    });
-
-    const loggedIn = await loggedInResponse.json();
+    const loggedInResponse = await axios.post(
+      `${backendUrl}/auth/login`,
+      values,
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const loggedIn = loggedInResponse.data;
     console.log(loggedIn);
 
     if (loggedIn.success === false) {
-      toast.error(loggedIn.message, {
+      toast.error(loggedInResponse.message, {
         position: "top-right",
         autoClose: 1000,
         hideProgressBar: false,
