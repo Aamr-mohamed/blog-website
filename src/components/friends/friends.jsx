@@ -35,7 +35,9 @@ function Friend({ friendId, name, userPicturePath }) {
       );
       const array = result.data;
       dispatch(setFriends({ friends: array }));
-      customToast("success", "Friend added successfully");
+      !isFriend
+        ? customToast("success", "Friend added successfully")
+        : customToast("warn", "Friend removed successfully");
     } catch (error) {
       customToast("error", error.message);
     }
